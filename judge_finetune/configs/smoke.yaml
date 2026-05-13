@@ -1,0 +1,18 @@
+run_name: smoke
+csv_path: ../reformulated_full.csv
+model_name: roberta-base
+
+max_length: 128
+batch_size: 32
+eval_batch_size: 64
+epochs: 1
+learning_rate: 2.0e-5
+weight_decay: 0.01
+warmup_ratio: 0.06
+
+bf16: true
+num_workers: 2
+seed: 42
+
+# Smoke test: only sample a small subset
+max_samples: 2000

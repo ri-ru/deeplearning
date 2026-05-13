@@ -1,0 +1,17 @@
+run_name: roberta_base_augmented
+csv_path: ../reformulated_full.csv
+augment_csv: runs/hard_testset_all.csv
+
+model_name: roberta-base
+
+max_length: 256
+batch_size: 32
+eval_batch_size: 128
+epochs: 3
+learning_rate: 2.0e-5
+weight_decay: 0.01
+warmup_ratio: 0.06
+
+bf16: true
+num_workers: 4
+seed: 42

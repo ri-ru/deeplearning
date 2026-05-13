@@ -1,0 +1,31 @@
+# Virtual environments (contains files >100MB: torch, CUDA libs, triton)
+**/.venv/
+**/venv/
+**/env/
+
+# Training runs / checkpoints (contain files >100MB: model.safetensors, optimizer.pt)
+judge_finetune/runs/
+
+# Large model / checkpoint formats
+*.safetensors
+*.pt
+*.bin
+*.ckpt
+*.pth
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local Claude Code config
+.claude/

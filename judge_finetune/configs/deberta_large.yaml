@@ -1,0 +1,15 @@
+run_name: deberta_v3_large
+csv_path: ../reformulated_full.csv
+model_name: microsoft/deberta-v3-large
+
+max_length: 256
+batch_size: 16
+eval_batch_size: 64
+epochs: 3
+learning_rate: 1.0e-5     # large models like lower LR
+weight_decay: 0.01
+warmup_ratio: 0.10
+
+bf16: true                # critical: avoids the NaN you hit with fp16 earlier
+num_workers: 4
+seed: 42
