@@ -1,0 +1,209 @@
+
+============================================================
+ITERATION 1
+============================================================
+  iter1: generated 50/200
+  iter1: generated 100/200
+  iter1: generated 150/200
+  iter1: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.214  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_01.json + .csv
+
+Optimising prompt with GPT-4o (history=0 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 2
+============================================================
+  iter2: generated 50/200
+  iter2: generated 100/200
+  iter2: generated 150/200
+  iter2: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.275  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 0.995  (target ≤ 0.7)
+  saved → loop_results/iter_02.json + .csv
+
+Optimising prompt with GPT-4o (history=1 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 3
+============================================================
+  iter3: generated 50/200
+  iter3: generated 100/200
+  iter3: generated 150/200
+  iter3: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.270  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_03.json + .csv
+
+Optimising prompt with GPT-4o (history=2 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 4
+============================================================
+  iter4: generated 50/200
+  iter4: generated 100/200
+  iter4: generated 150/200
+  iter4: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.282  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_04.json + .csv
+
+Optimising prompt with GPT-4o (history=3 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 5
+============================================================
+  iter5: generated 50/200
+  iter5: generated 100/200
+  iter5: generated 150/200
+  iter5: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.300  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_05.json + .csv
+
+Optimising prompt with GPT-4o (history=4 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 6
+============================================================
+  iter6: generated 50/200
+  iter6: generated 100/200
+  iter6: generated 150/200
+  iter6: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.142  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_06.json + .csv
+
+Optimising prompt with GPT-4o (history=5 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 7
+============================================================
+  iter7: generated 50/200
+  iter7: generated 100/200
+  iter7: generated 150/200
+  iter7: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.146  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_07.json + .csv
+
+Optimising prompt with GPT-4o (history=6 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 8
+============================================================
+  iter8: generated 50/200
+  iter8: generated 100/200
+  iter8: generated 150/200
+  iter8: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.331  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_08.json + .csv
+
+Optimising prompt with GPT-4o (history=7 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 9
+============================================================
+  iter9: generated 50/200
+  iter9: generated 100/200
+  iter9: generated 150/200
+  iter9: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.347  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_09.json + .csv
+
+Optimising prompt with GPT-4o (history=8 prior iter(s))…
+New prompt (first 200 chars): You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.
+
+Rules:
+- Reach a DIFFERENT classification labe…
+
+============================================================
+ITERATION 10
+============================================================
+  iter10: generated 50/200
+  iter10: generated 100/200
+  iter10: generated 150/200
+  iter10: generated 200/200
+
+Metrics:
+  cosine sim mean (unequiv): 0.342  (target 0.55–0.75)
+  % sim > 0.9 (unequiv):     0.0%  (target ≤ 15%)
+  TF-IDF F1:                 1.000  (target ≤ 0.7)
+  saved → loop_results/iter_10.json + .csv
+
+Max iterations reached.
+
+============================================================
+FINAL BATCH (n=200)
+============================================================
+  final: generated 50/200
+  final: generated 100/200
+  final: generated 150/200
+  final: generated 200/200
+  final cosine sim mean: 0.341
+  final % sim > 0.9:     0.0%
+  final TF-IDF F1:       1.000
+
+✓ wrote loop_results/summary.md

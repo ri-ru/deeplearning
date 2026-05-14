@@ -1,0 +1,102 @@
+[
+  {
+    "iteration": 1,
+    "metrics": {
+      "mean_sim": 0.2135351476085017,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.214 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 2,
+    "metrics": {
+      "mean_sim": 0.27493270574238815,
+      "pct_high": 0.0,
+      "tfidf_f1": 0.9949998749968749
+    },
+    "diagnosis": "cosine=0.275 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 3,
+    "metrics": {
+      "mean_sim": 0.2701655626926787,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.270 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 4,
+    "metrics": {
+      "mean_sim": 0.2821852433180767,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.282 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 5,
+    "metrics": {
+      "mean_sim": 0.29973373949231275,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.300 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 6,
+    "metrics": {
+      "mean_sim": 0.14172562044959577,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.142 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 7,
+    "metrics": {
+      "mean_sim": 0.14585820813511996,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.146 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 8,
+    "metrics": {
+      "mean_sim": 0.33067982243840843,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.331 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 9,
+    "metrics": {
+      "mean_sim": 0.3465529152214691,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.347 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  },
+  {
+    "iteration": 10,
+    "metrics": {
+      "mean_sim": 0.34228908793578233,
+      "pct_high": 0.0,
+      "tfidf_f1": 1.0
+    },
+    "diagnosis": "cosine=0.342 TOO LOW \u2014 synthetics drift off-topic, ignoring the original post.",
+    "prompt_head": "You are given a hate-speech classification rationale written by an annotator. Your task: write an UNEQUIVALENT rationale for the same social media post.  Rules: - Reach a DIFFERENT classification labe\u2026"
+  }
+]

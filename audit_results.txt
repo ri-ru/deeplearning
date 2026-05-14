@@ -1,0 +1,55 @@
+[ 1/30] DIFFERENT
+[ 2/30] DIFFERENT
+[ 3/30] DIFFERENT
+[ 4/30] SAME
+[ 5/30] SAME
+[ 6/30] DIFFERENT
+[ 7/30] SAME
+[ 8/30] DIFFERENT
+[ 9/30] DIFFERENT
+[10/30] SAME
+[11/30] SAME
+[12/30] DIFFERENT
+[13/30] DIFFERENT
+[14/30] DIFFERENT
+[15/30] SAME
+[16/30] SAME
+[17/30] DIFFERENT
+[18/30] SAME
+[19/30] SAME
+[20/30] DIFFERENT
+[21/30] SAME
+[22/30] DIFFERENT
+[23/30] DIFFERENT
+[24/30] SAME
+[25/30] SAME
+[26/30] DIFFERENT
+[27/30] DIFFERENT
+[28/30] SAME
+[29/30] SAME
+[30/30] SAME
+
+=== AUDIT RESULTS (n=30) ===
+  DIFFERENT (correctly flipped): 15
+  SAME (mislabeled):             15
+  ERROR:                         0
+  Other:                         0 → []
+  Flip rate:                     50.0%
+
+=== 3 SAME examples ===
+
+--- SAME #1 (cosine=0.2881) ---
+ORIGINAL : The post uses hostile and malicious language to attack and belittle someone based on their perceived characteristics. The use of derogatory terms and the suggestion that the person should have been aborted indicates a clear intention to demean and dehumanize them. This kind of language is targeted at individuals or groups based on their perceived characteristics, which in this case could be someone from a different race, an immigrant, or someone from a specific country. Therefore, the post quali
+SYNTHETIC: The post expresses a disdainful attitude towards an individual by employing derogatory language aimed at devaluing their identity. The choice of words suggests that the author seeks to mock and insult the target, which reveals a clear intention to undermine their dignity. The reference to the individual’s perceived characteristics, alongside phrases that imply they should not exist, demonstrates an effort to dehumanize and diminish their worth as a person. Such expressions are harmful and aimed 
+
+--- SAME #2 (cosine=0.2375) ---
+ORIGINAL : The post explicitly attacks and demeans a specific group, black people, by using derogatory language and insulting stereotypes. It refers to them as "theivin' stealin' dirty fuckin' heathens" and suggests that they should go back to their supposed home by using racially offensive terms like "nappy heads." This post clearly meets the definition of derogation as it explicitly attacks and demeans a group based on their ethnic origin.
+SYNTHETIC: The post expresses contempt for a specific ethnic group, specifically black individuals, through overtly insulting language and harmful stereotypes. It labels them with terms such as "thieving" and "dirty," which are not only deeply derogatory but also contribute to perpetuating negative societal views. The use of phrases like "nappy heads" further emphasizes the offensive nature of the message, as it invokes a harmful stereotype that is rooted in racism. 
+
+Because the post employs such explicit
+
+--- SAME #3 (cosine=0.4856) ---
+ORIGINAL : The post targets Jewish people by referring to a specific Jewish individual as a rat, which is a derogatory term used to dehumanize and demean them. This explicit attack on the individual based on their religious background falls under the category of dehumanization.
+SYNTHETIC: The post discusses a Jewish person in a derogatory manner, labeling them as a "rat," which serves to strip away their humanity and portray them in a negative light. This choice of words reflects a broader issue of targeting individuals based on their faith, suggesting an antagonistic stance towards the Jewish community. Consequently, the language used can be classified as hate speech, as it seeks to demean someone solely due to their religious identity.
+
+The term “rat” is particularly harmful be

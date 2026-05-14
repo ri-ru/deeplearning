@@ -29,3 +29,13 @@ Thumbs.db
 
 # Local Claude Code config
 .claude/
+
+# Transient run directories (kept locally for reference, not in git)
+archive/
+loop_results_killed_run/
+loop_results_old_iter01_only/
+loop_results_smoke_*/
+
+# Mac Numbers / Excel exports
+*.numbers
+*.xlsx
