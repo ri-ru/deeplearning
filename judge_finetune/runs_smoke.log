@@ -1,0 +1,87 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[data] train=1783  val=200  test=500
+[data] train domains: ['cad', 'dynahate', 'measure', 'socialbias', 'toraman']
+[data] test domains:  ['anatomy', 'gab', 'toxigen']
+Map:   0%|          | 0/1783 [00:00<?, ? examples/s]Map:  56%|█████▌    | 1000/1783 [00:00<00:00, 6544.20 examples/s]Map: 100%|██████████| 1783/1783 [00:00<00:00, 7089.29 examples/s]Map: 100%|██████████| 1783/1783 [00:00<00:00, 6902.53 examples/s]
+Map:   0%|          | 0/200 [00:00<?, ? examples/s]Map: 100%|██████████| 200/200 [00:00<00:00, 6625.60 examples/s]
+Map:   0%|          | 0/500 [00:00<?, ? examples/s]Map: 100%|██████████| 500/500 [00:00<00:00, 7286.71 examples/s]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 10113.93it/s]
+[transformers] [1mRobertaForSequenceClassification LOAD REPORT[0m from: roberta-base
+Key                        | Status     | 
+---------------------------+------------+-
+lm_head.dense.weight       | UNEXPECTED | 
+lm_head.layer_norm.weight  | UNEXPECTED | 
+lm_head.dense.bias         | UNEXPECTED | 
+lm_head.layer_norm.bias    | UNEXPECTED | 
+lm_head.bias               | UNEXPECTED | 
+classifier.dense.weight    | MISSING    | 
+classifier.dense.bias      | MISSING    | 
+classifier.out_proj.bias   | MISSING    | 
+classifier.out_proj.weight | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+  0%|          | 0/56 [00:00<?, ?it/s]/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:1095: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, device pinned memory won't be used.
+  super().__init__(loader)
+  2%|▏         | 1/56 [00:02<02:13,  2.43s/it]  4%|▎         | 2/56 [00:04<01:48,  2.00s/it]  5%|▌         | 3/56 [00:05<01:33,  1.76s/it]  7%|▋         | 4/56 [00:06<01:23,  1.61s/it]  9%|▉         | 5/56 [00:08<01:18,  1.53s/it] 11%|█         | 6/56 [00:09<01:14,  1.49s/it] 12%|█▎        | 7/56 [00:11<01:11,  1.47s/it] 14%|█▍        | 8/56 [00:12<01:09,  1.45s/it] 16%|█▌        | 9/56 [00:14<01:07,  1.43s/it] 18%|█▊        | 10/56 [00:15<01:05,  1.42s/it] 20%|█▉        | 11/56 [00:16<01:03,  1.41s/it] 21%|██▏       | 12/56 [00:18<01:01,  1.40s/it] 23%|██▎       | 13/56 [00:19<01:00,  1.40s/it] 25%|██▌       | 14/56 [00:20<00:58,  1.40s/it] 27%|██▋       | 15/56 [00:22<00:57,  1.40s/it] 29%|██▊       | 16/56 [00:23<00:56,  1.41s/it] 30%|███       | 17/56 [00:25<00:54,  1.41s/it] 32%|███▏      | 18/56 [00:26<00:53,  1.41s/it] 34%|███▍      | 19/56 [00:28<00:52,  1.41s/it] 36%|███▌      | 20/56 [00:29<00:50,  1.41s/it] 38%|███▊      | 21/56 [00:30<00:49,  1.41s/it] 39%|███▉      | 22/56 [00:32<00:48,  1.42s/it] 41%|████      | 23/56 [00:33<00:46,  1.42s/it] 43%|████▎     | 24/56 [00:35<00:45,  1.41s/it] 45%|████▍     | 25/56 [00:36<00:43,  1.41s/it] 46%|████▋     | 26/56 [00:37<00:42,  1.41s/it] 48%|████▊     | 27/56 [00:39<00:40,  1.41s/it] 50%|█████     | 28/56 [00:40<00:39,  1.41s/it] 52%|█████▏    | 29/56 [00:42<00:37,  1.41s/it] 54%|█████▎    | 30/56 [00:43<00:36,  1.40s/it] 55%|█████▌    | 31/56 [00:44<00:35,  1.40s/it] 57%|█████▋    | 32/56 [00:46<00:33,  1.41s/it] 59%|█████▉    | 33/56 [00:47<00:32,  1.41s/it] 61%|██████    | 34/56 [00:49<00:31,  1.44s/it] 62%|██████▎   | 35/56 [00:50<00:30,  1.45s/it] 64%|██████▍   | 36/56 [00:52<00:29,  1.46s/it] 66%|██████▌   | 37/56 [00:53<00:27,  1.46s/it] 68%|██████▊   | 38/56 [00:55<00:26,  1.46s/it] 70%|██████▉   | 39/56 [00:56<00:24,  1.45s/it] 71%|███████▏  | 40/56 [00:57<00:23,  1.44s/it] 73%|███████▎  | 41/56 [00:59<00:21,  1.46s/it] 75%|███████▌  | 42/56 [01:00<00:20,  1.46s/it] 77%|███████▋  | 43/56 [01:02<00:18,  1.45s/it] 79%|███████▊  | 44/56 [01:03<00:17,  1.45s/it] 80%|████████  | 45/56 [01:05<00:15,  1.45s/it] 82%|████████▏ | 46/56 [01:06<00:14,  1.44s/it] 84%|████████▍ | 47/56 [01:08<00:12,  1.43s/it] 86%|████████▌ | 48/56 [01:09<00:11,  1.45s/it] 88%|████████▊ | 49/56 [01:11<00:10,  1.45s/it] 89%|████████▉ | 50/56 [01:12<00:08,  1.45s/it]                                                89%|████████▉ | 50/56 [01:12<00:08,  1.45s/it] 91%|█████████ | 51/56 [01:14<00:07,  1.49s/it] 93%|█████████▎| 52/56 [01:15<00:05,  1.48s/it] 95%|█████████▍| 53/56 [01:16<00:04,  1.47s/it] 96%|█████████▋| 54/56 [01:18<00:02,  1.46s/it] 98%|█████████▊| 55/56 [01:19<00:01,  1.46s/it]100%|██████████| 56/56 [01:21<00:00,  1.49s/it]{'loss': '0.6056', 'grad_norm': '3.566', 'learning_rate': '2.692e-06', 'epoch': '0.8929'}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00,  2.63it/s][A
+ 75%|███████▌  | 3/4 [00:01<00:00,  1.86it/s][A
+100%|██████████| 4/4 [00:01<00:00,  2.53it/s][A                                               
+                                             [A100%|██████████| 56/56 [01:24<00:00,  1.49s/it]
+100%|██████████| 4/4 [00:01<00:00,  2.53it/s][A
+                                             [A{'eval_loss': '0.2916', 'eval_accuracy': '0.96', 'eval_f1_macro': '0.96', 'eval_f1_unequivalent': '0.9604', 'eval_auroc': '0.9744', 'eval_runtime': '2.817', 'eval_samples_per_second': '71', 'eval_steps_per_second': '1.42', 'epoch': '1'}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s][A
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.51it/s][AWriting model shards: 100%|██████████| 1/1 [00:00<00:00,  1.51it/s]
+                                               100%|██████████| 56/56 [01:26<00:00,  1.49s/it]100%|██████████| 56/56 [01:26<00:00,  1.55s/it]
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:1095: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, device pinned memory won't be used.
+  super().__init__(loader)
+{'train_runtime': '86.55', 'train_samples_per_second': '20.6', 'train_steps_per_second': '0.647', 'train_loss': '0.5769', 'epoch': '1'}
+  0%|          | 0/8 [00:00<?, ?it/s] 25%|██▌       | 2/8 [00:00<00:02,  2.85it/s] 38%|███▊      | 3/8 [00:01<00:02,  1.97it/s] 50%|█████     | 4/8 [00:02<00:02,  1.70it/s] 62%|██████▎   | 5/8 [00:02<00:01,  1.57it/s] 75%|███████▌  | 6/8 [00:03<00:01,  1.49it/s] 88%|████████▊ | 7/8 [00:04<00:00,  1.45it/s]100%|██████████| 8/8 [00:04<00:00,  1.51it/s]100%|██████████| 8/8 [00:04<00:00,  1.61it/s]
+
+=== OOD test results ===
+{
+  "overall": {
+    "n": 500,
+    "accuracy": 0.922,
+    "f1_macro": 0.9207416951522369,
+    "f1_unequivalent": 0.9107551487414187,
+    "auroc": 0.9729586511441188,
+    "confusion_matrix": [
+      [
+        262,
+        3
+      ],
+      [
+        36,
+        199
+      ]
+    ]
+  },
+  "anatomy": {
+    "n": 155,
+    "accuracy": 0.8129032258064516,
+    "f1_macro": 0.8022350301377095,
+    "f1_unequivalent": 0.7563025210084033,
+    "auroc": 0.9563982626127631
+  },
+  "gab": {
+    "n": 157,
+    "accuracy": 0.9808917197452229,
+    "f1_macro": 0.9806911818964457,
+    "f1_unequivalent": 0.9787234042553191,
+    "auroc": 0.985260399606944
+  },
+  "toxigen": {
+    "n": 188,
+    "accuracy": 0.9627659574468085,
+    "f1_macro": 0.9626380490020725,
+    "f1_unequivalent": 0.96045197740113,
+    "auroc": 0.9794947320720517
+  }
+}
+[done] artifacts in runs/smoke
