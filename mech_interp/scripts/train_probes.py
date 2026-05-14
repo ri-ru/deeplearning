@@ -42,9 +42,19 @@ def _load_layer(extracts_dir: Path, layer_idx: int) -> tuple[list[str], np.ndarr
     return list(pt["sample_ids"]), pt["activations"].numpy()
 
 
-def _align(manifest: pd.DataFrame, sample_ids: list[str]) -> pd.DataFrame:
-    df = manifest.set_index("sample_id").loc[sample_ids].reset_index()
-    return df
+def _align_positional(manifest: pd.DataFrame, sample_ids: list[str]) -> pd.DataFrame:
+    """Layer files were saved in manifest row order by extract_residuals.py.
+    sample_id is NOT unique in the manifest (each source uid has ~3
+    reformulations), so we cannot align by sample_id. Verify the layer's
+    sample_id list equals the manifest's column-by-position and return
+    the manifest unchanged."""
+    expected = manifest["sample_id"].astype(str).tolist()
+    if sample_ids != expected:
+        raise RuntimeError(
+            "Layer-file sample_id order does not match manifest row order. "
+            "Re-run extract_residuals.py against the current manifest."
+        )
+    return manifest.reset_index(drop=True)
 
 
 def main() -> None:
@@ -71,7 +81,7 @@ def main() -> None:
 
     # Use sample_ids from layer 0 as the canonical order; verify identical across layers.
     canon_ids, _ = _load_layer(args.extracts, 0)
-    aligned = _align(manifest, canon_ids)
+    aligned = _align_positional(manifest, canon_ids)
     is_synth = aligned["source"].to_numpy() == "synthetic"
     is_manual = aligned["source"].to_numpy() == "manual"
     y_equiv = aligned["label"].to_numpy().astype(int)

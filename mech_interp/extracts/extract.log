@@ -1,3 +1,48 @@
 [extract] checkpoint = /Users/veron/Desktop/deeplearning/judge_finetune/runs/smoke/checkpoints/checkpoint-56
 [extract] device     = mps
 Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 22427.64it/s]
+[extract] manifest rows = 52157
+[extract] n_layers=13  hidden_dim=768
+[extract]   1280/52157  rate=  87.0/s  eta=   585s
+[extract]   2560/52157  rate=  86.9/s  eta=   571s
+[extract]   3840/52157  rate=  86.1/s  eta=   561s
+[extract]   5120/52157  rate=  85.2/s  eta=   552s
+[extract]   6400/52157  rate=  85.2/s  eta=   537s
+[extract]   7680/52157  rate=  12.4/s  eta=  3573s
+[extract]   8960/52157  rate=   6.0/s  eta=  7145s
+[extract]  10240/52157  rate=   5.3/s  eta=  7980s
+[extract]  11520/52157  rate=   5.9/s  eta=  6925s
+[extract]  12800/52157  rate=   6.5/s  eta=  6080s
+[extract]  14080/52157  rate=   7.1/s  eta=  5387s
+[extract]  15360/52157  rate=   7.7/s  eta=  4807s
+[extract]  16640/52157  rate=   8.2/s  eta=  4314s
+[extract]  17920/52157  rate=   8.8/s  eta=  3890s
+[extract]  19200/52157  rate=   9.4/s  eta=  3521s
+[extract]  20480/52157  rate=   9.9/s  eta=  3196s
+[extract]  21760/52157  rate=  10.5/s  eta=  2908s
+[extract]  23040/52157  rate=  11.0/s  eta=  2650s
+[extract]  24320/52157  rate=  11.5/s  eta=  2418s
+[extract]  25600/52157  rate=  12.0/s  eta=  2208s
+[extract]  26880/52157  rate=  12.5/s  eta=  2017s
+[extract]  28160/52157  rate=  13.0/s  eta=  1843s
+[extract]  29440/52157  rate=  13.5/s  eta=  1683s
+[extract]  30720/52157  rate=  14.0/s  eta=  1534s
+[extract]  32000/52157  rate=  14.4/s  eta=  1397s
+[extract]  33280/52157  rate=  14.9/s  eta=  1268s
+[extract]  34560/52157  rate=  15.3/s  eta=  1149s
+[extract]  35840/52157  rate=  15.7/s  eta=  1038s
+[extract]  37120/52157  rate=  16.1/s  eta=   933s
+[extract]  38400/52157  rate=  16.5/s  eta=   833s
+[extract]  39680/52157  rate=  16.9/s  eta=   738s
+[extract]  40960/52157  rate=  17.3/s  eta=   648s
+[extract]  42240/52157  rate=  17.7/s  eta=   561s
+[extract]  43520/52157  rate=  18.1/s  eta=   478s
+[extract]  44800/52157  rate=  18.4/s  eta=   399s
+[extract]  46080/52157  rate=  18.8/s  eta=   323s
+[extract]  47360/52157  rate=  19.1/s  eta=   251s
+[extract]  48640/52157  rate=  19.5/s  eta=   181s
+[extract]  49920/52157  rate=  19.8/s  eta=   113s
+[extract]  51200/52157  rate=  20.1/s  eta=    48s
+[extract]  52157/52157  rate=  20.4/s  eta=     0s
+[extract] wrote 13 layer files to /Users/veron/Desktop/deeplearning/mech_interp/extracts
+[extract] meta: {'checkpoint': '/Users/veron/Desktop/deeplearning/judge_finetune/runs/smoke/checkpoints/checkpoint-56', 'n_samples': 52157, 'n_layers': 13, 'hidden_dim': 768, 'max_length': 128, 'batch_size': 64, 'device': 'mps', 'elapsed_seconds': 2563.68}

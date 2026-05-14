@@ -1,26 +1,7 @@
-"""
-Zero-shot reformulation of rationales using Qwen2.5-3B-Instruct.
+"""Zero-shot reformulation of rationales with Qwen2.5-3B-Instruct.
 
-This is a reconstruction of the original synthetic-data-generation script that
-produced the first version of the reformulated dataset. The actual file Flavia
-ran was not committed; the two system prompts below are taken verbatim from
-Flavia's Telegram message on 2026-05-14, and the model / quantization / dtype
-settings are taken from the same message:
-
-    Qwen/Qwen2.5-3B-Instruct
-    --quantization none
-    --dtype float16
-
-The script structure (argparse, vLLM batch generation, alternating equivalent /
-unequivalent labels) follows the same pattern as
-`../synthetic_data_generation_improved/script.py`. The only intentional
-difference is that this version is zero-shot — it does not load few-shot
-examples from `manual_labelling.csv`.
-
-This is the pipeline that produced `reformulated_full.csv`. The
-`audit_flip_rate.py` audit later found that ~50% of the resulting
-"unequivalent" rows actually reach the same conclusion as the original; that
-finding is the reason the few-shot version exists.
+Prompts and model config are from Flavia's Telegram message (May 14). See
+README.md for the audit caveat.
 """
 
 import argparse

@@ -30,11 +30,17 @@ def _fmt(v: float | None, digits: int = 3) -> str:
 
 
 def _peak(rows: list[dict], key: str) -> tuple[int, float | None]:
+    import math
     best_idx = -1
     best = -1.0
     for r in rows:
         v = r.get(key)
         if v is None:
+            continue
+        try:
+            if math.isnan(v):
+                continue
+        except TypeError:
             continue
         if v > best:
             best = v
