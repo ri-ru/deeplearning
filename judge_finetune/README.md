@@ -3,7 +3,7 @@
 Fine-tunes a transformer encoder to classify whether two hate-speech rationales are semantically equivalent.
 
 **Task:** binary sentence-pair classification.
-**Input:** `(explanation, meaning)` — original rationale + reformulation.
+**Input:** `(explanation, meaning)` - original rationale + reformulation.
 **Label:** `equivalent` (0) / `unequivalent` (1).
 **Data:** ~52k rows, balanced 50/50, 8 domains.
 
@@ -12,7 +12,7 @@ Fine-tunes a transformer encoder to classify whether two hate-speech rationales 
 - **Train domains:** `dynahate, cad, measure, socialbias, toraman`
 - **Test domains:** `toxigen, gab, anatomy`
 
-Random splits are uninformative — the model memorizes per-domain stylistic cues. Domain-OOD split is what makes the generalization claim meaningful.
+Random splits are uninformative - the model memorizes per-domain stylistic cues. Domain-OOD split is what makes the generalization claim meaningful.
 
 ## Setup
 
@@ -45,8 +45,8 @@ Outputs land in `runs/<run_name>/` with metrics JSON, checkpoint, and a CSV of p
 
 ## Files
 
-- `src/data.py` — dataset loading, domain split, tokenization
-- `src/train.py` — training loop using HF Trainer
-- `src/eval.py` — standalone eval on a saved checkpoint (for re-running metrics without retraining)
-- `configs/*.yaml` — model + hyperparam configs
-- `scripts/zero_shot_baseline.py` — zero-shot GPT-4o / Claude baseline for comparison
+- `src/data.py` - dataset loading, domain split, tokenization
+- `src/train.py` - training loop using HF Trainer
+- `src/eval.py` - standalone eval on a saved checkpoint (for re-running metrics without retraining)
+- `configs/*.yaml` - model + hyperparam configs
+- `scripts/zero_shot_baseline.py` - zero-shot GPT-4o / Claude baseline for comparison

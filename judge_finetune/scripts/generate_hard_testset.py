@@ -2,7 +2,7 @@
 
 Two types of hard examples:
   hard_unequivalent: similar structure/vocabulary to the original, but opposite
-                     conclusion — NOT just inserting "not"
+                     conclusion - NOT just inserting "not"
   hard_equivalent:   completely different vocabulary and sentence structure,
                      but identical meaning and verdict
 
@@ -40,7 +40,7 @@ Here is an explanation of why a social media post is or isn't hate speech:
 
 Rewrite this explanation so it reaches the OPPOSITE conclusion, but follow these strict rules:
 - Use similar sentence structure and vocabulary to the original
-- Do NOT just insert "not", "doesn't", or "no longer" — that is too easy to detect
+- Do NOT just insert "not", "doesn't", or "no longer" - that is too easy to detect
 - Instead, change the REASONING: swap which group is targeted, reframe the intent, change what the evidence shows
 - The rewrite must be plausible and coherent on its own
 - It should take genuine reading to notice the conclusion changed
@@ -111,7 +111,7 @@ def generate_one(client: OpenAI, model: str, prompt: str, retries: int = 3) -> s
             return resp.choices[0].message.content.strip()
         except Exception as e:
             wait = 2 ** attempt
-            print(f"  [retry {attempt+1}/{retries}] {e} — waiting {wait}s")
+            print(f"  [retry {attempt+1}/{retries}] {e} - waiting {wait}s")
             time.sleep(wait)
     return None
 
@@ -197,7 +197,7 @@ def main():
             flag_str = f"  [{result['quality_flags']}]" if result["quality_flags"] != "ok" else ""
             print(f"[{done}/{total}] unequivalent{flag_str}")
         else:
-            print(f"[{done}/{total}] unequivalent — FAILED")
+            print(f"[{done}/{total}] unequivalent - FAILED")
 
     print(f"\nGenerating {len(seed_eq)} hard-equivalent pairs...")
     for _, row in seed_eq.iterrows():
@@ -210,7 +210,7 @@ def main():
             flag_str = f"  [{result['quality_flags']}]" if result["quality_flags"] != "ok" else ""
             print(f"[{done}/{total}] equivalent{flag_str}")
         else:
-            print(f"[{done}/{total}] equivalent — FAILED")
+            print(f"[{done}/{total}] equivalent - FAILED")
 
     out_df = pd.DataFrame(rows)
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
@@ -222,7 +222,7 @@ def main():
     print(f"\n=== Done ===")
     print(f"Total generated: {len(out_df)}")
     print(f"  ok:      {n_ok}")
-    print(f"  flagged: {n_flagged}  (lazy negation or too-similar — still usable, just lower quality)")
+    print(f"  flagged: {n_flagged}  (lazy negation or too-similar - still usable, just lower quality)")
     print(f"Saved to: {args.out}")
     print()
     print("--- 3 sample hard-unequivalent pairs ---")

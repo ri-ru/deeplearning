@@ -46,7 +46,7 @@ preds = probs.argmax(axis=1)
 true = df["label"].to_numpy()
 correct = (preds == true).sum()
 
-print(f"\n=== {len(df)} examples — accuracy {correct}/{len(df)} = {correct/len(df):.1%} ===\n")
+print(f"\n=== {len(df)} examples - accuracy {correct}/{len(df)} = {correct/len(df):.1%} ===\n")
 
 ID2LABEL = {0: "equivalent", 1: "unequivalent"}
 for i, row in df.iterrows():

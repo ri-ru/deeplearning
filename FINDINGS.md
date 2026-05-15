@@ -1,4 +1,4 @@
-# Findings — Synthetic Data Quality and the Self-Improving Prompt Loop
+# Findings - Synthetic Data Quality and the Self-Improving Prompt Loop
 
 Status: in progress. This document records what we learned while building and
 diagnosing the rationale-equivalence judge data pipeline. Dated 2026-05-13/14.
@@ -17,9 +17,9 @@ diagnosing the rationale-equivalence judge data pipeline. Dated 2026-05-13/14.
    sentences with 'therefore'", "begin with a summary") that are absent in
    originals. The result is synthetics 4–5× longer than originals, in a
    different register, perfectly separable by surface features.
-4. Adding two new hard gates — **conclusion-flip rate** (does the unequivalent
+4. Adding two new hard gates - **conclusion-flip rate** (does the unequivalent
    rationale actually flip the verdict?) and **length-ratio** (do synthetics
-   match the originals' length?) — closes the loophole. Smoke test on the
+   match the originals' length?) - closes the loophole. Smoke test on the
    multi-objective loop with a hand-written `INITIAL_PROMPT` shows flip rate
    = 100% and length ratio = 0.83–1.15 on the first try.
 
@@ -96,7 +96,7 @@ The memory-of-iterations feature (added between the first and second
 overnight run) successfully prevented oscillation but locked the optimizer
 into this stylistic local minimum.
 
-## The fix — multi-objective optimizer
+## The fix - multi-objective optimizer
 
 Added two new hard gates to `prompt_loop.py`:
 
@@ -108,7 +108,7 @@ Added two new hard gates to `prompt_loop.py`:
 
 The meta-prompt now sees all six metrics in the history block and includes
 explicit anti-essay guidance: *do not add formal-essay constraints like "use
-at least N sentences with 'therefore'" or "begin with a summary" — these
+at least N sentences with 'therefore'" or "begin with a summary" - these
 introduce stylistic shortcuts that TF-IDF picks up on*.
 
 The diagnose function prioritises by severity: flip-rate < 90% is reported
@@ -131,7 +131,7 @@ vocabulary.
 | final| 0.383  | 100.0%    | 1.15      | 1.20    |
 
 Flip rate is at the target on iteration one (vs 50% on the old loop).
-Length ratio sits in the target band. Cosine is still below 0.55 — but with
+Length ratio sits in the target band. Cosine is still below 0.55 - but with
 `n=4`, cosine is noisy; the real check is on the overnight `n=200` run.
 
 `flip_cache.json` accumulates verdicts so a crash mid-iteration does not
@@ -156,8 +156,8 @@ Three things to write up regardless of how the overnight run goes:
 
 ## Files
 
-- `prompt_loop.py` — the multi-objective loop.
-- `audit_flip_rate.py` — one-off audit script.
-- `audit_results.txt` — verdicts on 30 pairs from the original failed run.
-- `loop_results/` — the 10-iteration overnight run that motivated the fix.
-- `loop_results_smoke_mo/` — smoke output verifying the new optimizer is wired.
+- `prompt_loop.py` - the multi-objective loop.
+- `audit_flip_rate.py` - one-off audit script.
+- `audit_results.txt` - verdicts on 30 pairs from the original failed run.
+- `loop_results/` - the 10-iteration overnight run that motivated the fix.
+- `loop_results_smoke_mo/` - smoke output verifying the new optimizer is wired.

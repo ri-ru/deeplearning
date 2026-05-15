@@ -41,7 +41,7 @@ TARGET_TFIDF_F1  = 0.70   # unequiv vs equiv must not be trivially TF-IDF separa
 TARGET_FLIP_RATE       = 0.90  # ≥ 90% of unequivalent pairs must actually flip the conclusion
 TARGET_LEN_RATIO_MIN   = 0.5   # synth/orig word-count ratio (mean) lower bound
 TARGET_LEN_RATIO_MAX   = 2.0   # synth/orig word-count ratio (mean) upper bound
-TARGET_LEN_RATIO_P90   = 3.0   # 90th-percentile ratio — no extreme essays
+TARGET_LEN_RATIO_P90   = 3.0   # 90th-percentile ratio - no extreme essays
 
 MAX_CONSECUTIVE_API_FAILURES = 5  # bail out instead of polluting data with copies
 
@@ -78,7 +78,7 @@ You are improving a data-generation prompt used to create "unequivalent" hate-sp
 
 Goal: the generated synthetic rationale should discuss the SAME social media post as the original but:
   - Reach a different classification label
-  - Use different reasoning — NOT a wholesale rewrite about a completely different topic
+  - Use different reasoning - NOT a wholesale rewrite about a completely different topic
   - Share enough vocabulary with the original that a TF-IDF cosine similarity between the pair is 0.55–0.75
   - NOT be trivially detectable as unequivalent (either by near-identical text OR by completely different topic)
 
@@ -102,7 +102,7 @@ Current diagnosis: {diagnosis}
 Prior iteration history (oldest → newest, current iteration NOT included):
 {history_block}
 
-Anti-oscillation guidance — READ CAREFULLY:
+Anti-oscillation guidance - READ CAREFULLY:
   - If conclusion-flip rate is BELOW 90%: the unequivalent rationales are reaching the SAME
     conclusion as the originals, just with different wording. They are MISLABELED. Fix: add
     an explicit instruction that the synthetic MUST reach the opposite verdict (if original
@@ -116,7 +116,7 @@ Anti-oscillation guidance — READ CAREFULLY:
   - If length ratio is BELOW 0.5: the synthetics are too short and likely missing reasoning.
   - If past iterations show cosine swinging between TOO LOW (<0.55) and TOO HIGH (>0.75),
     the previous rewrites overcorrected. Make a SMALLER, more targeted edit this time.
-    Do not flip the whole strategy — keep what worked in the closer-to-target iteration
+    Do not flip the whole strategy - keep what worked in the closer-to-target iteration
     and add ONE concrete constraint to nudge the metric in the right direction.
   - If past iterations consistently miss in the same direction, your constraints are not
     strong enough. Add explicit, countable rules (e.g. "reuse at least 4 distinct nouns
@@ -281,7 +281,7 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
 
     fm = final_metrics
     lines = []
-    lines.append("# Self-Improvement Loop — Summary\n")
+    lines.append("# Self-Improvement Loop - Summary\n")
     lines.append(f"**Status:** {stopped_reason}  ")
     lines.append(f"**Targets met:** {'yes' if targets_met else 'no'}\n")
     lines.append("## Final metrics (on final batch)\n")
@@ -331,11 +331,11 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
 
     lines.append("## Conclusion-flip audit\n")
     if not mislabeled:
-        lines.append("No SAME-verdict pairs in the final batch — every unequivalent rationale "
+        lines.append("No SAME-verdict pairs in the final batch - every unequivalent rationale "
                      "actually reaches a different conclusion. Clean.\n")
     else:
         lines.append(f"{len(mislabeled)} of {fm.get('n_total_uneq', 0)} unequivalent pairs were "
-                     f"judged SAME (mislabeled — synthetic reaches the same conclusion as the original). "
+                     f"judged SAME (mislabeled - synthetic reaches the same conclusion as the original). "
                      f"Showing up to 5:\n")
         for i, s in enumerate(mislabeled[:5], 1):
             lines.append(f"### SAME-verdict #{i} (cosine={s['sim']:.3f})")
@@ -350,7 +350,7 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
 
     if fr < TARGET_FLIP_RATE:
         lines.append(
-            f"Flip rate is **{fr:.1%}** — below the 90% target. Roughly "
+            f"Flip rate is **{fr:.1%}** - below the 90% target. Roughly "
             f"{fm.get('n_same', 0)} of {fm.get('n_total_uneq', 0)} 'unequivalent' pairs actually "
             f"reach the same conclusion as the original. A judge trained on this would learn to "
             f"call agreeing rationales 'unequivalent,' poisoning the supervision signal. The "
@@ -359,7 +359,7 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
         )
     elif lr > TARGET_LEN_RATIO_MAX:
         lines.append(
-            f"Length ratio is **{lr:.2f}×** — synthetics are roughly that much longer than "
+            f"Length ratio is **{lr:.2f}×** - synthetics are roughly that much longer than "
             f"originals. Even if cosine and flip rate look fine, the length disparity becomes a "
             f"surface shortcut: a TF-IDF classifier (and an LSTM, and a transformer with positional "
             f"signal) can separate the two by length alone. The prompt is producing essays where "
@@ -374,18 +374,18 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
         )
     elif fm.get("mean_sim", 0) > TARGET_MEAN_SIM:
         lines.append(
-            "Cosine is too high — synthetics are near-copies of the originals. The model is "
+            "Cosine is too high - synthetics are near-copies of the originals. The model is "
             "hedging by changing only a few verdict words. A judge trained on this picks up "
             "negation-token heuristics rather than meaning."
         )
     elif fm.get("mean_sim", 0) < TARGET_SIM_MIN:
         lines.append(
-            "Cosine is below target — synthetics drifted off-topic. The judge would learn "
+            "Cosine is below target - synthetics drifted off-topic. The judge would learn "
             "'is this text about a different topic' rather than rationale equivalence."
         )
     else:
         lines.append(
-            "Cosine band and flip rate are fine but TF-IDF F1 is still above target — there's a "
+            "Cosine band and flip rate are fine but TF-IDF F1 is still above target - there's a "
             "residual lexical shortcut. Worth eyeballing the worst-separated pairs."
         )
 
@@ -402,29 +402,29 @@ def diagnose(metrics: dict) -> str:
     n_total = metrics.get("n_total_uneq")
 
     if flip_rate is not None and flip_rate < TARGET_FLIP_RATE:
-        return (f"flip rate={flip_rate:.1%} TOO LOW — {n_same} of {n_total} unequivalent "
+        return (f"flip rate={flip_rate:.1%} TOO LOW - {n_same} of {n_total} unequivalent "
                 f"pairs reach the SAME conclusion as the original. These are mislabeled.")
     if length_ratio_mean is not None and length_ratio_mean > TARGET_LEN_RATIO_MAX:
-        return (f"length ratio={length_ratio_mean:.2f} TOO HIGH — synthetics are "
+        return (f"length ratio={length_ratio_mean:.2f} TOO HIGH - synthetics are "
                 f"{length_ratio_mean:.1f}× longer than originals, introducing register shortcut.")
     if length_ratio_mean is not None and length_ratio_mean < TARGET_LEN_RATIO_MIN:
-        return (f"length ratio={length_ratio_mean:.2f} TOO LOW — synthetics are much "
+        return (f"length ratio={length_ratio_mean:.2f} TOO LOW - synthetics are much "
                 f"shorter than originals; likely missing reasoning.")
     if mean_sim < TARGET_SIM_MIN:
-        return (f"cosine={mean_sim:.3f} TOO LOW — synthetics drift off-topic, "
+        return (f"cosine={mean_sim:.3f} TOO LOW - synthetics drift off-topic, "
                 f"ignoring the original post.")
     if mean_sim > TARGET_MEAN_SIM:
-        return (f"cosine={mean_sim:.3f} TOO HIGH — synthetics are near-copies with "
+        return (f"cosine={mean_sim:.3f} TOO HIGH - synthetics are near-copies with "
                 f"verdict word flipped.")
     if tfidf_f1 > TARGET_TFIDF_F1:
-        return (f"cosine={mean_sim:.3f} in band, but TF-IDF F1={tfidf_f1:.3f} too high — "
+        return (f"cosine={mean_sim:.3f} in band, but TF-IDF F1={tfidf_f1:.3f} too high - "
                 f"a non-cosine lexical shortcut remains.")
     return f"all targets met (cosine={mean_sim:.3f}, flip={flip_rate or 0:.1%})."
 
 def build_history_block(history: list[dict]) -> str:
     """Compact textual record of past iterations for the meta-prompt."""
     if not history:
-        return "  (none — this is the first optimization step)"
+        return "  (none - this is the first optimization step)"
     lines = []
     for h in history:
         m = h["metrics"]
@@ -513,7 +513,7 @@ def generate_batch(client: OpenAI, prompt: str, originals_paired: pd.DataFrame,
             if consecutive_failures >= max_failures:
                 print(f"  ⚠ aborting batch after {consecutive_failures} consecutive failures")
                 return originals, synthetics, labels, total_failures
-            synth = ""  # placeholder — will be removed below if we abort, otherwise scored badly
+            synth = ""  # placeholder - will be removed below if we abort, otherwise scored badly
         originals.append(orig)
         synthetics.append(synth)
         labels.append(1)

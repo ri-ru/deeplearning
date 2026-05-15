@@ -1,4 +1,4 @@
-# Methodology — What We Planned, What We Built, What To Do Next
+# Methodology - What We Planned, What We Built, What To Do Next
 
 ---
 
@@ -23,7 +23,7 @@ The original thesis was clean and directly on-topic for the course:
 **Why this is interesting:**
 - Directly produces a tool for hate speech model evaluation
 - Forces the judge to understand *error modes*, not just agree with GPT-4
-- The Prometheus line of work (Kim et al.) showed this works for general LLM judging — nobody had done it specifically for hate speech
+- The Prometheus line of work (Kim et al.) showed this works for general LLM judging - nobody had done it specifically for hate speech
 
 ---
 
@@ -31,11 +31,11 @@ The original thesis was clean and directly on-topic for the course:
 
 The original plan hit three walls:
 
-**Wall 1 — Dataset overlap.** The plan was to train on Jigsaw and test on ToxiGen OOD. Problem: HateCoT (the dataset Flavia was already using) already incorporates ToxiGen as one of its 8 sub-domains. Training on one and testing on the other becomes partially in-distribution. The OOD split had to change.
+**Wall 1 - Dataset overlap.** The plan was to train on Jigsaw and test on ToxiGen OOD. Problem: HateCoT (the dataset Flavia was already using) already incorporates ToxiGen as one of its 8 sub-domains. Training on one and testing on the other becomes partially in-distribution. The OOD split had to change.
 
-**Wall 2 — Adversarial generation quality.** The LLM-generated adversarial labels weren't aggressive enough. The `profanity_fixated` profile only flipped 5–10% of labels. Many "adversarial" generations were accidentally correct (model said "hate speech" for a genuinely hateful post even when prompted to be wrong). The data would have been too noisy.
+**Wall 2 - Adversarial generation quality.** The LLM-generated adversarial labels weren't aggressive enough. The `profanity_fixated` profile only flipped 5–10% of labels. Many "adversarial" generations were accidentally correct (model said "hate speech" for a genuinely hateful post even when prompted to be wrong). The data would have been too noisy.
 
-**Wall 3 — Content policy refusals.** Anthropic refused ~30% of requests to generate adversarial labels for explicitly toxic content. The profile that needed to generate plausible-but-wrong labels for the hardest cases was exactly the one that got blocked most.
+**Wall 3 - Content policy refusals.** Anthropic refused ~30% of requests to generate adversarial labels for explicitly toxic content. The profile that needed to generate plausible-but-wrong labels for the hardest cases was exactly the one that got blocked most.
 
 **The pivot Flavia made:**
 
@@ -49,7 +49,7 @@ Instead of (post, correct_label, adversarial_label), she reformulated the task a
 This produced 52,137 clean pairs, exactly 50/50 balanced, across 8 domains. The adversarial generation problem went away because "generate a paraphrase" and "flip the conclusion" are both easy, non-toxic requests that no model refuses.
 
 **What this is actually measuring:**
-Rationale equivalence, not label correctness. The model learns: "do these two explanations agree?" — not "is this label correct given this post?"
+Rationale equivalence, not label correctness. The model learns: "do these two explanations agree?" - not "is this label correct given this post?"
 
 ---
 
@@ -60,9 +60,9 @@ Rationale equivalence, not label correctness. The model learns: "do these two ex
 | Input | (post, proposed_label) | (original_rationale, reformulated_rationale) |
 | Output | correct / adversarial | equivalent / unequivalent |
 | What it detects | wrong hate speech labels | changed/preserved meaning in explanations |
-| Directly detects hate speech? | Yes — label is right or wrong | No — just checks if two explanations agree |
+| Directly detects hate speech? | Yes - label is right or wrong | No - just checks if two explanations agree |
 | Post content used? | Yes | No |
-| Error modes simulated? | Yes (sarcasm-blind, etc.) | No — just meaning flip |
+| Error modes simulated? | Yes (sarcasm-blind, etc.) | No - just meaning flip |
 
 The current system is a **semantic equivalence classifier on rationale pairs**. It is *related* to the original thesis but does not directly fulfill it. It would catch a model that outputs a flipped conclusion, but not a model that outputs a subtly wrong conclusion in similar language.
 
@@ -81,7 +81,7 @@ The current system is a **semantic equivalence classifier on rationale pairs**. 
 - Matches GPT-4o-mini overall, beats it on anatomy (the hardest domain)
 - TF-IDF gap (18 points) proves the task requires genuine semantic understanding, not keyword matching
 
-**Anatomy is consistently the weakest domain** across all models — shorter, more ambiguous rationales that are harder to distinguish semantically.
+**Anatomy is consistently the weakest domain** across all models - shorter, more ambiguous rationales that are harder to distinguish semantically.
 
 ---
 
@@ -92,7 +92,7 @@ If we want to make this directly about hate speech detection, one additional exp
 **The idea:** use the trained judge as a component in a hate speech evaluation pipeline.
 
 1. Take a held-out set of posts with ground-truth hate/benign labels and human rationales (from HateCoT).
-2. Run a hate speech classifier (e.g., RoBERTa zero-shot, or fine-tuned on a subset) — get its predicted label *and* its generated rationale.
+2. Run a hate speech classifier (e.g., RoBERTa zero-shot, or fine-tuned on a subset) - get its predicted label *and* its generated rationale.
 3. Feed (ground_truth_rationale, classifier_rationale) into our judge.
 4. Measure: when the judge says "unequivalent," does the classifier's label also disagree with ground truth? If yes, the judge is a proxy for label correctness.
 
@@ -107,7 +107,7 @@ for post, gt_label, gt_rationale in held_out_set:
     # does judge_verdict == "unequivalent" predict (classifier_label != gt_label)?
 ```
 
-If the judge's "unequivalent" verdict correlates with label disagreement, we've shown the judge is a useful signal for detecting classification errors — which is the original thesis.
+If the judge's "unequivalent" verdict correlates with label disagreement, we've shown the judge is a useful signal for detecting classification errors - which is the original thesis.
 
 **Effort:** one script, maybe 200 lines, one day of work.
 
@@ -115,16 +115,16 @@ If the judge's "unequivalent" verdict correlates with label disagreement, we've 
 
 ## Which paper to write
 
-**Option A — Accept the pivot (less work, B-range grade):**
+**Option A - Accept the pivot (less work, B-range grade):**
 
 Rewrite the intro/methodology to match what was actually built. Frame it as:
-> "Hate speech detection is subjective and evaluation is expensive. We build a local rationale-consistency judge — a 125M parameter model that matches GPT-4o-mini at inference time, runs for free locally, and generalizes OOD."
+> "Hate speech detection is subjective and evaluation is expensive. We build a local rationale-consistency judge - a 125M parameter model that matches GPT-4o-mini at inference time, runs for free locally, and generalizes OOD."
 
 The contribution is: efficient, local alternative to LLM-based rationale evaluation. The OOD generalization and TF-IDF gap are the evidence.
 
-**Option B — Add the pipeline experiment (more work, A-range grade):**
+**Option B - Add the pipeline experiment (more work, A-range grade):**
 
 Keep everything we have, add one experiment connecting the judge to actual label correctness. The paper's thesis becomes coherent end-to-end:
-> "We built a rationale-equivalence judge, and showed it serves as a proxy for label correctness in hate speech detection — catching classifier errors without requiring label comparisons."
+> "We built a rationale-equivalence judge, and showed it serves as a proxy for label correctness in hate speech detection - catching classifier errors without requiring label comparisons."
 
 This directly fulfills the course objective (deep learning to detect hate speech) and has a novel angle (judge-as-error-detector via rationale comparison).

@@ -167,7 +167,7 @@ def main():
     model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
     model.eval()
 
-    print("Pairs where the synthetic just flips 'not' — all true label = unequivalent.")
+    print("Pairs where the synthetic just flips 'not' - all true label = unequivalent.")
     print("A shortcut learner detects the negation token, not the meaning change.\n")
     print(f"{'#':<3} {'True':<14} {'Model':<14} {'Confidence':>10}  Match  Description")
     print("-" * 100)
@@ -190,7 +190,7 @@ def main():
 
     print("-" * 100)
     print(f"\nAccuracy: {correct}/{len(NEGATION_PAIRS)} = {correct/len(NEGATION_PAIRS):.1%}")
-    print("\nNOTE: scoring 100% here does NOT prove the model is good — a simple negation")
+    print("\nNOTE: scoring 100% here does NOT prove the model is good - a simple negation")
     print("detector would also score 100%. What matters is comparing the confidence here")
     print("vs the manual labels: if confidence is similarly high on both, the model may")
     print("just be detecting 'not' tokens rather than genuine meaning differences.")

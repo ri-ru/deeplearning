@@ -1,4 +1,4 @@
-# Synthetic Data Generation — Few-Shot Improved
+# Synthetic Data Generation - Few-Shot Improved
 
 ## The problem with previous generation attempts
 
@@ -11,7 +11,7 @@ conclusion but mostly just inserted "NOT" into the original sentence:
 
 A RoBERTa model trained on this data learns to detect the presence of a negation
 token, not genuine semantic difference. The self-improving prompt loop
-(`prompt_loop.py`) attempted to fix this over 10 iterations but never converged —
+(`prompt_loop.py`) attempted to fix this over 10 iterations but never converged -
 it optimized for cosine similarity and TF-IDF separability, but had no signal
 that the generated pairs were actually mislabeled.
 
@@ -21,10 +21,10 @@ that the generated pairs were actually mislabeled.
 
 `manual labelling.csv` contains 20 pairs that were manually judged by a human.
 Each row has:
-- **Post** — the original social media post
-- **Explanation** — the AI-generated rationale
-- **Human comment** — the human's reasoning for their verdict
-- **Label** — `Equivalent` or `Unequivalent`
+- **Post** - the original social media post
+- **Explanation** - the AI-generated rationale
+- **Human comment** - the human's reasoning for their verdict
+- **Label** - `Equivalent` or `Unequivalent`
 
 The 7 Unequivalent cases are especially valuable: they are examples where a human
 identified a genuine semantic disagreement, often for subtle reasons:
@@ -40,8 +40,8 @@ completely missed.
 Instead of zero-shot generation ("rewrite this to reach the opposite conclusion"),
 we inject the manually labelled examples **directly into the generation prompt**
 as few-shot demonstrations. The LLM sees concrete examples of what a genuine
-semantic flip looks like — not a negation shortcut, but a real change in reasoning
-— before it generates anything.
+semantic flip looks like - not a negation shortcut, but a real change in reasoning
+- before it generates anything.
 
 **For unequivalent generation:**
 The prompt shows 3–4 manually labelled Unequivalent examples with the human
@@ -75,7 +75,7 @@ Cluster GPU: **Tesla V100-SXM2-32GB**, ~10GB allocated, CUDA 13.0, compute capab
 ## How to use
 
 ```bash
-# Option 1 — GPTQ 4-bit (recommended, keeps 7B quality)
+# Option 1 - GPTQ 4-bit (recommended, keeps 7B quality)
 python reformulate.py \
     --input "hatecot_final_D3 (2).csv" \
     --model "Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4" \
@@ -83,7 +83,7 @@ python reformulate.py \
     --dtype float16 \
     --n-samples 0
 
-# Option 2 — 3B no quantization (~6GB, fallback if GPTQ fails)
+# Option 2 - 3B no quantization (~6GB, fallback if GPTQ fails)
 python reformulate.py \
     --input "hatecot_final_D3 (2).csv" \
     --model "Qwen/Qwen2.5-3B-Instruct" \
@@ -98,9 +98,9 @@ python -m src.train \
 
 ## Files
 
-- `reformulate.py` — few-shot generation script
-- `manual_labelling.csv` — 20 manually labelled pairs used as few-shot examples
-- `README.md` — this file
+- `reformulate.py` - few-shot generation script
+- `manual_labelling.csv` - 20 manually labelled pairs used as few-shot examples
+- `README.md` - this file
 
 ## What to measure
 

@@ -1,4 +1,4 @@
-# Overnight Self-Improvement Loop — Summary
+# Overnight Self-Improvement Loop - Summary
 
 **Status:** max iterations reached (10)  
 **Targets met:** no
@@ -31,7 +31,7 @@ You are given a hate-speech classification rationale written by an annotator. Yo
 
 Rules:
 - Reach a DIFFERENT classification label (e.g. if the original says "Not Hate", conclude "Hate", and vice versa)
-- Use DIFFERENT reasoning and evidence — do not simply negate or copy the original sentences
+- Use DIFFERENT reasoning and evidence - do not simply negate or copy the original sentences
 - Reuse at least 40 distinct nouns or verbs from the original rationale to ensure the rationale stays on topic and anchors to the post's vocabulary
 - Include at least twenty specific phrases or concepts from the original, paraphrased in a new way
 - Begin the new rationale with a brief summary of the post's main idea to anchor it to the original content
@@ -119,4 +119,4 @@ In conclusion, the post fulfills the criteria for hate speech because it aims to
 
 ## Honest assessment
 
-Cosine similarity is below target. The unequivalent rationales drifted off-topic — they no longer discuss the same post in the same vocabulary. A judge trained on this would learn 'is this text on a totally different topic' rather than rationale equivalence. The prompt needs to anchor the generator to the post's key phrases.
+Cosine similarity is below target. The unequivalent rationales drifted off-topic - they no longer discuss the same post in the same vocabulary. A judge trained on this would learn 'is this text on a totally different topic' rather than rationale equivalence. The prompt needs to anchor the generator to the post's key phrases.

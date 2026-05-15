@@ -1,33 +1,33 @@
-# EE559 Group Mini-Project — Notes & Findings
+# EE559 Group Mini-Project - Notes & Findings
 
 ## What this project is
 
-We are building a **rationale-equivalence judge** — a binary classifier that takes two hate-speech rationales and decides if they mean the same thing.
+We are building a **rationale-equivalence judge** - a binary classifier that takes two hate-speech rationales and decides if they mean the same thing.
 
 - **Input:** two texts (original explanation + reformulated version)
 - **Output:** `equivalent` or `unequivalent`
 - **Why it matters:** once trained, anyone can use it to check whether a model's generated reasoning agrees with their ground truth, without paying GPT-4 per call
 
-This is the core artifact. It is not a hate speech classifier itself — it is a tool for *evaluating* hate speech classifiers. The paper needs to justify this clearly in the intro.
+This is the core artifact. It is not a hate speech classifier itself - it is a tool for *evaluating* hate speech classifiers. The paper needs to justify this clearly in the intro.
 
 ---
 
 ## The dataset (`reformulated_full.csv`)
 
 - **52,137 rows**, exactly 50/50 balanced (26,069 equivalent / 26,068 unequivalent)
-- **Source:** HateCoT dataset — real social media posts with human-written explanations
+- **Source:** HateCoT dataset - real social media posts with human-written explanations
 - **How Flavia generated it:** took each human explanation and ran GPT-4 twice:
   1. "Paraphrase this, keep the same meaning" → `equivalent` row
   2. "Rewrite this but change the conclusion" → `unequivalent` row (adversarial)
 - **Columns:** `id`, `explanation` (original rationale), `domain`, `label` (hate/benign), `post`, `target`, `uid`, `synthetic` (reformulated rationale), `meaning` (the label: equivalent/unequivalent)
 
-### Example — equivalent
+### Example - equivalent
 - Post: *"you keep thinking im black"*
 - Explanation: *"benign, no harmful language, no stereotypes"*
 - Synthetic: *"benign because it lacks offensive language, no harmful intent"*
 - Label: **equivalent** (same conclusion, different words)
 
-### Example — unequivalent
+### Example - unequivalent
 - Post: *"Same. At first I thought I just misread it..."*
 - Explanation: *"does not target any identity, general confusion, Neutral content"*
 - Synthetic: *"targets a specific identity for abuse, promotes hate, Hate speech"*
@@ -54,7 +54,7 @@ Data is bad:
 | Val | carved from train (10%) | ~3.4k |
 | OOD Test | toxigen, gab, anatomy | ~17.7k |
 
-The key scientific claim: the model generalizes to **unseen domains** (OOD). This is what makes it interesting — not just in-domain accuracy.
+The key scientific claim: the model generalizes to **unseen domains** (OOD). This is what makes it interesting - not just in-domain accuracy.
 
 ---
 
@@ -64,10 +64,10 @@ RoBERTa-base was pre-trained by Meta on 160GB of English text to predict masked 
 
 Fine-tuning = take those 125M pre-trained weights as a starting point, throw away the vocabulary prediction head, add a new 2-output classification head, and nudge all weights slightly on your labeled data.
 
-The model input is: `[CLS] explanation [SEP] synthetic [SEP]` — both texts fed as a sentence pair. The `[CLS]` token's final hidden state becomes a vector that the classification head reads.
+The model input is: `[CLS] explanation [SEP] synthetic [SEP]` - both texts fed as a sentence pair. The `[CLS]` token's final hidden state becomes a vector that the classification head reads.
 
 **Key hyperparameters:**
-- Learning rate: `2e-5` (small — don't destroy pre-trained weights)
+- Learning rate: `2e-5` (small - don't destroy pre-trained weights)
 - Epochs: 3
 - Batch size: 32
 - Max length: 256 tokens
@@ -75,7 +75,7 @@ The model input is: `[CLS] explanation [SEP] synthetic [SEP]` — both texts fed
 
 ---
 
-## Training results (full run — `configs/roberta_base.yaml`)
+## Training results (full run - `configs/roberta_base.yaml`)
 
 ### Training loss curve
 ```
@@ -95,7 +95,7 @@ epoch 3.0:   eval F1 = 0.989, eval accuracy = 98.9%  ← no improvement
 | gab | 5,034 | 97.6% | 0.976 | 0.998 |
 | toxigen | 7,239 | 97.7% | 0.977 | 0.998 |
 
-**anatomy is the weakest domain** — likely because its rationales are shorter and more ambiguous. Error analysis material.
+**anatomy is the weakest domain** - likely because its rationales are shorter and more ambiguous. Error analysis material.
 
 ### Confusion matrix (OOD overall)
 ```
@@ -119,9 +119,9 @@ More data helped anatomy massively. Gab was already nearly saturated.
 ## Artifacts
 
 All in `runs/roberta_base/`:
-- `checkpoints/` — the trained model (load with `from transformers import pipeline`)
-- `metrics.json` — the results table (goes in the paper)
-- `test_predictions.csv` — every test example with `label`, `pred`, `p_unequivalent` (use for error analysis)
+- `checkpoints/` - the trained model (load with `from transformers import pipeline`)
+- `metrics.json` - the results table (goes in the paper)
+- `test_predictions.csv` - every test example with `label`, `pred`, `p_unequivalent` (use for error analysis)
 
 ---
 
@@ -132,9 +132,9 @@ Running GPT-4o-mini on 500 OOD test samples via `scripts/zero_shot_baseline.py`.
 **Why 500 not 17k:** costs money per API call. 500 samples gives ±3% confidence interval on F1, which is tight enough. RoBERTa runs free on local GPU so we ran it on everything.
 
 **Why we run this:** the paper needs a comparison. The story is:
-> "A 125M parameter model fine-tuned in 3 minutes on a single GPU matches or beats a large LLM called via API — making it practical to run locally without per-call costs."
+> "A 125M parameter model fine-tuned in 3 minutes on a single GPU matches or beats a large LLM called via API - making it practical to run locally without per-call costs."
 
-### Results — GPT-4o-mini zero-shot (500 samples)
+### Results - GPT-4o-mini zero-shot (500 samples)
 
 | Domain | n | Accuracy | F1 macro |
 |--------|---|----------|----------|
@@ -151,19 +151,19 @@ Running GPT-4o-mini on 500 OOD test samples via `scripts/zero_shot_baseline.py`.
 | GPT-4o-mini zero-shot | 0.964 | 0.914 | **0.994** | 0.979 |
 | **RoBERTa-base fine-tuned (ours)** | **0.968** | **0.949** | 0.976 | **0.977** |
 
-**Key finding:** A 125M parameter model fine-tuned in 3 minutes on a single GPU **matches GPT-4o-mini** overall and **beats it on anatomy** (0.949 vs 0.914). The TF-IDF baseline shows the task is not trivially solvable by keyword matching — 18 points of the gap reflects genuine semantic understanding that RoBERTa learns.
+**Key finding:** A 125M parameter model fine-tuned in 3 minutes on a single GPU **matches GPT-4o-mini** overall and **beats it on anatomy** (0.949 vs 0.914). The TF-IDF baseline shows the task is not trivially solvable by keyword matching - 18 points of the gap reflects genuine semantic understanding that RoBERTa learns.
 
-**The data is not "too easy":** TF-IDF gets 78.9% — if the task were just surface keyword matching it would score 95%+. The remaining 18-point gap to RoBERTa is real semantic understanding.
+**The data is not "too easy":** TF-IDF gets 78.9% - if the task were just surface keyword matching it would score 95%+. The remaining 18-point gap to RoBERTa is real semantic understanding.
 
 ---
 
 ## Paper framing (important)
 
-**The abstract currently talks about adversarial labels — this needs to be fixed.** The dataset pivoted to rationale-equivalence, not label-correctness. Fix this before submission or the grader will catch it.
+**The abstract currently talks about adversarial labels - this needs to be fixed.** The dataset pivoted to rationale-equivalence, not label-correctness. Fix this before submission or the grader will catch it.
 
 **Justification for being in-scope for EE559:** the course asks for hate speech detection. Frame the contribution as: *"Hate speech detection is bottlenecked by evaluation cost. We build the evaluator that lets practitioners cheaply check whether any classifier's reasoning aligns with their values."* The UN definition of hate speech (no universal legal definition, inherently subjective) motivates the practitioner-anchored approach.
 
-**Cite HateCoT paper** — the dataset source. Currently missing from the report.
+**Cite HateCoT paper** - the dataset source. Currently missing from the report.
 
 ---
 
@@ -184,8 +184,8 @@ Running GPT-4o-mini on 500 OOD test samples via `scripts/zero_shot_baseline.py`.
 
 ## What to do next
 
-1. ~~**Get baseline results**~~ — done. RoBERTa matches GPT-4o-mini overall, beats it on anatomy.
+1. ~~**Get baseline results**~~ - done. RoBERTa matches GPT-4o-mini overall, beats it on anatomy.
 2. **Decision required:** Option A (rewrite paper around rationale equivalence) vs Option B (add hate speech pipeline experiment to reconnect to course objective). See METHODOLOGY.md.
-3. **Fix the abstract** — currently placeholder "A very nice abstract". Must match whichever option is chosen.
-4. **Add HateCoT citation** — missing from bibliography entirely.
-5. **Error analysis** — open `runs/roberta_base/test_predictions.csv`, filter `label != pred`, look at anatomy failures. Short paragraph for the paper.
+3. **Fix the abstract** - currently placeholder "A very nice abstract". Must match whichever option is chosen.
+4. **Add HateCoT citation** - missing from bibliography entirely.
+5. **Error analysis** - open `runs/roberta_base/test_predictions.csv`, filter `label != pred`, look at anatomy failures. Short paragraph for the paper.

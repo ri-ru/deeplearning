@@ -64,7 +64,7 @@ def load_and_split(cfg: DataConfig) -> tuple[Dataset, Dataset, Dataset]:
         )
 
     # If the label lives in the same column as the reformulated text,
-    # they are actually two separate columns in the source — adjust here.
+    # they are actually two separate columns in the source - adjust here.
     # In Veronika's CSV: columns are
     #   id, explanation, domain, label (hate/benign/...), post, target,
     #   uid, synthetic (=reformulated text), meaning (=equivalent/unequivalent)

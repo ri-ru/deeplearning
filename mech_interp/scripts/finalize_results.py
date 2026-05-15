@@ -6,7 +6,7 @@ with the corresponding sentence built from the metrics JSON. Adds a final
 "Summary verdict" section.
 
 Be deliberate about reading what the numbers actually say. We do NOT claim
-a hypothesis is "confirmed" — we just describe which hypothesis the data
+a hypothesis is "confirmed" - we just describe which hypothesis the data
 matches best, and what we still cannot conclude.
 """
 from __future__ import annotations
@@ -64,7 +64,7 @@ def build_fill_ins(metrics: dict) -> dict:
         f"{_fmt(vr)} at layer {lr}. "
         f"At that same layer probe_equiv AUC = {_fmt(rows[lr]['probe_equiv_auc_val'])} "
         f"and probe_neg AUC = {_fmt(rows[lr]['probe_neg_auc_val'])}. "
-        + ("ρ exceeds 0.85 — the two probes agree per-sample, " if (vr is not None and vr > 0.85) else "ρ does not exceed 0.85, ")
+        + ("ρ exceeds 0.85 - the two probes agree per-sample, " if (vr is not None and vr > 0.85) else "ρ does not exceed 0.85, ")
         + "so H1 is "
         + ("**consistent with the data**." if (vr is not None and vr > 0.85) else "**not supported** at this threshold.")
     )
@@ -83,16 +83,16 @@ def build_fill_ins(metrics: dict) -> dict:
         f"= [{_fmt(min((r['probe_neg_auc_val'] for r in rows if r['probe_neg_auc_val'] is not None), default=None))}, "
         f"{_fmt(max((r['probe_neg_auc_val'] for r in rows if r['probe_neg_auc_val'] is not None), default=None))}], "
         f"vs regex-only prior {_fmt(prior)}. "
-        + ("probe_neg climbs well above the regex prior, so negation is encoded as more than a surface lexical match." if (vn is not None and prior is not None and vn > prior + 0.05) else "probe_neg stays close to or below the regex prior — the model does not appear to encode negation richer than the regex itself.")
+        + ("probe_neg climbs well above the regex prior, so negation is encoded as more than a surface lexical match." if (vn is not None and prior is not None and vn > prior + 0.05) else "probe_neg stays close to or below the regex prior - the model does not appear to encode negation richer than the regex itself.")
     )
 
     aux = (
         f"**Actual result:** best probe_equiv AUC on synthetic val = {_fmt(ve)} (layer {le}); "
         f"best probe_equiv AUC on manual (n=20) = {_fmt(vm)} (layer {lm}). "
         f"Drop = {_fmt((ve or 0.0) - (vm or 0.0))}. "
-        + ("Synthetic→manual drop > 0.20 — the synthetic decision function does not transfer to human-labeled pairs, consistent with a shortcut even where H1 alone fails to localize the precise feature."
+        + ("Synthetic→manual drop > 0.20 - the synthetic decision function does not transfer to human-labeled pairs, consistent with a shortcut even where H1 alone fails to localize the precise feature."
            if (ve is not None and vm is not None and (ve - vm) > 0.20)
-           else "Synthetic→manual drop is < 0.20 — the manual eval does not refute on its own that the model learned semantics.")
+           else "Synthetic→manual drop is < 0.20 - the manual eval does not refute on its own that the model learned semantics.")
     )
 
     prior_text = (
@@ -160,7 +160,7 @@ def main() -> None:
         f"**Phase-2 hook.** "
         + (f"Run activation patching at layer {lr}: ablate the negation direction (probe_neg weight vector) and measure label-flip rate on synthetic vs manual."
            if (vr is not None and vr > 0.7)
-           else "Probe correlation is weak; before doing causal patching, expand the probe target set — try sentiment-flip, length ratio, n-gram overlap.")
+           else "Probe correlation is weak; before doing causal patching, expand the probe target set - try sentiment-flip, length ratio, n-gram overlap.")
         + "\n"
     )
     if verdict_marker in text:

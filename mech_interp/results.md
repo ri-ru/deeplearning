@@ -5,37 +5,37 @@
 `unequivalent` (1). Trained on 52k synthetic pairs produced by GPT-4o where
 "unequivalent" pairs were generated to have the *opposite conclusion*. The
 prompt-loop audit (`audit_flip_rate.py`) showed ~50% of "unequivalent" pairs
-have an obvious surface flip — frequently a negation injected into the
+have an obvious surface flip - frequently a negation injected into the
 synthetic side. We suspect the model learned a negation shortcut rather than
 "semantic equivalence of conclusions".
 
 **Phase 1 (this doc).** Residual-stream probing at the `[CLS]` token, every
 layer, two linear probes:
 
-- `probe_equiv` — predicts the equivalence label.
-- `probe_neg`   — predicts whether the synthetic side contains negation
+- `probe_equiv` - predicts the equivalence label.
+- `probe_neg`   - predicts whether the synthetic side contains negation
   (regex `\b(not|n't|never|no|none|nothing|neither|nor)\b`, case-insensitive).
 
 **Methodology.**
 
 - Checkpoint probed: `judge_finetune/runs/smoke/checkpoints/checkpoint-XX/`
-  (RoBERTa-base, 2k-subset training, 1 epoch — see "caveat" below).
+  (RoBERTa-base, 2k-subset training, 1 epoch - see "caveat" below).
 - Data: 52,137 synthetic pairs (`reformulated_full.csv`) + 20 human-annotated
   pairs (`manual labelling.csv`).
 - For each sample, forward pass once with `output_hidden_states=True`,
   store `[CLS]` activation at every layer (13 layers: 1 embedding + 12
   transformer blocks).
 - 80/20 random split on the synthetic pool for probe train/val. Manual pairs
-  are evaluated by the probes trained on synthetic — they are out-of-domain
+  are evaluated by the probes trained on synthetic - they are out-of-domain
   in two senses (different writing voice + true labels, not GPT-4o-judged).
 - Logistic regression probes (sklearn), `max_iter=1000`, `C=1.0`. No PCA, no
-  whitening — we want raw linear separability.
+  whitening - we want raw linear separability.
 
 ---
 
 ## Hypotheses (stated *before* looking at any numbers)
 
-### H1 — Pure negation shortcut
+### H1 - Pure negation shortcut
 
 `probe_neg` AUC tracks `probe_equiv` AUC layer-for-layer, and at some layer
 the two probes' *per-sample predicted probabilities* correlate >0.85 on the
@@ -51,7 +51,7 @@ val split.
 
 **Actual result:** peak ρ(probe_equiv, probe_neg) on synthetic val = 0.350 at layer 5. At that same layer probe_equiv AUC = 0.878 and probe_neg AUC = 0.934. ρ does not exceed 0.85, so H1 is **not supported** at this threshold.
 
-### H2 — Mixed feature ("negation is *a* signal, not *the* signal")
+### H2 - Mixed feature ("negation is *a* signal, not *the* signal")
 
 `probe_neg` AUC rises but plateaus below `probe_equiv` AUC; per-sample
 prediction correlation peaks somewhere in 0.55–0.80.
@@ -67,14 +67,14 @@ gap widens at the top.
 
 **Actual result:** at the top layer (layer 12) probe_equiv AUC = 0.995 and probe_neg AUC = 0.976; the gap is 0.019. Peak probe_neg AUC across all layers = 0.976 (layer 12); peak probe_equiv AUC = 0.995 (layer 12). 
 
-### H3 — Negation is incidental
+### H3 - Negation is incidental
 
 `probe_neg` AUC stays near base-rate (~AUC of the regex baseline, see
 `prior_neg_correlation` below) while `probe_equiv` climbs sharply.
 
 > **What this would mean.** The shortcut is something else entirely
 > (likely conclusion-token mismatch, sentiment flip, or some
-> domain-specific cue). We'd need to redesign the probe targets — e.g.,
+> domain-specific cue). We'd need to redesign the probe targets - e.g.,
 > probe for "the post is hate" yes/no embedded in text_a vs text_b.
 
 **Predicted result:** flat `probe_neg` curve at AUC ≈ 0.5–0.6; clear
@@ -82,46 +82,46 @@ gap widens at the top.
 
 **Actual result:** probe_neg AUC range across layers = [0.500, 0.976], vs regex-only prior 0.609. probe_neg climbs well above the regex prior, so negation is encoded as more than a surface lexical match.
 
-### Auxiliary — Manual transfer
+### Auxiliary - Manual transfer
 
 If `probe_equiv` AUC on the 20 manual pairs is much lower than its synthetic
 val AUC (drop > 0.20), that's independent evidence the synthetic decision
-function does not transfer to human-labeled pairs — consistent with a
+function does not transfer to human-labeled pairs - consistent with a
 shortcut even if H1 fails to localize *which* shortcut.
 
 **Predicted result:** large drop (AUC 0.95-ish on synthetic, ≤ 0.70 on manual).
 
-**Actual result:** best probe_equiv AUC on synthetic val = 0.995 (layer 12); best probe_equiv AUC on manual (n=20) = 0.802 (layer 11). Drop = 0.192. Synthetic→manual drop is < 0.20 — the manual eval does not refute on its own that the model learned semantics.
+**Actual result:** best probe_equiv AUC on synthetic val = 0.995 (layer 12); best probe_equiv AUC on manual (n=20) = 0.802 (layer 11). Drop = 0.192. Synthetic→manual drop is < 0.20 - the manual eval does not refute on its own that the model learned semantics.
 
 ---
 
 ## Observed surprises (not covered by H1/H2/H3)
 
-### S1 — `probe_neg` is *higher than* `probe_equiv` at layers 1–6
+### S1 - `probe_neg` is *higher than* `probe_equiv` at layers 1–6
 
 Layers 1–6: probe_neg AUC = 0.85→0.94, probe_equiv AUC = 0.75→0.93.
 The crossover is at layer 7 (probe_equiv 0.964 > probe_neg 0.943) and
 the equivalence probe pulls further ahead through layer 12. This is the
 right *shape* for "negation is read off as a near-lexical feature early,
-then equivalence is computed on top of it" — which is a strictly weaker
+then equivalence is computed on top of it" - which is a strictly weaker
 shortcut claim than H1 (it does not require the two probes to agree
 per-sample, only that the equivalence representation builds on a
 negation representation that emerged first).
 
-### S2 — High AUC on both probes, but per-sample disagreement (ρ ≤ 0.35)
+### S2 - High AUC on both probes, but per-sample disagreement (ρ ≤ 0.35)
 
 The two probes hit AUC 0.995 and 0.976 at layer 12 but their *predicted
 probabilities* correlate only ρ = 0.27–0.35 across all middle and top
 layers. Reading this carefully: the model has high-quality linear
 representations of *both* features in [CLS], stored in **different
 directions**. Whatever direction the equivalence probe found is not
-collinear with the negation direction — so "the model is doing
+collinear with the negation direction - so "the model is doing
 negation detection in disguise" is not the right one-line story.
 
 What the model is using *causally* for the final classifier head is
 still open; probe AUC is correlational. This is the Phase-2 question.
 
-### S3 — Mid-layer probe_equiv on manual is **below chance** (anti-correlated)
+### S3 - Mid-layer probe_equiv on manual is **below chance** (anti-correlated)
 
 | layer | probe_equiv AUC (manual, n=20) |
 |---|---|
@@ -133,13 +133,13 @@ still open; probe AUC is correlational. This is the Phase-2 question.
 
 With n=20 every individual number is noisy, but five consecutive layers
 sitting at 0.30–0.50 is qualitatively striking. The synthetic-fit
-direction at mid layers is *anti-correlated* with the human label —
+direction at mid layers is *anti-correlated* with the human label -
 not merely non-transferring. This is the strongest standalone signal in
 Phase 1 that the model is leaning on something that *flips sign* between
 the synthetic and manual distributions, then partially recovers at the
 top layers (manual AUC 0.69, 0.65, 0.64, 0.80, 0.64 at layers 8–12).
 
-### S4 — probe_neg transfers to manual better than probe_equiv at the top layers
+### S4 - probe_neg transfers to manual better than probe_equiv at the top layers
 
 At layers 9–12 probe_neg AUC on manual is 0.60, 0.60, 0.70, 0.70 vs
 probe_equiv 0.65, 0.64, 0.80, 0.64. Layer-11 manual is the only place
@@ -158,7 +158,7 @@ unequivalent iff negation present" rule.
 **Actual:** regex-only AUC on the synthetic pool = 0.609 (negation regex on text_b alone predicts the equivalence label this well).
 
 If this prior is already very high (e.g. > 0.75 AUC), the probe curves
-become harder to interpret — a strong probe_neg AUC at the top of the
+become harder to interpret - a strong probe_neg AUC at the top of the
 network could just mean the model has propagated text-level features
 without doing real composition. We will report it both ways.
 
@@ -171,7 +171,7 @@ machine (gitignored, 8.3 GB; see `EXCLUDED_FILES.md`). Phase 1 uses the
 2k-sample smoke training run as a stand-in. This means:
 
 - Probe AUC numbers are not directly comparable to the paper's reported
-  judge performance — a probe AUC of 0.9 on a smoke checkpoint could be
+  judge performance - a probe AUC of 0.9 on a smoke checkpoint could be
   0.95 or 0.85 on the full one.
 - The *shape* of the per-layer curves and the negation-equivalence
   correlation are the load-bearing claims. Those should be qualitatively
@@ -183,11 +183,11 @@ machine (gitignored, 8.3 GB; see `EXCLUDED_FILES.md`). Phase 1 uses the
 
 ## Result figures and artifacts
 
-- `figures/probe_auc_layer_sweep.png` — AUC vs layer, both probes, with regex prior as a horizontal line.
-- `figures/probe_prediction_correlation.png` — per-layer pearson ρ between probe_equiv and probe_neg predicted probs.
-- `results/probe_metrics.json` — full numeric table (AUC, ρ, manual AUC) per layer.
-- `extracts/layer_XX.pt` — `[CLS]` residual tensors, per layer, in manifest order.
-- `extracts/manifest.csv` — sample_id, source, label, contains_negation_in_synthetic, in_synthetic_not_original, text_a, text_b.
+- `figures/probe_auc_layer_sweep.png` - AUC vs layer, both probes, with regex prior as a horizontal line.
+- `figures/probe_prediction_correlation.png` - per-layer pearson ρ between probe_equiv and probe_neg predicted probs.
+- `results/probe_metrics.json` - full numeric table (AUC, ρ, manual AUC) per layer.
+- `extracts/layer_XX.pt` - `[CLS]` residual tensors, per layer, in manifest order.
+- `extracts/manifest.csv` - sample_id, source, label, contains_negation_in_synthetic, in_synthetic_not_original, text_a, text_b.
 
 ---
 
@@ -218,7 +218,7 @@ machine (gitignored, 8.3 GB; see `EXCLUDED_FILES.md`). Phase 1 uses the
 The clean H1 story ("negation IS the shortcut at layer L") did not
 materialize: AUCs are similar but predictions disagree per-sample. So
 the Phase-2 plan should not be "patch the negation direction and watch
-labels flip" — that test would likely come back ambiguous.
+labels flip" - that test would likely come back ambiguous.
 
 Better Phase-2 targets, in order:
 

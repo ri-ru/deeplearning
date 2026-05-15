@@ -11,8 +11,8 @@ The exclusion rules live in `.gitignore`.
 
 | Category | Path | Approx. size | Regeneratable? |
 |---|---|---|---|
-| Training runs (checkpoints, optimizer state) | `judge_finetune/runs/` | ~8.3 GB | Yes — rerun training |
-| Python virtual environment | `judge_finetune/.venv/` | ~5.7 GB | Yes — `pip install -r judge_finetune/requirements.txt` |
+| Training runs (checkpoints, optimizer state) | `judge_finetune/runs/` | ~8.3 GB | Yes - rerun training |
+| Python virtual environment | `judge_finetune/.venv/` | ~5.7 GB | Yes - `pip install -r judge_finetune/requirements.txt` |
 
 ## Individual files larger than 100 MB
 
@@ -46,7 +46,7 @@ python -m judge_finetune.src.train --config judge_finetune/configs/smoke.yaml
 ### Virtual environment libraries (`judge_finetune/.venv/`)
 
 The entire `.venv/` is gitignored. The files below are the individual
-binaries inside it that exceed 100 MB — listed for reference, not because
+binaries inside it that exceed 100 MB - listed for reference, not because
 they are special. Recreate the venv with `pip install -r requirements.txt`
 and these will all be reinstalled from PyPI.
 
