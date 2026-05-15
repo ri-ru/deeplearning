@@ -34,7 +34,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 from sklearn.metrics.pairwise import cosine_similarity
 
-# ── targets ──────────────────────────────────────────────────────────────────
 TARGET_SIM_MIN   = 0.55   # unequivalent pairs must not be too different
 TARGET_MEAN_SIM  = 0.75   # unequivalent pairs must not be too similar
 TARGET_PCT_HIGH  = 0.15   # fraction with sim > 0.9
@@ -58,7 +57,6 @@ Rationale B: {synthetic}
 
 Answer (SAME or DIFFERENT):"""
 
-# ── initial generation prompt ─────────────────────────────────────────────────
 INITIAL_PROMPT = """\
 You are given a hate-speech classification rationale written by an annotator.
 
@@ -75,7 +73,6 @@ Original rationale:
 
 Write only the rewritten rationale, nothing else."""
 
-# ── meta-prompt for prompt optimisation ──────────────────────────────────────
 META_PROMPT = """\
 You are improving a data-generation prompt used to create "unequivalent" hate-speech rationale pairs.
 
@@ -143,7 +140,6 @@ Write an improved generation prompt that fixes the diagnosed problem above WHILE
 the prior trajectory shown in the history. Output ONLY the improved prompt text (the {{explanation}}
 placeholder must remain), nothing else. Do NOT wrap the prompt in quotes or <<<>>> markers."""
 
-
 def compute_metrics(originals: list[str], synthetics: list[str], labels: list[int]):
     """labels: 0=equivalent, 1=unequivalent"""
     vec = TfidfVectorizer(max_features=20000)
@@ -173,13 +169,9 @@ def compute_metrics(originals: list[str], synthetics: list[str], labels: list[in
 
     return mean_sim, pct_high, tfidf_f1, sims
 
-
-# ── flip-rate metric (does the unequivalent actually reach a different conclusion?) ──
-
 def _flip_cache_key(original: str, synthetic: str) -> str:
     import hashlib
     return hashlib.md5((original + "|||" + synthetic).encode("utf-8")).hexdigest()
-
 
 def load_flip_cache(out_dir: Path) -> dict[str, str]:
     path = out_dir / "flip_cache.json"
@@ -190,10 +182,8 @@ def load_flip_cache(out_dir: Path) -> dict[str, str]:
             return {}
     return {}
 
-
 def save_flip_cache(out_dir: Path, cache: dict[str, str]) -> None:
     (out_dir / "flip_cache.json").write_text(json.dumps(cache, indent=2))
-
 
 def judge_flip(client: OpenAI, original: str, synthetic: str,
                cache: dict[str, str]) -> str:
@@ -215,7 +205,6 @@ def judge_flip(client: OpenAI, original: str, synthetic: str,
     verdict = "SAME" if raw.startswith("SAME") else ("DIFFERENT" if raw.startswith("DIFFERENT") else "OTHER")
     cache[key] = verdict
     return verdict
-
 
 def compute_extra_metrics(client: OpenAI, originals: list[str], synthetics: list[str],
                           labels: list[int], cache: dict[str, str]) -> dict:
@@ -260,7 +249,6 @@ def compute_extra_metrics(client: OpenAI, originals: list[str], synthetics: list
         "verdicts": verdicts,  # parallel to uneq_pairs order
     }
 
-
 def generate_synthetic(client: OpenAI, prompt_template: str, explanation: str, model="gpt-4o-mini") -> str:
     prompt = prompt_template.replace("{explanation}", explanation)
     resp = client.chat.completions.create(
@@ -270,7 +258,6 @@ def generate_synthetic(client: OpenAI, prompt_template: str, explanation: str, m
         temperature=0.9,
     )
     return resp.choices[0].message.content.strip()
-
 
 def write_iter_csv(out_dir: Path, iteration: int, originals: list[str],
                    synthetics: list[str], labels: list[int], sims) -> None:
@@ -283,7 +270,6 @@ def write_iter_csv(out_dir: Path, iteration: int, originals: list[str],
         for i, (o, s, l) in enumerate(zip(originals, synthetics, labels)):
             w.writerow([i, "equivalent" if l == 0 else "unequivalent",
                         f"{float(sims[i]):.4f}", o, s])
-
 
 def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
                      final_metrics: dict, final_samples: list[dict],
@@ -356,7 +342,6 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
             lines.append(f"- **ORIGINAL:** {s['original']}")
             lines.append(f"- **SYNTHETIC:** {s['synthetic']}\n")
 
-    # ── honest assessment, ordered by severity ──
     lines.append("## Honest assessment\n")
     fr = fm.get("flip_rate", 0)
     lr = fm.get("length_ratio_mean", 0)
@@ -406,7 +391,6 @@ def write_summary_md(out_dir: Path, history: list[dict], final_prompt: str,
 
     (out_dir / "summary.md").write_text("\n".join(lines))
 
-
 def diagnose(metrics: dict) -> str:
     """Stable one-line diagnosis used in both the optimizer and the history block.
     Priority order: flip-rate, length-ratio, cosine, TF-IDF (most severe first)."""
@@ -437,7 +421,6 @@ def diagnose(metrics: dict) -> str:
                 f"a non-cosine lexical shortcut remains.")
     return f"all targets met (cosine={mean_sim:.3f}, flip={flip_rate or 0:.1%})."
 
-
 def build_history_block(history: list[dict]) -> str:
     """Compact textual record of past iterations for the meta-prompt."""
     if not history:
@@ -456,7 +439,6 @@ def build_history_block(history: list[dict]) -> str:
         lines.append(f"    diagnosis: {h['diagnosis']}")
         lines.append(f"    prompt opening: {h['prompt_head']}")
     return "\n".join(lines)
-
 
 def optimize_prompt(client: OpenAI, current_prompt: str, metrics: dict,
                     failure_examples: list[dict], n: int,
@@ -502,7 +484,6 @@ def optimize_prompt(client: OpenAI, current_prompt: str, metrics: dict,
     )
     return resp.choices[0].message.content.strip()
 
-
 def generate_batch(client: OpenAI, prompt: str, originals_paired: pd.DataFrame,
                    max_failures: int = MAX_CONSECUTIVE_API_FAILURES,
                    tag: str = "iter") -> tuple[list[str], list[str], list[int], int]:
@@ -541,7 +522,6 @@ def generate_batch(client: OpenAI, prompt: str, originals_paired: pd.DataFrame,
             print(f"  {tag}: generated {i+1}/{len(originals_paired)}")
 
     return originals, synthetics, labels, total_failures
-
 
 def main():
     p = argparse.ArgumentParser()
@@ -690,7 +670,6 @@ def main():
 
     (out_dir / "history.json").write_text(json.dumps(history, indent=2))
 
-    # ── final clean batch with the best prompt ──────────────────────────────
     print(f"\n{'='*60}\nFINAL BATCH (n={args.final_n})\n{'='*60}")
     final_sample = eq_pool.sample(n=args.final_n, random_state=4242).reset_index(drop=True)
     f_originals, f_synthetics, f_labels, f_failures = generate_batch(
@@ -747,7 +726,6 @@ def main():
     write_summary_md(out_dir, history, current_prompt, final_metrics,
                      final_samples_for_summary, targets_met, stopped_reason)
     print(f"\n✓ wrote {out_dir}/summary.md")
-
 
 if __name__ == "__main__":
     main()

@@ -31,17 +31,12 @@ from transformers import (
     set_seed,
 )
 
-# ── constants ──────────────────────────────────────────────────────────────────
-
 TRAIN_DOMAINS = ("dynahate", "cad", "measure", "socialbias", "toraman")
 TEST_DOMAINS  = ("toxigen", "gab", "anatomy")
 LABEL2ID = {"equivalent": 0, "unequivalent": 1}
 ID2LABEL  = {v: k for k, v in LABEL2ID.items()}
 
-# ── data preparation ───────────────────────────────────────────────────────────
-
 def prepare_synthetic(synthetic_csv: str) -> str:
-    """Convert reformulate.py output to the format expected by the trainer."""
     df = pd.read_csv(synthetic_csv)
     out = pd.DataFrame({
         "original":      df["explanation"],
@@ -56,9 +51,6 @@ def prepare_synthetic(synthetic_csv: str) -> str:
     out.to_csv(prepared_path, index=False)
     print(f"[prep] {len(out)} synthetic rows saved to {prepared_path}")
     return prepared_path
-
-
-# ── dataset loading ────────────────────────────────────────────────────────────
 
 def load_and_split(csv_path: str, augment_csv: str | None,
                    val_frac: float = 0.1, seed: int = 42):
@@ -111,7 +103,6 @@ def load_and_split(csv_path: str, augment_csv: str | None,
         Dataset.from_pandas(test_df[keep]),
     )
 
-
 def tokenize_dataset(ds: Dataset, tokenizer: PreTrainedTokenizerBase, max_length: int):
     def _tok(batch):
         return tokenizer(batch["text_a"], batch["text_b"],
@@ -119,13 +110,9 @@ def tokenize_dataset(ds: Dataset, tokenizer: PreTrainedTokenizerBase, max_length
     cols = [c for c in ds.column_names if c not in ("label", "domain", "post_id")]
     return ds.map(_tok, batched=True, remove_columns=cols)
 
-
-# ── metrics ────────────────────────────────────────────────────────────────────
-
 def softmax_np(logits):
     e = np.exp(logits - logits.max(axis=-1, keepdims=True))
     return e / e.sum(axis=-1, keepdims=True)
-
 
 def compute_metrics_overall(eval_pred):
     logits, labels = eval_pred
@@ -137,7 +124,6 @@ def compute_metrics_overall(eval_pred):
         "f1_unequivalent":  f1_score(labels, preds, pos_label=1),
         "auroc":            roc_auc_score(labels, probs[:, 1]),
     }
-
 
 def per_domain_breakdown(logits, labels, domains):
     probs = softmax_np(logits)
@@ -168,9 +154,6 @@ def per_domain_breakdown(logits, labels, domains):
         }
     return out
 
-
-# ── main ───────────────────────────────────────────────────────────────────────
-
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--synthetic",  required=True,
@@ -189,14 +172,11 @@ def main():
     run_dir = Path(args.output_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    # Step 1 — prepare synthetic CSV
     augment_csv = prepare_synthetic(args.synthetic)
 
-    # Step 2 — load data
     train_ds, val_ds, test_ds = load_and_split(args.base_csv, augment_csv, seed=args.seed)
     print(f"[data] train={len(train_ds)}  val={len(val_ds)}  test={len(test_ds)}")
 
-    # Step 3 — tokenize
     tok = AutoTokenizer.from_pretrained("roberta-base")
     train_tok = tokenize_dataset(train_ds, tok, args.max_length)
     val_tok   = tokenize_dataset(val_ds,   tok, args.max_length)
@@ -207,7 +187,6 @@ def main():
     test_text_a   = list(test_ds["text_a"])
     test_text_b   = list(test_ds["text_b"])
 
-    # Step 4 — model
     model = AutoModelForSequenceClassification.from_pretrained(
         "roberta-base", num_labels=2,
         id2label=ID2LABEL, label2id=LABEL2ID,
@@ -247,10 +226,8 @@ def main():
         compute_metrics=compute_metrics_overall,
     )
 
-    # Step 5 — train
     trainer.train()
 
-    # Step 6 — evaluate on OOD test set
     pred_out = trainer.predict(test_tok)
     breakdown = per_domain_breakdown(pred_out.predictions, pred_out.label_ids, test_domains)
 
@@ -273,7 +250,6 @@ def main():
     }).to_csv(run_dir / "test_predictions.csv", index=False)
 
     print(f"\n[done] results in {run_dir}/metrics.json")
-
 
 if __name__ == "__main__":
     main()
