@@ -44,3 +44,6 @@ loop_results_smoke_*/
 mech_interp/token_extracts/
 mech_interp/extracts/manifest.csv
 mech_interp/.Rhistory
+
+# local docs (not for the public repo)
+docs/
