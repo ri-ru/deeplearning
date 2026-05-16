@@ -39,3 +39,8 @@ loop_results_smoke_*/
 # Mac Numbers / Excel exports
 *.numbers
 *.xlsx
+
+# mech-interp activations - too big, easy to regenerate
+mech_interp/token_extracts/
+mech_interp/extracts/manifest.csv
+mech_interp/.Rhistory
