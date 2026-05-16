@@ -1,0 +1,206 @@
+
+=== manual @ layer 1  (20 samples) ===
+
+
+--- true=EQUIV   roberta=✓  (10 samples) ---
+
+  [manual_00]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.50
+    0.009  _benign
+    0.009  _middle
+    0.009  _middle
+    0.009  _benign
+    0.009  _resulting
+    0.009  _disrespectful
+
+  [manual_01]  roberta=equiv (p_uneq=0.02)   probe_p_uneq=0.52
+    0.017 █ _understand
+    0.017 █ _frustration
+    0.016 █ _confusion
+    0.016 █ _category
+    0.016 █ _general
+    0.016 █ _neutral
+
+  [manual_03]  roberta=equiv (p_uneq=0.19)   probe_p_uneq=0.53
+    0.011  _context
+    0.010  _solely
+    0.010  _classified
+    0.010  _criteria
+    0.010  _meet
+    0.010  _museum
+
+  [manual_04]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.50
+    0.008  _dem
+    0.008  _concerning
+    0.008  _insult
+    0.008  _straight
+    0.008  _classified
+    0.008  _rather
+
+  [manual_07]  roberta=equiv (p_uneq=0.01)   probe_p_uneq=0.51
+    0.009  _dehuman
+    0.009  _statement
+    0.009  _dem
+    0.009  _not
+    0.009  Not
+    0.009  _insult
+
+  [manual_08]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.52
+    0.011  _understand
+    0.011  _don
+    0.011  eness
+    0.011  _display
+    0.011  _don
+    0.011  _classified
+
+  [manual_09]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.51
+    0.016 █ _experience
+    0.016 █ _meet
+    0.016 █ _anticipation
+    0.016 █ _aspect
+    0.016 █ _a
+    0.016 █ _problematic
+
+  [manual_10]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.51
+    0.009  _link
+    0.009  _if
+    0.009  _not
+    0.008  _against
+    0.008  _classified
+    0.008  _categorized
+
+  [manual_11]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.49
+    0.017 █ _benign
+    0.017 █ _stereotypes
+    0.017 █ _middle
+    0.017 █ _don
+    0.017 █ _problematic
+    0.017 █ _because
+
+  [manual_15]  roberta=equiv (p_uneq=0.16)   probe_p_uneq=0.51
+    0.021 █ _benign
+    0.021 █ _because
+    0.021 █ _don
+    0.020 █ _including
+    0.020 █ _refer
+    0.020 █ _simply
+
+--- true=EQUIV   roberta=✗  (3 samples) ---
+
+  [manual_05]  roberta=uneq (p_uneq=0.68)   probe_p_uneq=0.49
+    0.018 █ _fact
+    0.018 █ _benign
+    0.018 █ _neutral
+    0.018 █ _poster
+    0.018 █ _middle
+    0.018 █ _
+
+  [manual_06]  roberta=uneq (p_uneq=0.60)   probe_p_uneq=0.51
+    0.014 █ _classified
+    0.014 █ _battlefield
+    0.014 █ _just
+    0.014 █ _can
+    0.014 █ _become
+    0.014 █ _a
+
+  [manual_17]  roberta=uneq (p_uneq=0.84)   probe_p_uneq=0.51
+    0.008  _fact
+    0.008  _context
+    0.008  _unrelated
+    0.008  _discrim
+    0.008  _damage
+    0.008  _fatigue
+
+--- true=UNEQUIV   roberta=✓  (7 samples) ---
+
+  [manual_02]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.50
+    0.033 █ able
+    0.032 █ _disrespectful
+    0.032 █ _
+    0.032 █ _toler
+    0.032 █ _nature
+    0.032 █ While
+
+  [manual_12]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.50
+    0.008  _dem
+    0.008  _dysph
+    0.008  _understand
+    0.008  _characteristics
+    0.008  _feel
+    0.008  _such
+
+  [manual_13]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.51
+    0.008  _directly
+    0.008  _social
+    0.008  _not
+    0.008  _inform
+    0.008  _disclose
+    0.008  _if
+
+  [manual_14]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.52
+    0.010  _others
+    0.010  _not
+    0.010  ans
+    0.010  _Americans
+    0.010  _Americans
+    0.010  _classified
+
+  [manual_16]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.50
+    0.013 █ _fact
+    0.013 █ _not
+    0.013 █ _benign
+    0.013 █ _argument
+    0.013 █ _disclose
+    0.013 █ _middle
+
+  [manual_18]  roberta=uneq (p_uneq=0.97)   probe_p_uneq=0.53
+    0.015 █ _social
+    0.015 █ _other
+    0.015 █ _disrespectful
+    0.015 █ Not
+    0.015 █ _labeled
+    0.015 █ _characteristics
+
+  [manual_19]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.50
+    0.009  _disability
+    0.009  _former
+    0.009  _disease
+    0.009  _don
+    0.009  _identity
+    0.009  _classified
+
+
+=== mean alpha per token (top 15 each, min 3 occurrences) ===
+
+-- EQUIV --
+  0.0159 (  4x) █ _neutral
+  0.0158 (  4x) █ 't
+  0.0149 (  5x) █ _anything
+  0.0149 (  4x) █ _no
+  0.0148 (  4x) █ _here
+  0.0147 (  5x) █ _benign
+  0.0146 (  3x) █ _There
+  0.0140 (  5x) █ _target
+  0.0139 (  8x) █ _simply
+  0.0139 (  4x) █ _content
+  0.0138 (  3x) █ _problematic
+  0.0133 (  5x) █ _about
+  0.0132 (  8x) █ _It
+  0.0131 (  6x) █ _harmful
+  0.0130 (  3x) █ _states
+
+-- UNEQUIV --
+  0.0195 (  5x) █ _offensive
+  0.0160 (  8x) █ _is
+  0.0151 (  5x) █ _language
+  0.0140 (  4x) █ This
+  0.0134 ( 12x) █ _it
+  0.0133 (  7x) █ _
+  0.0123 (  3x) █ _Therefore
+  0.0120 (  9x) █ s
+  0.0118 ( 11x) █ _and
+  0.0114 (  3x) █ The
+  0.0113 (  3x) █ _like
+  0.0113 (  3x) █ _but
+  0.0112 ( 16x) █ Ļ
+  0.0111 ( 28x) █ .
+  0.0110 ( 11x) █ _post

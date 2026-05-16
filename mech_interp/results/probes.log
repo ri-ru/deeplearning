@@ -1,0 +1,77 @@
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+/Users/veron/Desktop/deeplearning/judge_finetune/.venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1184: FutureWarning: 'n_jobs' has no effect since 1.8 and will be removed in 1.10. You provided 'n_jobs=-1', please leave it unspecified.
+  warnings.warn(msg, category=FutureWarning)
+[probes] manifest rows: 52157
+[probes] found 13 layer files
+[probes] regex-only AUC vs label (synthetic): 0.6086
+[probes] split: train=41709  val=10428  manual=20
+layer 00  equiv_val=0.5000  neg_val=     0.5  ρ=     nan  equiv_manual=     0.5  neg_manual=     0.5
+layer 01  equiv_val=0.7498  neg_val=0.8507719461537191  ρ=0.18936367816111171  equiv_manual=0.5164835164835164  neg_manual=    0.67
+layer 02  equiv_val=0.7738  neg_val=0.8501502200271762  ρ=0.1762923508575658  equiv_manual=0.5494505494505495  neg_manual=0.7500000000000001
+layer 03  equiv_val=0.7935  neg_val=0.8514800672665404  ρ=0.1925120156202134  equiv_manual=0.4505494505494505  neg_manual=    0.68
+layer 04  equiv_val=0.8392  neg_val=0.9013379584376164  ρ=0.31119275174095334  equiv_manual=0.39560439560439553  neg_manual=    0.72
+layer 05  equiv_val=0.8779  neg_val=0.9343408431959996  ρ=0.3499140734804576  equiv_manual=0.32967032967032966  neg_manual=    0.72
+layer 06  equiv_val=0.9259  neg_val=0.935423263139029  ρ=0.34181507909265146  equiv_manual=0.49450549450549447  neg_manual=    0.65
+layer 07  equiv_val=0.9639  neg_val=0.9432614135125413  ρ=0.3487612898203  equiv_manual=0.29670329670329665  neg_manual=    0.53
+layer 08  equiv_val=0.9855  neg_val=0.9529368575390768  ρ=0.29145376628437286  equiv_manual=0.6923076923076923  neg_manual=0.5700000000000001
+layer 09  equiv_val=0.9931  neg_val=0.9660466115052222  ρ=0.2878537422456036  equiv_manual=0.6483516483516483  neg_manual=     0.6
+layer 10  equiv_val=0.9941  neg_val=0.9690852125467605  ρ=0.28476521808999494  equiv_manual=0.6373626373626373  neg_manual=     0.6
+layer 11  equiv_val=0.9916  neg_val=0.9637160918546726  ρ=0.3183037938624173  equiv_manual=0.8021978021978021  neg_manual=     0.7
+layer 12  equiv_val=0.9946  neg_val=0.9756074580442113  ρ=0.2707570882436853  equiv_manual=0.6373626373626373  neg_manual=     0.7
+[probes] wrote /Users/veron/Desktop/deeplearning/mech_interp/results/probe_metrics.json
+[probes] wrote /Users/veron/Desktop/deeplearning/mech_interp/figures/probe_auc_layer_sweep.png
+[probes] wrote /Users/veron/Desktop/deeplearning/mech_interp/figures/probe_prediction_correlation.png
+[verdict] peak ρ at layer 0: nan  (no clear localization)

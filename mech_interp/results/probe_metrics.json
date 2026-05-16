@@ -1,0 +1,112 @@
+{
+  "prior_regex_auc_synthetic": 0.6085723364146282,
+  "n_train": 41709,
+  "n_val": 10428,
+  "n_manual": 20,
+  "metrics_by_layer": [
+    {
+      "layer": 0,
+      "probe_equiv_auc_val": 0.5,
+      "probe_neg_auc_val": 0.5,
+      "probe_equiv_auc_manual": 0.5,
+      "probe_neg_auc_manual": 0.5,
+      "pred_pearson_equiv_neg_val": NaN
+    },
+    {
+      "layer": 1,
+      "probe_equiv_auc_val": 0.7498296536912142,
+      "probe_neg_auc_val": 0.8507719461537191,
+      "probe_equiv_auc_manual": 0.5164835164835164,
+      "probe_neg_auc_manual": 0.67,
+      "pred_pearson_equiv_neg_val": 0.18936367816111171
+    },
+    {
+      "layer": 2,
+      "probe_equiv_auc_val": 0.7738076530847211,
+      "probe_neg_auc_val": 0.8501502200271762,
+      "probe_equiv_auc_manual": 0.5494505494505495,
+      "probe_neg_auc_manual": 0.7500000000000001,
+      "pred_pearson_equiv_neg_val": 0.1762923508575658
+    },
+    {
+      "layer": 3,
+      "probe_equiv_auc_val": 0.7934701268265236,
+      "probe_neg_auc_val": 0.8514800672665404,
+      "probe_equiv_auc_manual": 0.4505494505494505,
+      "probe_neg_auc_manual": 0.68,
+      "pred_pearson_equiv_neg_val": 0.1925120156202134
+    },
+    {
+      "layer": 4,
+      "probe_equiv_auc_val": 0.8391621860180222,
+      "probe_neg_auc_val": 0.9013379584376164,
+      "probe_equiv_auc_manual": 0.39560439560439553,
+      "probe_neg_auc_manual": 0.72,
+      "pred_pearson_equiv_neg_val": 0.31119275174095334
+    },
+    {
+      "layer": 5,
+      "probe_equiv_auc_val": 0.8779129365938008,
+      "probe_neg_auc_val": 0.9343408431959996,
+      "probe_equiv_auc_manual": 0.32967032967032966,
+      "probe_neg_auc_manual": 0.72,
+      "pred_pearson_equiv_neg_val": 0.3499140734804576
+    },
+    {
+      "layer": 6,
+      "probe_equiv_auc_val": 0.9259027030144714,
+      "probe_neg_auc_val": 0.935423263139029,
+      "probe_equiv_auc_manual": 0.49450549450549447,
+      "probe_neg_auc_manual": 0.65,
+      "pred_pearson_equiv_neg_val": 0.34181507909265146
+    },
+    {
+      "layer": 7,
+      "probe_equiv_auc_val": 0.9639154211265324,
+      "probe_neg_auc_val": 0.9432614135125413,
+      "probe_equiv_auc_manual": 0.29670329670329665,
+      "probe_neg_auc_manual": 0.53,
+      "pred_pearson_equiv_neg_val": 0.3487612898203
+    },
+    {
+      "layer": 8,
+      "probe_equiv_auc_val": 0.9854862443608419,
+      "probe_neg_auc_val": 0.9529368575390768,
+      "probe_equiv_auc_manual": 0.6923076923076923,
+      "probe_neg_auc_manual": 0.5700000000000001,
+      "pred_pearson_equiv_neg_val": 0.29145376628437286
+    },
+    {
+      "layer": 9,
+      "probe_equiv_auc_val": 0.9931455382067902,
+      "probe_neg_auc_val": 0.9660466115052222,
+      "probe_equiv_auc_manual": 0.6483516483516483,
+      "probe_neg_auc_manual": 0.6,
+      "pred_pearson_equiv_neg_val": 0.2878537422456036
+    },
+    {
+      "layer": 10,
+      "probe_equiv_auc_val": 0.9941065915450849,
+      "probe_neg_auc_val": 0.9690852125467605,
+      "probe_equiv_auc_manual": 0.6373626373626373,
+      "probe_neg_auc_manual": 0.6,
+      "pred_pearson_equiv_neg_val": 0.28476521808999494
+    },
+    {
+      "layer": 11,
+      "probe_equiv_auc_val": 0.9916334250429895,
+      "probe_neg_auc_val": 0.9637160918546726,
+      "probe_equiv_auc_manual": 0.8021978021978021,
+      "probe_neg_auc_manual": 0.7,
+      "pred_pearson_equiv_neg_val": 0.3183037938624173
+    },
+    {
+      "layer": 12,
+      "probe_equiv_auc_val": 0.9945708413319955,
+      "probe_neg_auc_val": 0.9756074580442113,
+      "probe_equiv_auc_manual": 0.6373626373626373,
+      "probe_neg_auc_manual": 0.7,
+      "pred_pearson_equiv_neg_val": 0.2707570882436853
+    }
+  ]
+}

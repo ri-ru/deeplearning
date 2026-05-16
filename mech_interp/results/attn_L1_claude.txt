@@ -1,0 +1,206 @@
+
+=== claude @ layer 1  (20 samples) ===
+
+
+--- true=EQUIV   roberta=✓  (3 samples) ---
+
+  [claude_03]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.51
+    0.016 █ _school
+    0.016 █ _education
+    0.016 █ _not
+    0.016 █ _schools
+    0.016 █ _not
+    0.016 █ _American
+
+  [claude_06]  roberta=equiv (p_uneq=0.00)   probe_p_uneq=0.51
+    0.015 █ typically
+    0.015 █ _irrational
+    0.015 █ _stereotype
+    0.015 █ _discrimination
+    0.015 █ _general
+    0.015 █ es
+
+  [claude_08]  roberta=equiv (p_uneq=0.01)   probe_p_uneq=0.48
+    0.017 █ _benign
+    0.017 █ _benign
+    0.017 █ _experience
+    0.017 █ _well
+    0.017 █ _job
+    0.017 █ _years
+
+--- true=EQUIV   roberta=✗  (7 samples) ---
+
+  [claude_00]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.50
+    0.016 █ em
+    0.016 █ _stereotypes
+    0.016 █ _textbook
+    0.016 █ _Toxic
+    0.015 █ s
+    0.015 █ _insults
+
+  [claude_01]  roberta=uneq (p_uneq=0.98)   probe_p_uneq=0.49
+    0.013 █ _dehuman
+    0.013 █ _dem
+    0.013 █ cut
+    0.012  anking
+    0.012  _explicitly
+    0.012  _different
+
+  [claude_02]  roberta=uneq (p_uneq=0.82)   probe_p_uneq=0.49
+    0.018 █ _incapable
+    0.018 █ _understanding
+    0.018 █ _Clearly
+    0.018 █ _degrading
+    0.017 █ _AND
+    0.017 █ _simple
+
+  [claude_04]  roberta=uneq (p_uneq=0.77)   probe_p_uneq=0.49
+    0.014 █ _benign
+    0.014 █ _just
+    0.014 █ _stereotypes
+    0.014 █ _19
+    0.014 █ _a
+    0.014 █ tymology
+
+  [claude_05]  roberta=uneq (p_uneq=0.96)   probe_p_uneq=0.52
+    0.013 █ _not
+    0.013 █ _dem
+    0.013 █ _argument
+    0.013 █ _animosity
+    0.013 █ _specifically
+    0.012  _libertarian
+
+  [claude_07]  roberta=uneq (p_uneq=0.98)   probe_p_uneq=0.51
+    0.015 █ _blame
+    0.015 █ aming
+    0.014 █ aming
+    0.014 █ _women
+    0.014 █ _harmful
+    0.014 █ _women
+
+  [claude_09]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.49
+    0.016 █ _dehuman
+    0.016 █ _dehuman
+    0.016 █ _dehuman
+    0.016 █ _than
+    0.016 █ _deaths
+    0.016 █ _explicitly
+
+--- true=UNEQUIV   roberta=✓  (10 samples) ---
+
+  [claude_10]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.50
+    0.015 █ _stereotypes
+    0.014 █ _other
+    0.014 █ _directly
+    0.014 █ ression
+    0.014 █ _than
+    0.014 █ _others
+
+  [claude_11]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.52
+    0.014 █ _social
+    0.014 █ _dem
+    0.013 █ ifier
+    0.013 █ Like
+    0.013 █ _just
+    0.013 █ _a
+
+  [claude_12]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.50
+    0.013 █ _dem
+    0.013 █ _not
+    0.013 █ _toxic
+    0.013 █ or
+    0.013 █ _general
+    0.013 █ _explaining
+
+  [claude_13]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.52
+    0.012  ucing
+    0.012  _if
+    0.012  _not
+    0.012  _against
+    0.012  _women
+    0.012  _exhibit
+
+  [claude_14]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.51
+    0.014 █ mediately
+    0.014 █ _discriminatory
+    0.014 █ _disqualified
+    0.014 █ _not
+    0.014 █ _against
+    0.014 █ _disabled
+
+  [claude_15]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.52
+    0.014 █ _directly
+    0.014 █ _argument
+    0.014 █ _heated
+    0.014 █ _insult
+    0.014 █ _trash
+    0.014 █ _non
+
+  [claude_16]  roberta=uneq (p_uneq=0.92)   probe_p_uneq=0.51
+    0.014 █ _distance
+    0.013 █ not
+    0.013 █ _framing
+    0.013 █ _classified
+    0.013 █ _real
+    0.013 █ _statement
+
+  [claude_17]  roberta=uneq (p_uneq=1.00)   probe_p_uneq=0.51
+    0.015 █ _literacy
+    0.015 █ _not
+    0.015 █ _not
+    0.015 █ _stereotypes
+    0.015 █ _propaganda
+    0.015 █ _awareness
+
+  [claude_18]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.52
+    0.014 █ _not
+    0.014 █ ude
+    0.014 █ _dem
+    0.014 █ _not
+    0.014 █ _insult
+    0.014 █ _a
+
+  [claude_19]  roberta=uneq (p_uneq=0.99)   probe_p_uneq=0.50
+    0.012  _context
+    0.011  _context
+    0.011  group
+    0.011  _outsider
+    0.011  _slur
+    0.011  _an
+
+
+=== mean alpha per token (top 15 each, min 3 occurrences) ===
+
+-- EQUIV --
+  0.0163 (  3x) █ _benign
+  0.0161 (  3x) █ _derogatory
+  0.0158 (  5x) █ _of
+  0.0158 (  7x) █ _offensive
+  0.0157 (  3x) █ _making
+  0.0155 (  4x) █ _stereotypes
+  0.0155 (  3x) █ _statement
+  0.0154 (  4x) █ _dehuman
+  0.0153 ( 11x) █ _harmful
+  0.0153 (  5x) █ _people
+  0.0152 (  5x) █ _targets
+  0.0152 (  4x) █ _in
+  0.0151 (  3x) █ _personal
+  0.0151 (  3x) █ _which
+  0.0151 (  7x) █ _that
+
+-- UNEQUIV --
+  0.0142 (  3x) █ _stereotypes
+  0.0141 (  3x) █ _general
+  0.0140 (  3x) █ _are
+  0.0138 (  4x) █ _white
+  0.0137 (  3x) █ _of
+  0.0137 ( 11x) █ _not
+  0.0137 (  3x) █ _dem
+  0.0135 (  8x) █ _people
+  0.0135 (  3x) █ _statement
+  0.0134 (  4x) █ _person
+  0.0133 ( 30x) █ _a
+  0.0132 (  4x) █ _from
+  0.0132 (  7x) █ _that
+  0.0131 (  3x) █ _That
+  0.0130 (  4x) █ _This
