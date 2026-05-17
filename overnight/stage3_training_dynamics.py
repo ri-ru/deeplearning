@@ -121,7 +121,7 @@ def main() -> int:
         fp16=False,
         logging_steps=100,
         report_to="none",
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         seed=args.seed,
     )
 

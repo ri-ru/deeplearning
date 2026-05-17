@@ -165,7 +165,7 @@ def train_roberta(train_df, test_df, label_names, run_dir: Path,
         greater_is_better=False, save_total_limit=1,
         bf16=torch.cuda.is_available(), fp16=False,
         logging_steps=200, report_to="none",
-        dataloader_num_workers=4, seed=42,
+        dataloader_num_workers=0, seed=42,
     )
     trainer = Trainer(model=model, args=args,
                       train_dataset=train_ds, eval_dataset=test_ds,

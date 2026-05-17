@@ -225,7 +225,7 @@ def train_variant(name: str, prep_fn: Callable, epochs: int, seed: int = 42) -> 
         fp16=False,
         logging_steps=200,
         report_to="none",
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         seed=seed,
     )
     trainer = Trainer(
