@@ -45,5 +45,11 @@ mech_interp/token_extracts/
 mech_interp/extracts/manifest.csv
 mech_interp/.Rhistory
 
+# overnight pipeline heavy artifacts (checkpoints, residuals).
+# the small JSON results under overnight/results/ ARE tracked.
+overnight/runs/
+overnight/extracts/
+overnight/run.log
+
 # local docs (not for the public repo)
 docs/

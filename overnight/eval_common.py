@@ -64,68 +64,82 @@ def has_negation_flip(text_a: str, text_b: str) -> int:
     return int(bool(b_negs - a_negs))
 
 
-def _score_pairs(pairs: list[tuple[str, str, int]], tokenizer, model, device) -> dict[str, Any]:
-    labels, preds, probs = [], [], []
-    for a, b, y in pairs:
-        inputs = tokenizer(a, b, return_tensors="pt", truncation=True, max_length=256).to(device)
+def _batched_forward(pairs: list[tuple[str, str, int]], tokenizer, model, device,
+                     batch_size: int = 64) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Run all pairs through the model in batches. Returns (labels, preds, probs_uneq)."""
+    labels = np.array([y for _, _, y in pairs], dtype=int)
+    preds = np.zeros(len(pairs), dtype=int)
+    probs = np.zeros(len(pairs), dtype=float)
+    for st in range(0, len(pairs), batch_size):
+        chunk = pairs[st: st + batch_size]
+        a = [c[0] for c in chunk]; b = [c[1] for c in chunk]
+        enc = tokenizer(a, b, return_tensors="pt", truncation=True, max_length=256,
+                        padding=True).to(device)
         with torch.no_grad():
-            logits = model(**inputs).logits[0].cpu().numpy()
-        p = np.exp(logits - logits.max()); p = p / p.sum()
-        preds.append(int(p.argmax()))
-        probs.append(float(p[1]))
-        labels.append(int(y))
+            logits = model(**enc).logits.float().cpu().numpy()
+        p = np.exp(logits - logits.max(axis=1, keepdims=True))
+        p = p / p.sum(axis=1, keepdims=True)
+        preds[st: st + len(chunk)] = p.argmax(axis=1)
+        probs[st: st + len(chunk)] = p[:, 1]
+    return labels, preds, probs
 
-    y_arr = np.array(labels)
-    p_arr = np.array(preds)
-    cm = confusion_matrix(y_arr, p_arr, labels=[0, 1]).tolist()
-    metrics: dict[str, Any] = {
-        "n": int(len(pairs)),
-        "accuracy": float(accuracy_score(y_arr, p_arr)),
-        "f1_macro": float(f1_score(y_arr, p_arr, average="macro", zero_division=0)),
-        "label_balance": dict(Counter(labels)),
-        "pred_balance": dict(Counter(preds)),
+
+def _metrics_from_arrays(labels: np.ndarray, preds: np.ndarray, probs: np.ndarray) -> dict[str, Any]:
+    if len(labels) == 0:
+        return {"n": 0}
+    cm = confusion_matrix(labels, preds, labels=[0, 1]).tolist()
+    out: dict[str, Any] = {
+        "n": int(len(labels)),
+        "accuracy": float(accuracy_score(labels, preds)),
+        "f1_macro": float(f1_score(labels, preds, average="macro", zero_division=0)),
+        "label_balance": {str(k): int(v) for k, v in Counter(labels.tolist()).items()},
+        "pred_balance":  {str(k): int(v) for k, v in Counter(preds.tolist()).items()},
         "confusion_matrix": cm,
-        "mean_p_unequivalent": float(np.mean(probs)) if probs else 0.0,
+        "mean_p_unequivalent": float(np.mean(probs)),
     }
     try:
-        metrics["auroc"] = float(roc_auc_score(y_arr, probs))
+        out["auroc"] = float(roc_auc_score(labels, probs))
     except ValueError:
-        metrics["auroc"] = None
+        out["auroc"] = None
     for cls_id, cls_name in ID2LABEL.items():
-        mask = y_arr == cls_id
+        mask = labels == cls_id
         if mask.sum() == 0:
             continue
-        metrics[f"acc_{cls_name}"] = float((p_arr[mask] == cls_id).mean())
-        metrics[f"n_{cls_name}"] = int(mask.sum())
-    return metrics
+        out[f"acc_{cls_name}"] = float((preds[mask] == cls_id).mean())
+        out[f"n_{cls_name}"] = int(mask.sum())
+    return out
+
+
+def _score_pairs(pairs: list[tuple[str, str, int]], tokenizer, model, device) -> dict[str, Any]:
+    labels, preds, probs = _batched_forward(pairs, tokenizer, model, device)
+    return _metrics_from_arrays(labels, preds, probs)
 
 
 def score_all(checkpoint_dir: Path, ood_test_df: pd.DataFrame | None = None) -> dict[str, Any]:
     """Score a checkpoint on (a) OOD test split, (b) manual, (c) Claude."""
     device = "cuda" if torch.cuda.is_available() else "cpu"
     tokenizer = AutoTokenizer.from_pretrained(str(checkpoint_dir))
-    model = AutoModelForSequenceClassification.from_pretrained(str(checkpoint_dir)).to(device).eval()
+    model = AutoModelForSequenceClassification.from_pretrained(str(checkpoint_dir)).to(device)
+    model.train(False)
 
     if ood_test_df is None:
         df = load_full_csv()
         ood_test_df = df[df["domain"].isin(TEST_DOMAINS)].reset_index(drop=True)
 
+    # Run all OOD pairs once, then slice per-domain from the cached predictions.
     ood_pairs = list(zip(
         ood_test_df["explanation"].astype(str).tolist(),
         ood_test_df["synthetic"].astype(str).tolist(),
         ood_test_df["label"].astype(int).tolist(),
     ))
-    ood_metrics = _score_pairs(ood_pairs, tokenizer, model, device)
+    labels, preds, probs = _batched_forward(ood_pairs, tokenizer, model, device)
+    ood_metrics = _metrics_from_arrays(labels, preds, probs)
 
+    domains_arr = ood_test_df["domain"].to_numpy()
     per_domain: dict[str, Any] = {}
-    for dom in sorted(ood_test_df["domain"].unique()):
-        sub = ood_test_df[ood_test_df["domain"] == dom]
-        sub_pairs = list(zip(
-            sub["explanation"].astype(str).tolist(),
-            sub["synthetic"].astype(str).tolist(),
-            sub["label"].astype(int).tolist(),
-        ))
-        per_domain[dom] = _score_pairs(sub_pairs, tokenizer, model, device)
+    for dom in sorted(set(domains_arr.tolist())):
+        m = domains_arr == dom
+        per_domain[dom] = _metrics_from_arrays(labels[m], preds[m], probs[m])
 
     manual = load_human_csv(REPO / "manual labelling.csv")
     manual_pairs = [(r["explanation"], r["comment"], LABEL2ID[r["label"]]) for r in manual]
