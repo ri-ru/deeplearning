@@ -1,0 +1,23 @@
+{
+  "regex_auc_vs_label": 0.7200058165527512,
+  "regex_auc_vs_model_pred": 0.7235272613576141,
+  "lr_neg_only_f1_macro": 0.699778787255191,
+  "accuracy_by_cell": {
+    "label=0_flip=0": {
+      "acc": 0.9752123020426899,
+      "count": 8714
+    },
+    "label=0_flip=1": {
+      "acc": 1.0,
+      "count": 157
+    },
+    "label=1_flip=0": {
+      "acc": 0.9272423165377378,
+      "count": 4783
+    },
+    "label=1_flip=1": {
+      "acc": 0.9997522913054249,
+      "count": 4037
+    }
+  }
+}

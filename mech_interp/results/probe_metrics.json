@@ -14,99 +14,99 @@
     },
     {
       "layer": 1,
-      "probe_equiv_auc_val": 0.7498296536912142,
-      "probe_neg_auc_val": 0.8507719461537191,
-      "probe_equiv_auc_manual": 0.5164835164835164,
+      "probe_equiv_auc_val": 0.7541596722052942,
+      "probe_neg_auc_val": 0.8447828470957303,
+      "probe_equiv_auc_manual": 0.5274725274725275,
       "probe_neg_auc_manual": 0.67,
-      "pred_pearson_equiv_neg_val": 0.18936367816111171
+      "pred_pearson_equiv_neg_val": 0.19729829368220683
     },
     {
       "layer": 2,
-      "probe_equiv_auc_val": 0.7738076530847211,
-      "probe_neg_auc_val": 0.8501502200271762,
-      "probe_equiv_auc_manual": 0.5494505494505495,
-      "probe_neg_auc_manual": 0.7500000000000001,
-      "pred_pearson_equiv_neg_val": 0.1762923508575658
+      "probe_equiv_auc_val": 0.7722756030391753,
+      "probe_neg_auc_val": 0.847000556741208,
+      "probe_equiv_auc_manual": 0.49450549450549447,
+      "probe_neg_auc_manual": 0.72,
+      "pred_pearson_equiv_neg_val": 0.18347464265076763
     },
     {
       "layer": 3,
-      "probe_equiv_auc_val": 0.7934701268265236,
-      "probe_neg_auc_val": 0.8514800672665404,
-      "probe_equiv_auc_manual": 0.4505494505494505,
-      "probe_neg_auc_manual": 0.68,
-      "pred_pearson_equiv_neg_val": 0.1925120156202134
+      "probe_equiv_auc_val": 0.8109546985491984,
+      "probe_neg_auc_val": 0.862945337355937,
+      "probe_equiv_auc_manual": 0.4395604395604395,
+      "probe_neg_auc_manual": 0.63,
+      "pred_pearson_equiv_neg_val": 0.28747020683747787
     },
     {
       "layer": 4,
-      "probe_equiv_auc_val": 0.8391621860180222,
-      "probe_neg_auc_val": 0.9013379584376164,
-      "probe_equiv_auc_manual": 0.39560439560439553,
-      "probe_neg_auc_manual": 0.72,
-      "pred_pearson_equiv_neg_val": 0.31119275174095334
+      "probe_equiv_auc_val": 0.888085859247969,
+      "probe_neg_auc_val": 0.908705047596289,
+      "probe_equiv_auc_manual": 0.5384615384615385,
+      "probe_neg_auc_manual": 0.69,
+      "pred_pearson_equiv_neg_val": 0.36022539283137733
     },
     {
       "layer": 5,
-      "probe_equiv_auc_val": 0.8779129365938008,
-      "probe_neg_auc_val": 0.9343408431959996,
-      "probe_equiv_auc_manual": 0.32967032967032966,
-      "probe_neg_auc_manual": 0.72,
-      "pred_pearson_equiv_neg_val": 0.3499140734804576
+      "probe_equiv_auc_val": 0.9204782159036285,
+      "probe_neg_auc_val": 0.924569391499655,
+      "probe_equiv_auc_manual": 0.4945054945054945,
+      "probe_neg_auc_manual": 0.64,
+      "pred_pearson_equiv_neg_val": 0.3301208437340237
     },
     {
       "layer": 6,
-      "probe_equiv_auc_val": 0.9259027030144714,
-      "probe_neg_auc_val": 0.935423263139029,
-      "probe_equiv_auc_manual": 0.49450549450549447,
-      "probe_neg_auc_manual": 0.65,
-      "pred_pearson_equiv_neg_val": 0.34181507909265146
+      "probe_equiv_auc_val": 0.957292256588698,
+      "probe_neg_auc_val": 0.9251500849729447,
+      "probe_equiv_auc_manual": 0.6703296703296703,
+      "probe_neg_auc_manual": 0.5999999999999999,
+      "pred_pearson_equiv_neg_val": 0.33136225230538385
     },
     {
       "layer": 7,
-      "probe_equiv_auc_val": 0.9639154211265324,
-      "probe_neg_auc_val": 0.9432614135125413,
-      "probe_equiv_auc_manual": 0.29670329670329665,
-      "probe_neg_auc_manual": 0.53,
-      "pred_pearson_equiv_neg_val": 0.3487612898203
+      "probe_equiv_auc_val": 0.9885870547987632,
+      "probe_neg_auc_val": 0.9503606980746668,
+      "probe_equiv_auc_manual": 0.7362637362637362,
+      "probe_neg_auc_manual": 0.68,
+      "pred_pearson_equiv_neg_val": 0.3102910348706044
     },
     {
       "layer": 8,
-      "probe_equiv_auc_val": 0.9854862443608419,
-      "probe_neg_auc_val": 0.9529368575390768,
-      "probe_equiv_auc_manual": 0.6923076923076923,
-      "probe_neg_auc_manual": 0.5700000000000001,
-      "pred_pearson_equiv_neg_val": 0.29145376628437286
+      "probe_equiv_auc_val": 0.9974997973206302,
+      "probe_neg_auc_val": 0.9587338618137815,
+      "probe_equiv_auc_manual": 0.9230769230769231,
+      "probe_neg_auc_manual": 0.65,
+      "pred_pearson_equiv_neg_val": 0.2862241171689686
     },
     {
       "layer": 9,
-      "probe_equiv_auc_val": 0.9931455382067902,
-      "probe_neg_auc_val": 0.9660466115052222,
-      "probe_equiv_auc_manual": 0.6483516483516483,
-      "probe_neg_auc_manual": 0.6,
-      "pred_pearson_equiv_neg_val": 0.2878537422456036
+      "probe_equiv_auc_val": 0.9984578343779228,
+      "probe_neg_auc_val": 0.9673871836394351,
+      "probe_equiv_auc_manual": 0.989010989010989,
+      "probe_neg_auc_manual": 0.68,
+      "pred_pearson_equiv_neg_val": 0.2706634232199185
     },
     {
       "layer": 10,
-      "probe_equiv_auc_val": 0.9941065915450849,
-      "probe_neg_auc_val": 0.9690852125467605,
-      "probe_equiv_auc_manual": 0.6373626373626373,
-      "probe_neg_auc_manual": 0.6,
-      "pred_pearson_equiv_neg_val": 0.28476521808999494
+      "probe_equiv_auc_val": 0.9987745438831366,
+      "probe_neg_auc_val": 0.9703287839653447,
+      "probe_equiv_auc_manual": 0.9670329670329669,
+      "probe_neg_auc_manual": 0.65,
+      "pred_pearson_equiv_neg_val": 0.26647417107623633
     },
     {
       "layer": 11,
-      "probe_equiv_auc_val": 0.9916334250429895,
-      "probe_neg_auc_val": 0.9637160918546726,
-      "probe_equiv_auc_manual": 0.8021978021978021,
-      "probe_neg_auc_manual": 0.7,
-      "pred_pearson_equiv_neg_val": 0.3183037938624173
+      "probe_equiv_auc_val": 0.9986015859164101,
+      "probe_neg_auc_val": 0.9677224359080283,
+      "probe_equiv_auc_manual": 0.8571428571428571,
+      "probe_neg_auc_manual": 0.6900000000000001,
+      "pred_pearson_equiv_neg_val": 0.26071599578241567
     },
     {
       "layer": 12,
-      "probe_equiv_auc_val": 0.9945708413319955,
-      "probe_neg_auc_val": 0.9756074580442113,
-      "probe_equiv_auc_manual": 0.6373626373626373,
-      "probe_neg_auc_manual": 0.7,
-      "pred_pearson_equiv_neg_val": 0.2707570882436853
+      "probe_equiv_auc_val": 0.9986245390791574,
+      "probe_neg_auc_val": 0.9596409893087894,
+      "probe_equiv_auc_manual": 0.8461538461538461,
+      "probe_neg_auc_manual": 0.5,
+      "pred_pearson_equiv_neg_val": 0.26697775498156595
     }
   ]
 }
