@@ -127,6 +127,25 @@ def _combined(df: pd.DataFrame) -> pd.DataFrame:
     return out.reset_index(drop=True)
 
 
+def _append_overnight_log(name: str, epochs: int, metrics: dict) -> None:
+    log_path = REPO / "OVERNIGHTLOG.md"
+    m = metrics["manual"]; o = metrics["ood_overall"]; c = metrics["claude"]
+    cm = c.get("pred_balance", {})
+    pred_uneq = (int(cm.get("1", 0)) / max(c.get("n", 1), 1)) * 100
+    ts = time.strftime("%Y-%m-%d %H:%M")
+    entry = (
+        f"\n## {ts}  {name}  (stage1)\n"
+        f"- recipe: {name} ({epochs} epochs)\n"
+        f"- OOD F1: {o['f1_macro']:.3f}  manual_acc: {m['accuracy']*100:.1f}% "
+        f"(eq={m.get('acc_equivalent', 0)*100:.0f}%/uneq={m.get('acc_unequivalent', 0)*100:.0f}%)  "
+        f"claude_acc: {c['accuracy']*100:.1f}% ({pred_uneq:.0f}% predicted unequivalent)\n"
+        f"- interpretation: _auto-logged; review later_\n"
+        f"- file: `overnight/results/stage1/{name}.json`\n"
+    )
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(entry)
+
+
 VARIANTS: list[tuple[str, Callable[[pd.DataFrame], pd.DataFrame], int]] = [
     ("v00_baseline",         _baseline,         3),
     ("v01_drop_high_cosine", _drop_high_cosine, 3),
@@ -258,6 +277,7 @@ def main() -> int:
                   f"claude_acc={metrics['claude']['accuracy']:.3f}  "
                   f"ood_f1={metrics['ood_overall']['f1_macro']:.3f}  "
                   f"({metrics['_meta']['elapsed_sec']:.0f}s)", flush=True)
+            _append_overnight_log(name, epochs, metrics)
             if args.cleanup_checkpoints:
                 # keep config.json + tokenizer; nuke heavy weights to save disk
                 ckpt_root = ckpt.parent

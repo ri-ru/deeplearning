@@ -80,6 +80,25 @@ def log(msg: str) -> None:
         f.write(line)
 
 
+def _append_overnight_log(name: str, v: Variant, metrics: dict) -> None:
+    log_path = REPO / "OVERNIGHTLOG.md"
+    m = metrics["manual"]; o = metrics["ood_overall"]; c = metrics["claude"]
+    cm = c.get("pred_balance", {})
+    pred_uneq = (int(cm.get("1", 0)) / max(c.get("n", 1), 1)) * 100
+    ts = time.strftime("%Y-%m-%d %H:%M")
+    entry = (
+        f"\n## {ts}  {name}  (evolve)\n"
+        f"- recipe: {asdict(v)}\n"
+        f"- OOD F1: {o['f1_macro']:.3f}  manual_acc: {m['accuracy']*100:.1f}% "
+        f"(eq={m.get('acc_equivalent', 0)*100:.0f}%/uneq={m.get('acc_unequivalent', 0)*100:.0f}%)  "
+        f"claude_acc: {c['accuracy']*100:.1f}% ({pred_uneq:.0f}% predicted unequivalent)\n"
+        f"- interpretation: _auto-logged; review later_\n"
+        f"- file: `overnight/results/stage1/{name}.json`\n"
+    )
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(entry)
+
+
 # --- data prep (kept identical to stage1_mitigations.py) -------------------
 
 def add_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -317,6 +336,8 @@ def main() -> int:
                 log(f"  {name}: manual_acc={metrics['manual']['accuracy']:.3f}  "
                     f"ood_f1={metrics['ood_overall']['f1_macro']:.3f}  "
                     f"({metrics['_meta']['elapsed_sec']:.0f}s)")
+                # Append a one-liner to OVERNIGHTLOG.md so we have a flat history
+                _append_overnight_log(name, v, metrics)
                 if args.cleanup_checkpoints:
                     for sub in ckpt.parent.iterdir():
                         if sub.is_dir():
