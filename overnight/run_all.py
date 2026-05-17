@@ -74,6 +74,13 @@ def main() -> int:
         run_stage("stage1", OVERNIGHT / "stage1_mitigations.py", extra)
         summarize()
 
+    if "evolve" not in skip:
+        evo_extra = ["--max_iters", "3", "--per_iter", "2"]
+        if args.cleanup_checkpoints:
+            evo_extra.append("--cleanup_checkpoints")
+        run_stage("evolve", OVERNIGHT / "evolve.py", evo_extra)
+        summarize()
+
     if "s2" not in skip:
         run_stage("stage2", OVERNIGHT / "stage2_interp.py", ["--include_best_mitigation"])
         summarize()
