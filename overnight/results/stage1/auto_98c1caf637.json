@@ -1,0 +1,198 @@
+{
+  "ood_overall": {
+    "n": 17691,
+    "accuracy": 0.9715674636820982,
+    "f1_macro": 0.9715672365626548,
+    "label_balance": {
+      "0": 8871,
+      "1": 8820
+    },
+    "pred_balance": {
+      "0": 8870,
+      "1": 8821
+    },
+    "confusion_matrix": [
+      [
+        8619,
+        252
+      ],
+      [
+        251,
+        8569
+      ]
+    ],
+    "mean_p_unequivalent": 0.4992474208995547,
+    "auroc": 0.9970994304609455,
+    "acc_equivalent": 0.9715928305715252,
+    "n_equivalent": 8871,
+    "acc_unequivalent": 0.9715419501133787,
+    "n_unequivalent": 8820
+  },
+  "ood_per_domain": {
+    "anatomy": {
+      "n": 5418,
+      "accuracy": 0.953672942045035,
+      "f1_macro": 0.9536700238051639,
+      "label_balance": {
+        "1": 2656,
+        "0": 2762
+      },
+      "pred_balance": {
+        "1": 2719,
+        "0": 2699
+      },
+      "confusion_matrix": [
+        [
+          2605,
+          157
+        ],
+        [
+          94,
+          2562
+        ]
+      ],
+      "mean_p_unequivalent": 0.4970503709357675,
+      "auroc": 0.9923388794133813,
+      "acc_equivalent": 0.943157132512672,
+      "n_equivalent": 2762,
+      "acc_unequivalent": 0.9646084337349398,
+      "n_unequivalent": 2656
+    },
+    "gab": {
+      "n": 5034,
+      "accuracy": 0.9767580452920143,
+      "f1_macro": 0.9767536778614321,
+      "label_balance": {
+        "1": 2533,
+        "0": 2501
+      },
+      "pred_balance": {
+        "1": 2432,
+        "0": 2602
+      },
+      "confusion_matrix": [
+        [
+          2493,
+          8
+        ],
+        [
+          109,
+          2424
+        ]
+      ],
+      "mean_p_unequivalent": 0.490464476801032,
+      "auroc": 0.9978926708037669,
+      "acc_equivalent": 0.9968012794882047,
+      "n_equivalent": 2501,
+      "acc_unequivalent": 0.9569680221081721,
+      "n_unequivalent": 2533
+    },
+    "toxigen": {
+      "n": 7239,
+      "accuracy": 0.9813510153336096,
+      "f1_macro": 0.9813496472479954,
+      "label_balance": {
+        "0": 3608,
+        "1": 3631
+      },
+      "pred_balance": {
+        "0": 3569,
+        "1": 3670
+      },
+      "confusion_matrix": [
+        [
+          3521,
+          87
+        ],
+        [
+          48,
+          3583
+        ]
+      ],
+      "mean_p_unequivalent": 0.5069994525746152,
+      "auroc": 0.99824397999244,
+      "acc_equivalent": 0.9758869179600886,
+      "n_equivalent": 3608,
+      "acc_unequivalent": 0.986780501239328,
+      "n_unequivalent": 3631
+    }
+  },
+  "manual": {
+    "n": 20,
+    "accuracy": 0.95,
+    "f1_macro": 0.9466666666666667,
+    "label_balance": {
+      "0": 13,
+      "1": 7
+    },
+    "pred_balance": {
+      "0": 12,
+      "1": 8
+    },
+    "confusion_matrix": [
+      [
+        12,
+        1
+      ],
+      [
+        0,
+        7
+      ]
+    ],
+    "mean_p_unequivalent": 0.4077229628150235,
+    "auroc": 1.0,
+    "acc_equivalent": 0.9230769230769231,
+    "n_equivalent": 13,
+    "acc_unequivalent": 1.0,
+    "n_unequivalent": 7
+  },
+  "claude": {
+    "n": 20,
+    "accuracy": 0.65,
+    "f1_macro": 0.6491228070175439,
+    "label_balance": {
+      "0": 10,
+      "1": 10
+    },
+    "pred_balance": {
+      "0": 11,
+      "1": 9
+    },
+    "confusion_matrix": [
+      [
+        7,
+        3
+      ],
+      [
+        4,
+        6
+      ]
+    ],
+    "mean_p_unequivalent": 0.46020245930703824,
+    "auroc": 0.74,
+    "acc_equivalent": 0.7,
+    "n_equivalent": 10,
+    "acc_unequivalent": 0.6,
+    "n_unequivalent": 10
+  },
+  "_meta": {
+    "variant": "auto_98c1caf637",
+    "recipe": {
+      "drop_cosine_threshold": null,
+      "drop_neg_shortcut": false,
+      "downsample_uneq_frac": 1.0,
+      "upsample_eq_neg_factor": 1,
+      "mix_qwen7b": true,
+      "epochs": 2
+    },
+    "epochs": 2,
+    "checkpoint": "C:\\Users\\jan\\Downloads\\deep learning\\overnight\\runs\\auto_98c1caf637\\checkpoints\\checkpoint-1948",
+    "elapsed_sec": 119.7,
+    "proposed_by": "evolve.py",
+    "iter": 0,
+    "trigger_symptoms": {
+      "asymmetry": 0.07692307692307687,
+      "manual_acc": 0.95
+    }
+  }
+}

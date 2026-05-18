@@ -1,0 +1,268 @@
+{
+  "checkpoint": "C:\\Users\\jan\\Downloads\\deep learning\\overnight\\runs\\v04_style_mix_qwen7b\\checkpoints\\checkpoint-974",
+  "n_synthetic": 52137,
+  "n_manual": 20,
+  "n_claude": 20,
+  "by_layer": [
+    {
+      "linear_eq": {
+        "val": 0.5,
+        "manual": 0.5,
+        "claude": 0.5
+      },
+      "linear_neg_val": 0.5002574185020647,
+      "linear_eq_ablated": {
+        "val": 0.5,
+        "manual": 0.5,
+        "claude": 0.5
+      },
+      "mlp_eq": {
+        "val": 0.5,
+        "manual": 0.5,
+        "claude": 0.5
+      },
+      "shortcut_tax_linear": 0.0,
+      "layer": 0
+    },
+    {
+      "linear_eq": {
+        "val": 0.7536776925715178,
+        "manual": 0.5164835164835165,
+        "claude": 0.64
+      },
+      "linear_neg_val": 0.7823868013624703,
+      "linear_eq_ablated": {
+        "val": 0.701327855178491,
+        "manual": 0.5384615384615384,
+        "claude": 0.42000000000000004
+      },
+      "mlp_eq": {
+        "val": 0.8264477891322366,
+        "manual": 0.29670329670329665,
+        "claude": 0.7
+      },
+      "shortcut_tax_linear": 0.2371941760880013,
+      "layer": 1
+    },
+    {
+      "linear_eq": {
+        "val": 0.7618255135880517,
+        "manual": 0.4505494505494505,
+        "claude": 0.57
+      },
+      "linear_neg_val": 0.7881597998920662,
+      "linear_eq_ablated": {
+        "val": 0.6954435691344112,
+        "manual": 0.4945054945054945,
+        "claude": 0.32
+      },
+      "mlp_eq": {
+        "val": 0.8823165781130706,
+        "manual": 0.6373626373626373,
+        "claude": 0.77
+      },
+      "shortcut_tax_linear": 0.3112760630386012,
+      "layer": 2
+    },
+    {
+      "linear_eq": {
+        "val": 0.8199763214584558,
+        "manual": 0.4505494505494505,
+        "claude": 0.36000000000000004
+      },
+      "linear_neg_val": 0.7983816999202228,
+      "linear_eq_ablated": {
+        "val": 0.7395159957795608,
+        "manual": 0.4725274725274725,
+        "claude": 0.21
+      },
+      "mlp_eq": {
+        "val": 0.879013069913421,
+        "manual": 0.5054945054945055,
+        "claude": 0.47
+      },
+      "shortcut_tax_linear": 0.3694268709090053,
+      "layer": 3
+    },
+    {
+      "linear_eq": {
+        "val": 0.8843588762308081,
+        "manual": 0.43956043956043955,
+        "claude": 0.36
+      },
+      "linear_neg_val": 0.8590015085330371,
+      "linear_eq_ablated": {
+        "val": 0.8090716196060619,
+        "manual": 0.4505494505494505,
+        "claude": 0.14999999999999997
+      },
+      "mlp_eq": {
+        "val": 0.9192936634998659,
+        "manual": 0.3846153846153846,
+        "claude": 0.5299999999999999
+      },
+      "shortcut_tax_linear": 0.44479843667036856,
+      "layer": 4
+    },
+    {
+      "linear_eq": {
+        "val": 0.9184655472291485,
+        "manual": 0.5384615384615384,
+        "claude": 0.51
+      },
+      "linear_neg_val": 0.8810209092651107,
+      "linear_eq_ablated": {
+        "val": 0.8516267833393585,
+        "manual": 0.4505494505494505,
+        "claude": 0.22
+      },
+      "mlp_eq": {
+        "val": 0.9489181961050543,
+        "manual": 0.41758241758241754,
+        "claude": 0.6300000000000001
+      },
+      "shortcut_tax_linear": 0.3800040087676101,
+      "layer": 5
+    },
+    {
+      "linear_eq": {
+        "val": 0.9578804313840948,
+        "manual": 0.5824175824175823,
+        "claude": 0.49
+      },
+      "linear_neg_val": 0.8996444486375297,
+      "linear_eq_ablated": {
+        "val": 0.9161229268401778,
+        "manual": 0.6043956043956044,
+        "claude": 0.33999999999999997
+      },
+      "mlp_eq": {
+        "val": 0.9758107873685213,
+        "manual": 0.5054945054945055,
+        "claude": 0.54
+      },
+      "shortcut_tax_linear": 0.3754628489665125,
+      "layer": 6
+    },
+    {
+      "linear_eq": {
+        "val": 0.9928790019611712,
+        "manual": 0.5164835164835164,
+        "claude": 0.74
+      },
+      "linear_neg_val": 0.9412656865927292,
+      "linear_eq_ablated": {
+        "val": 0.9909608311634502,
+        "manual": 0.4065934065934066,
+        "claude": 0.6799999999999999
+      },
+      "mlp_eq": {
+        "val": 0.9948971514389351,
+        "manual": 0.5384615384615384,
+        "claude": 0.65
+      },
+      "shortcut_tax_linear": 0.47639548547765476,
+      "layer": 7
+    },
+    {
+      "linear_eq": {
+        "val": 0.9977831805991629,
+        "manual": 0.9230769230769231,
+        "claude": 0.84
+      },
+      "linear_neg_val": 0.9531131458437618,
+      "linear_eq_ablated": {
+        "val": 0.997854798881004,
+        "manual": 0.9230769230769231,
+        "claude": 0.83
+      },
+      "mlp_eq": {
+        "val": 0.9980582507129827,
+        "manual": 0.956043956043956,
+        "claude": 0.8
+      },
+      "shortcut_tax_linear": 0.0747062575222398,
+      "layer": 8
+    },
+    {
+      "linear_eq": {
+        "val": 0.9982821176175972,
+        "manual": 1.0,
+        "claude": 0.8800000000000001
+      },
+      "linear_neg_val": 0.9635824433346889,
+      "linear_eq_ablated": {
+        "val": 0.998396883431333,
+        "manual": 1.0,
+        "claude": 0.8800000000000001
+      },
+      "mlp_eq": {
+        "val": 0.9983817284584936,
+        "manual": 1.0,
+        "claude": 0.8800000000000001
+      },
+      "shortcut_tax_linear": -0.00171788238240278,
+      "layer": 9
+    },
+    {
+      "linear_eq": {
+        "val": 0.9986974447980114,
+        "manual": 1.0,
+        "claude": 0.89
+      },
+      "linear_neg_val": 0.968477843237705,
+      "linear_eq_ablated": {
+        "val": 0.9987069350479933,
+        "manual": 1.0,
+        "claude": 0.87
+      },
+      "mlp_eq": {
+        "val": 0.9984520593033216,
+        "manual": 1.0,
+        "claude": 0.9099999999999999
+      },
+      "shortcut_tax_linear": -0.001302555201988631,
+      "layer": 10
+    },
+    {
+      "linear_eq": {
+        "val": 0.9986868878145043,
+        "manual": 1.0,
+        "claude": 0.9299999999999999
+      },
+      "linear_neg_val": 0.967994535845013,
+      "linear_eq_ablated": {
+        "val": 0.9986946492204974,
+        "manual": 1.0,
+        "claude": 0.9299999999999999
+      },
+      "mlp_eq": {
+        "val": 0.9986358317409576,
+        "manual": 1.0,
+        "claude": 0.92
+      },
+      "shortcut_tax_linear": -0.0013131121854956795,
+      "layer": 11
+    },
+    {
+      "linear_eq": {
+        "val": 0.9985625581829569,
+        "manual": 0.9780219780219781,
+        "claude": 0.81
+      },
+      "linear_neg_val": 0.966052360663559,
+      "linear_eq_ablated": {
+        "val": 0.9985528472294869,
+        "manual": 0.9780219780219781,
+        "claude": 0.8200000000000001
+      },
+      "mlp_eq": {
+        "val": 0.9984202780010561,
+        "manual": 1.0,
+        "claude": 0.86
+      },
+      "shortcut_tax_linear": 0.020540580160978816,
+      "layer": 12
+    }
+  ]
+}

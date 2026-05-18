@@ -79,24 +79,36 @@ def load_davidson() -> tuple[pd.DataFrame, list[str]]:
 def load_hatexplain() -> tuple[pd.DataFrame, list[str]]:
     """HateXplain: ~20k posts, 3 classes (hatespeech / offensive / normal).
 
-    The dataset stores per-annotator labels; we take the majority vote (the
-    official label aggregation used by the paper).
+    Downloads the raw JSON from the official GitHub repo since the modern
+    `datasets` lib dropped script support. Majority-vote the per-annotator
+    labels (same aggregation as the paper).
     """
-    from datasets import load_dataset
-    ds = load_dataset("Hate-speech-CNERG/hatexplain", split="train",
-                      trust_remote_code=True)
+    import urllib.request
+    cache = REPO / "data" / "hatexplain"
+    cache.mkdir(parents=True, exist_ok=True)
+    raw_path = cache / "dataset.json"
+    if not raw_path.exists():
+        url = "https://raw.githubusercontent.com/hate-alert/HateXplain/master/Data/dataset.json"
+        print(f"[hatexplain] downloading {url} ...", flush=True)
+        urllib.request.urlretrieve(url, raw_path)
+    data = json.loads(raw_path.read_text(encoding="utf-8"))
+
+    # The labels in the JSON are strings: "hatespeech", "normal", "offensive".
+    # The paper uses majority vote among the 3 annotators; if no majority
+    # (3-way tie), the example is dropped.
+    label_to_id = {"hatespeech": 0, "normal": 1, "offensive": 2}
     rows = []
-    for row in ds:
-        # annotators field: {"label": [int,int,int], "annotator_id": [...], "target": [...]}
-        labels = row["annotators"]["label"]
-        # majority vote; tie-break = first label
+    for _, item in data.items():
+        labels = [a["label"] for a in item["annotators"]]
         counts = Counter(labels)
-        majority = counts.most_common(1)[0][0]
-        text = " ".join(row["post_tokens"])
-        rows.append({"text": text, "label": int(majority)})
+        top, count = counts.most_common(1)[0]
+        if count < 2:  # no majority
+            continue
+        text = " ".join(item["post_tokens"])
+        rows.append({"text": text, "label": label_to_id[top]})
     df = pd.DataFrame(rows)
     df = df.dropna(subset=["text", "label"]).copy()
-    label_names = ["hatespeech", "normal", "offensive"]  # HF id mapping
+    label_names = ["hatespeech", "normal", "offensive"]
     return df, label_names
 
 

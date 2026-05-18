@@ -1,0 +1,58 @@
+{
+  "n": 3846,
+  "accuracy": 0.7147685907436298,
+  "f1_macro": 0.7033428924974858,
+  "f1_weighted": 0.7122164051879369,
+  "confusion_matrix": [
+    [
+      977,
+      71,
+      139
+    ],
+    [
+      102,
+      1180,
+      281
+    ],
+    [
+      212,
+      292,
+      592
+    ]
+  ],
+  "label_names": [
+    "hatespeech",
+    "normal",
+    "offensive"
+  ],
+  "per_class": {
+    "hatespeech": {
+      "precision": 0.7567776917118513,
+      "recall": 0.823083403538332,
+      "f1-score": 0.7885391444713479,
+      "support": 1187.0
+    },
+    "normal": {
+      "precision": 0.7647440051847051,
+      "recall": 0.7549584133077415,
+      "f1-score": 0.7598197037990985,
+      "support": 1563.0
+    },
+    "offensive": {
+      "precision": 0.5849802371541502,
+      "recall": 0.5401459854014599,
+      "f1-score": 0.5616698292220114,
+      "support": 1096.0
+    }
+  },
+  "label_balance": {
+    "hatespeech": 1187,
+    "normal": 1563,
+    "offensive": 1096
+  },
+  "_meta": {
+    "dataset": "hatexplain",
+    "model": "roberta-base",
+    "elapsed_sec": 48.4
+  }
+}

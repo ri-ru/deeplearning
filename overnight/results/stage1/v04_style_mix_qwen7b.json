@@ -1,0 +1,184 @@
+{
+  "ood_overall": {
+    "n": 17691,
+    "accuracy": 0.9605449098411621,
+    "f1_macro": 0.9605074294908185,
+    "label_balance": {
+      "0": 8871,
+      "1": 8820
+    },
+    "pred_balance": {
+      "0": 8275,
+      "1": 9416
+    },
+    "confusion_matrix": [
+      [
+        8224,
+        647
+      ],
+      [
+        51,
+        8769
+      ]
+    ],
+    "mean_p_unequivalent": 0.5270258095551199,
+    "auroc": 0.9970585957300292,
+    "acc_equivalent": 0.927065719761019,
+    "n_equivalent": 8871,
+    "acc_unequivalent": 0.9942176870748299,
+    "n_unequivalent": 8820
+  },
+  "ood_per_domain": {
+    "anatomy": {
+      "n": 5418,
+      "accuracy": 0.9483204134366925,
+      "f1_macro": 0.9482775338669233,
+      "label_balance": {
+        "1": 2656,
+        "0": 2762
+      },
+      "pred_balance": {
+        "1": 2918,
+        "0": 2500
+      },
+      "confusion_matrix": [
+        [
+          2491,
+          271
+        ],
+        [
+          9,
+          2647
+        ]
+      ],
+      "mean_p_unequivalent": 0.5336783139837733,
+      "auroc": 0.9917765740732662,
+      "acc_equivalent": 0.9018826937002172,
+      "n_equivalent": 2762,
+      "acc_unequivalent": 0.9966114457831325,
+      "n_unequivalent": 2656
+    },
+    "gab": {
+      "n": 5034,
+      "accuracy": 0.9517282479141835,
+      "f1_macro": 0.9515941062875761,
+      "label_balance": {
+        "1": 2533,
+        "0": 2501
+      },
+      "pred_balance": {
+        "1": 2766,
+        "0": 2268
+      },
+      "confusion_matrix": [
+        [
+          2263,
+          238
+        ],
+        [
+          5,
+          2528
+        ]
+      ],
+      "mean_p_unequivalent": 0.5375757002946627,
+      "auroc": 0.9979635465198051,
+      "acc_equivalent": 0.9048380647740903,
+      "n_equivalent": 2501,
+      "acc_unequivalent": 0.9980260560600079,
+      "n_unequivalent": 2533
+    },
+    "toxigen": {
+      "n": 7239,
+      "accuracy": 0.9758253902472718,
+      "f1_macro": 0.9758182949084753,
+      "label_balance": {
+        "0": 3608,
+        "1": 3631
+      },
+      "pred_balance": {
+        "0": 3507,
+        "1": 3732
+      },
+      "confusion_matrix": [
+        [
+          3470,
+          138
+        ],
+        [
+          37,
+          3594
+        ]
+      ],
+      "mean_p_unequivalent": 0.5147103766255299,
+      "auroc": 0.9979329266766042,
+      "acc_equivalent": 0.9617516629711752,
+      "n_equivalent": 3608,
+      "acc_unequivalent": 0.9898099697053153,
+      "n_unequivalent": 3631
+    }
+  },
+  "manual": {
+    "n": 20,
+    "accuracy": 0.95,
+    "f1_macro": 0.9466666666666667,
+    "label_balance": {
+      "0": 13,
+      "1": 7
+    },
+    "pred_balance": {
+      "0": 12,
+      "1": 8
+    },
+    "confusion_matrix": [
+      [
+        12,
+        1
+      ],
+      [
+        0,
+        7
+      ]
+    ],
+    "mean_p_unequivalent": 0.41923600431764496,
+    "auroc": 0.989010989010989,
+    "acc_equivalent": 0.9230769230769231,
+    "n_equivalent": 13,
+    "acc_unequivalent": 1.0,
+    "n_unequivalent": 7
+  },
+  "claude": {
+    "n": 20,
+    "accuracy": 0.75,
+    "f1_macro": 0.7493734335839599,
+    "label_balance": {
+      "0": 10,
+      "1": 10
+    },
+    "pred_balance": {
+      "1": 11,
+      "0": 9
+    },
+    "confusion_matrix": [
+      [
+        7,
+        3
+      ],
+      [
+        2,
+        8
+      ]
+    ],
+    "mean_p_unequivalent": 0.5522028113657143,
+    "auroc": 0.8899999999999999,
+    "acc_equivalent": 0.7,
+    "n_equivalent": 10,
+    "acc_unequivalent": 0.8,
+    "n_unequivalent": 10
+  },
+  "_meta": {
+    "variant": "v04_style_mix_qwen7b",
+    "epochs": 3,
+    "checkpoint": "C:\\Users\\jan\\Downloads\\deep learning\\overnight\\runs\\v04_style_mix_qwen7b\\checkpoints\\checkpoint-974",
+    "elapsed_sec": 181.9
+  }
+}
