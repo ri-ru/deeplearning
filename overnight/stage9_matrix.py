@@ -43,13 +43,21 @@ RUNS_DIR = REPO / "overnight" / "runs" / "stage9"
 RESULTS_DIR = REPO / "overnight" / "results" / "stage9"
 
 
-def load_generator_csv(slug: str) -> pd.DataFrame:
+def load_generator_csv(slug: str) -> pd.DataFrame | None:
     p = CROSS_DIR / f"{slug}.csv"
-    if not p.exists():
-        raise FileNotFoundError(p)
-    df = pd.read_csv(p)
+    if not p.exists() or p.stat().st_size == 0:
+        print(f"  [warn] {p.name} missing or empty; skipping", flush=True)
+        return None
+    try:
+        df = pd.read_csv(p)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError) as e:
+        print(f"  [warn] {p.name} unreadable ({e}); skipping", flush=True)
+        return None
     df = df.dropna(subset=["explanation", "synthetic", "meaning"]).copy()
     df = df[df["meaning"].isin(LABEL2ID)].copy()
+    if len(df) == 0:
+        print(f"  [warn] {p.name} has no usable rows; skipping", flush=True)
+        return None
     df["label"] = df["meaning"].map(LABEL2ID).astype(int)
     df = df.rename(columns={"explanation": "text_a", "synthetic": "text_b"})
     return df.reset_index(drop=True)
@@ -149,17 +157,21 @@ def main() -> int:
         slugs = [s.strip() for s in args.slugs.split(",")]
     else:
         slugs = sorted(p.stem for p in CROSS_DIR.glob("*.csv") if not p.stem.startswith("_"))
-    print(f"[stage9] generators in matrix: {slugs}", flush=True)
+    print(f"[stage9] candidate generators: {slugs}", flush=True)
 
-    # Per-generator splits
+    # Per-generator splits (skip unusable CSVs)
     train_dfs: dict[str, pd.DataFrame] = {}
     test_dfs: dict[str, pd.DataFrame] = {}
     for s in slugs:
         df = load_generator_csv(s)
+        if df is None:
+            continue
         tr, te = make_train_test_split(df)
         train_dfs[s] = tr
         test_dfs[s] = te
         print(f"  {s}: train={len(tr)} test={len(te)}", flush=True)
+    slugs = list(train_dfs.keys())
+    print(f"[stage9] generators in matrix: {slugs}", flush=True)
 
     # Human held-out
     human_df = load_human()
