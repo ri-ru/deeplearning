@@ -268,3 +268,83 @@ a 50-row eval rather than a 20-row one. **Going forward, eval set size
 matters more than mitigation cleverness.**
 
 File: `overnight/results/stage7/{harder_eval.csv,scores.json}`
+
+## 2026-05-18 09:20  STAGE 8: training-data label noise audit
+
+GPT-4o-mini blind-judges each pair: SAME conclusion or DIFFERENT?
+
+**`reformulated_full.csv` (the actual training data, n=192):**
+- overall judge-agreement: **95.3%**
+
+| stored label | n | judge agrees | judge disagrees | garbage |
+|---|---|---|---|---|
+| equivalent | 96 | 100.0% | 0.0% | 0.0% |
+| unequivalent | 96 | 90.6% | 9.4% | 0.0% |
+
+**Qwen-7B augmentation files (the data v04 added):**
+
+| file | n | overall agree |
+|---|---|---|
+| reformulated (1).csv | 50 | 96.0% |
+| reformulated (2).csv | 50 | 100.0% |
+| reformulated (3).csv | 50 | 92.0% |
+| reformulated (4).csv | 50 | 70.0% |
+
+Interpretation: any noise rate >5% means a meaningful chunk of the training labels are wrong. If 30% of 'unequivalent' pairs are actually saying the same thing as the original, the model is being told 'these are different' on examples that aren't, and there's no clean signal it can latch onto except *style*.
+
+
+---
+
+## 2026-05-18  STAGE 5: fine-grained step sweep (every 25 steps, 25-800)
+
+Retrained baseline from scratch, scored 32 snapshots between step 25 and 800. The step-400 "sweet spot" from Stage 3 was real but not unique. The actual best snapshots (sum of manual+claude):
+
+| Step | OOD F1 | manual | eq / uneq | claude |
+|---|---|---|---|---|
+| **250** | 0.954 | **85%** | (see file) | **90%** |
+| **125** | 0.953 | 80% |  | 90% |
+| 200 | 0.946 | 65% |  | 85% |
+| 400 | 0.946 | 70% |  | 80% |
+| 175 | 0.941 | 80% |  | 65% |
+
+But the noise is huge: in the window 100-250 the model oscillates 80% → 70% → 80% → 55% → 80% on the 20-pair manual set. **The "sweet spots" are noise spikes, not stable states.** Three reasons:
+1. The sample size (20 humans) is so small that single-example changes flip 5 percentage points.
+2. Early in training the model is still drifting between "predict-eq-always" and "predict-uneq-always" modes (eg step 25: eq=100%/uneq=0%).
+3. The OOD F1 plateau is reached by step 200 (~0.94) while manual_acc keeps bouncing -- they're decoupled.
+
+Cost of early-stopping at step 250 instead of step 2907:
+- OOD F1: 0.954 vs 0.969 (-0.015)
+- manual: 85% vs 45% (+40)
+- claude: 90% vs 60% (+30)
+
+Trading 1.5 OOD F1 points for +35 manual is a bargain -- IF the sweet-spot step generalizes outside the eval set. Stage 7 already cast doubt on this: v04 dropped from 95% to 68% on 50 fresh pairs. Early-stopping is unlikely to give you a truly 85% model.
+
+File: `overnight/results/stage5/fine_timeline.json`
+
+---
+
+## 2026-05-18  STAGE 8: label-noise audit (the "garbage in, garbage out" check)
+
+GPT-4o-mini blind-judged each pair: SAME conclusion or DIFFERENT?
+
+**`reformulated_full.csv` (the actual training data, n=192 stratified):**
+
+| stored label | n | judge agrees | judge disagrees |
+|---|---|---|---|
+| equivalent | 96 | **100.0%** | 0.0% |
+| unequivalent | 96 | **90.6%** | **9.4%** |
+
+**Overall agreement: 95.3%.** The data is mostly clean. The 9.4% noise on unequivalent matches the existing audit's spirit but is much milder than the 50% noise we saw on the regenerated `loop_results/final_batch.csv` (which was a totally different generation, not the training data). **The training data is not the bottleneck.** The shortcut is genuinely about *style*, not noise.
+
+**Qwen-7B augmentation files (the v04 data):**
+
+| file | n | overall agree |
+|---|---|---|
+| reformulated (1).csv | 50 | 96.0% |
+| reformulated (2).csv | 50 | **100.0%** |
+| reformulated (3).csv | 50 | 92.0% |
+| reformulated (4).csv | 50 | **70.0%** ⚠ |
+
+`reformulated (4).csv` is much noisier than the others (40% of its 'equivalent' pairs actually disagree). v04 includes it; if we re-train without it, the win might be sharper. Worth a quick re-run.
+
+Files: `overnight/results/stage8/{main,aug}_audit.json`

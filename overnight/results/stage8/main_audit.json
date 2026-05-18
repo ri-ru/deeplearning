@@ -1,0 +1,1368 @@
+{
+  "summary": {
+    "name": "reformulated_full.csv",
+    "n": 192,
+    "overall_agreement_pct": 95.3125,
+    "by_stored_label": {
+      "equivalent": {
+        "n": 96,
+        "agree_pct": 100.0,
+        "disagree_pct": 0.0,
+        "garbage_pct": 0.0
+      },
+      "unequivalent": {
+        "n": 96,
+        "agree_pct": 90.625,
+        "disagree_pct": 9.375,
+        "garbage_pct": 0.0
+      }
+    },
+    "sampled_per_stratum": 12
+  },
+  "rows": [
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "equivalent",
+      "expected_verdict": "same",
+      "judge_verdict": "same",
+      "agrees": true,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "same",
+      "agrees": false,
+      "raw": "SAME"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    },
+    {
+      "stored_label": "unequivalent",
+      "expected_verdict": "different",
+      "judge_verdict": "different",
+      "agrees": true,
+      "raw": "DIFFERENT"
+    }
+  ]
+}
