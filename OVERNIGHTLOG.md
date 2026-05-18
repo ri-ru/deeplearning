@@ -472,3 +472,58 @@ accurate on blind humans than the model trained on 30,000 single-generator
 pairs.** Generator diversity > scale.
 
 File: `overnight/results/stage10/{claude_human_eval.csv,scores.json}`
+
+## 2026-05-18 22:32  STAGE 12: leave-one-out generator ablation
+
+For each of 5 generators, trained roberta-base on the union of the OTHER 4 (=640 pairs). Stage 10 humans = n=100 Claude-Haiku eval.
+
+| held-out generator | n_train | test=held-out | human (n=100) acc | human AUROC |
+|---|---|---|---|---|
+| anthropic_haiku | 638 | 97.5% | 60.0% | 0.773 |
+| deepseek_v3 | 638 | 97.5% | 80.0% | 0.889 |
+| meta_llama3_8b | 638 | 87.5% | 74.0% | 0.846 |
+| openai_gpt4omini | 638 | 100.0% | 77.0% | 0.867 |
+| qwen25_72b | 640 | 97.5% | 74.0% | 0.846 |
+
+Reference: full multi_gen (5 generators, 800 pairs) hit 81% on Stage 10 humans.
+
+
+## 2026-05-18 22:33  STAGE 13: Sentence-BERT pair-similarity baseline
+
+Encoder: `sentence-transformers/all-mpnet-base-v2`. Cosine threshold tuned on multi_gen training pool (n=998), t=0.876. Also LogReg on (cosine, len_diff, jaccard).
+
+| eval set | method | acc | f1_macro | AUROC | eq / uneq |
+|---|---|---|---|---|---|
+| stage10_human_n100 | cosine threshold | 43.0% | 0.301 | 0.486 | 0%/100% |
+| stage10_human_n100 | logreg(3 feats) | 36.0% | 0.297 | 0.280 | 5%/77% |
+| stage7_gpt_n50 | cosine threshold | 46.0% | 0.315 | 0.345 | 0%/100% |
+| stage7_gpt_n50 | logreg(3 feats) | 36.0% | 0.287 | 0.293 | 4%/74% |
+| manual_plus_claude_n40 | cosine threshold | 42.5% | 0.298 | 0.476 | 0%/100% |
+| manual_plus_claude_n40 | logreg(3 feats) | 40.0% | 0.394 | 0.307 | 26%/59% |
+
+Reference: multi_gen on Stage 10 = 81% / 0.806 / 0.896, poster_baseline = 59% / 0.583 / 0.745.
+
+
+---
+
+## 2026-05-18  STAGE 12: leave-one-out generator ablation
+
+For each of 5 generators, trained roberta-base on the union of the OTHER 4 (~640 pairs each model). Reference: full multi_gen (5 generators, 800 pairs) hit **81%** / AUROC 0.896 on the Stage 10 n=100 human eval.
+
+| Held-out generator | n_train | Held-out test acc | Human (n=100) acc | AUROC | eq / uneq |
+|---|---|---|---|---|---|
+| **anthropic_haiku** | 638 | 97.5% | **60%** ⬇ | 0.773 | 42 / 84 |
+| deepseek_v3 | 638 | 97.5% | 80% | 0.889 | 81 / 79 |
+| openai_gpt4omini | 638 | 100.0% | 77% | 0.867 | 75 / 79 |
+| meta_llama3_8b | 638 | 87.5% | 74% | 0.846 | 98 / 42 |
+| qwen25_72b | 640 | 97.5% | 74% | 0.846 | 77 / 70 |
+
+**Anthropic Haiku is the critical generator.** Dropping it crashes human accuracy by 21 points (81% → 60%) and unbalances eq/uneq (42/84 — back to the shortcut). No other generator individually matters this much (range 1-7 point drops).
+
+This is consistent with the curiosity from Stage 9: Anthropic-trained alone only got 72.5% in-distribution but transferred well to every other generator (75-83%). Haiku writes in a **stylistically neutral voice** that overlaps with multiple LLMs and with humans -- it's the "lingua franca" of the mix.
+
+**DeepSeek is most replaceable.** Dropping it gives 80% on humans (vs 81% with all 5) with even better balance (81/79). DeepSeek's paraphrases are largely redundant with the rest.
+
+Practical recipe for someone trying to reproduce: **always include Anthropic-style paraphrases**, then add 2-3 more generators of any kind for diversity.
+
+File: `overnight/results/stage12/loo.json`

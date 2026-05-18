@@ -1,0 +1,247 @@
+{
+  "loo_drop_anthropic_haiku": {
+    "held_out": "anthropic_haiku",
+    "n_train_pairs": 638,
+    "scores": {
+      "anthropic_haiku": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "deepseek_v3": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "meta_llama3_8b": {
+        "n": 40,
+        "acc": 0.925,
+        "f1": 0.9249530956848031,
+        "acc_eq": 0.9,
+        "acc_uneq": 0.95
+      },
+      "openai_gpt4omini": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "qwen25_72b": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "human_stage10": {
+        "n": 100,
+        "acc": 0.6,
+        "f1": 0.5941558441558441,
+        "acc_eq": 0.42105263157894735,
+        "acc_uneq": 0.8372093023255814,
+        "auroc": 0.7731538147694819
+      }
+    }
+  },
+  "loo_drop_deepseek_v3": {
+    "held_out": "deepseek_v3",
+    "n_train_pairs": 638,
+    "scores": {
+      "anthropic_haiku": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "deepseek_v3": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "meta_llama3_8b": {
+        "n": 40,
+        "acc": 0.9,
+        "f1": 0.9,
+        "acc_eq": 0.9,
+        "acc_uneq": 0.9
+      },
+      "openai_gpt4omini": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "qwen25_72b": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "human_stage10": {
+        "n": 100,
+        "acc": 0.8,
+        "f1": 0.797077922077922,
+        "acc_eq": 0.8070175438596491,
+        "acc_uneq": 0.7906976744186046,
+        "auroc": 0.8890248878008975
+      }
+    }
+  },
+  "loo_drop_meta_llama3_8b": {
+    "held_out": "meta_llama3_8b",
+    "n_train_pairs": 638,
+    "scores": {
+      "anthropic_haiku": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "deepseek_v3": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "meta_llama3_8b": {
+        "n": 40,
+        "acc": 0.875,
+        "f1": 0.8749218261413383,
+        "acc_eq": 0.85,
+        "acc_uneq": 0.9
+      },
+      "openai_gpt4omini": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "qwen25_72b": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "human_stage10": {
+        "n": 100,
+        "acc": 0.74,
+        "f1": 0.6961196820944366,
+        "acc_eq": 0.9824561403508771,
+        "acc_uneq": 0.4186046511627907,
+        "auroc": 0.8457772337821298
+      }
+    }
+  },
+  "loo_drop_openai_gpt4omini": {
+    "held_out": "openai_gpt4omini",
+    "n_train_pairs": 638,
+    "scores": {
+      "anthropic_haiku": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "deepseek_v3": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "meta_llama3_8b": {
+        "n": 40,
+        "acc": 0.925,
+        "f1": 0.9249530956848031,
+        "acc_eq": 0.9,
+        "acc_uneq": 0.95
+      },
+      "openai_gpt4omini": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "qwen25_72b": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "human_stage10": {
+        "n": 100,
+        "acc": 0.77,
+        "f1": 0.7681217864704104,
+        "acc_eq": 0.7543859649122807,
+        "acc_uneq": 0.7906976744186046,
+        "auroc": 0.8669930640554876
+      }
+    }
+  },
+  "loo_drop_qwen25_72b": {
+    "held_out": "qwen25_72b",
+    "n_train_pairs": 640,
+    "scores": {
+      "anthropic_haiku": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "deepseek_v3": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "meta_llama3_8b": {
+        "n": 40,
+        "acc": 0.925,
+        "f1": 0.9249530956848031,
+        "acc_eq": 0.9,
+        "acc_uneq": 0.95
+      },
+      "openai_gpt4omini": {
+        "n": 40,
+        "acc": 1.0,
+        "f1": 1.0,
+        "acc_eq": 1.0,
+        "acc_uneq": 1.0
+      },
+      "qwen25_72b": {
+        "n": 40,
+        "acc": 0.975,
+        "f1": 0.9749843652282677,
+        "acc_eq": 0.95,
+        "acc_uneq": 1.0
+      },
+      "human_stage10": {
+        "n": 100,
+        "acc": 0.74,
+        "f1": 0.7348021215830274,
+        "acc_eq": 0.7719298245614035,
+        "acc_uneq": 0.6976744186046512,
+        "auroc": 0.8461852305181559
+      }
+    }
+  }
+}
