@@ -95,11 +95,15 @@ def generate_one(slug: str, model: str, posts: pd.DataFrame, out_path: Path,
     """Generate two paraphrases per source post (one equiv, one unequiv)."""
     print(f"\n=== generating {slug}  ({model}) ===", flush=True)
     seen_ids: set[tuple[str, str]] = set()
-    if resume and out_path.exists():
-        existing = pd.read_csv(out_path)
-        for _, r in existing.iterrows():
-            seen_ids.add((str(r["post_id"]), r["meaning"]))
-        print(f"  resume: {len(seen_ids)} pairs already generated", flush=True)
+    if resume and out_path.exists() and out_path.stat().st_size > 0:
+        try:
+            existing = pd.read_csv(out_path)
+            for _, r in existing.iterrows():
+                seen_ids.add((str(r["post_id"]), r["meaning"]))
+            print(f"  resume: {len(seen_ids)} pairs already generated", flush=True)
+        except (pd.errors.EmptyDataError, pd.errors.ParserError) as e:
+            print(f"  resume: existing file unreadable ({e}); starting fresh", flush=True)
+            out_path.unlink()
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     write_header = not out_path.exists()
