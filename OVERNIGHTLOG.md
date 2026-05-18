@@ -527,3 +527,30 @@ This is consistent with the curiosity from Stage 9: Anthropic-trained alone only
 Practical recipe for someone trying to reproduce: **always include Anthropic-style paraphrases**, then add 2-3 more generators of any kind for diversity.
 
 File: `overnight/results/stage12/loo.json`
+
+---
+
+## 2026-05-18  STAGE 13: Sentence-BERT pair-similarity baseline (negative result)
+
+Encoder: `sentence-transformers/all-mpnet-base-v2`. Encoded both rationales of every pair, computed cosine similarity, tuned a threshold on the multi_gen training pool (n=998), then evaluated on three held-out sets. Also tried a LogReg on (cosine, length_diff, Jaccard token overlap).
+
+| eval set | method | acc | f1_macro | AUROC | eq / uneq |
+|---|---|---|---|---|---|
+| Stage 10 (100 Claude humans) | cosine @ t=0.876 | 43% | 0.30 | **0.486** | 0/100 |
+| Stage 10 | logreg(3 feats) | 36% | 0.30 | 0.280 | 5/77 |
+| Stage 7 (50 GPT humans) | cosine @ t=0.876 | 46% | 0.32 | **0.345** | 0/100 |
+| manual + Claude (40 humans) | cosine @ t=0.876 | 43% | 0.30 | **0.476** | 0/100 |
+
+**AUROC ≤ 0.5 on every human eval set.** Off-the-shelf sentence-similarity is worse than random on this task with humans. Why:
+
+- Training data cosine mean ≈ 0.55, threshold was tuned at 0.876.
+- Stage 10 human cosine mean = 0.515 (LLM long explanation vs short human reaction).
+- So ~all human pairs fall below threshold → predicted "unequivalent" → 100% unequivalent recall, 0% equivalent recall, AUROC ≈ random.
+
+Mechanism: pretrained sentence-BERT measures **surface-text similarity**, which is dominated by length and word overlap. A 200-word LLM explanation and a 10-word human reaction will have low cosine regardless of whether they reach the same verdict. The task is not "are these two strings similar" but "do they agree about something." Off-the-shelf embedding similarity can't do that.
+
+**Take-away for the report:** *fine-tuning is genuinely required* — sentence-similarity baselines fail not by 10 points but to below-random. This forecloses the "why not just use sentence-bert?" critique.
+
+Reference: full multi_gen on Stage 10 = 81% / 0.806 / 0.896.
+
+File: `overnight/results/stage13/sentence_bert.json`
