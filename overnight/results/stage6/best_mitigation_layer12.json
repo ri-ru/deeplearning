@@ -1,0 +1,94 @@
+{
+  "target": "best_mitigation",
+  "layer": 12,
+  "n_syn_train": 41709,
+  "n_syn_val": 10428,
+  "n_manual": 20,
+  "n_claude": 20,
+  "directions_used": [
+    "proxy_neg_flip",
+    "proxy_len_ratio",
+    "proxy_b_starts_the_post",
+    "proxy_b_has_first_person",
+    "proxy_b_much_shorter",
+    "proxy_b_has_verdict_word"
+  ],
+  "sweep": [
+    {
+      "K": 0,
+      "directions_ablated": [],
+      "eq_val": 0.9985625581829569,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.81
+    },
+    {
+      "K": 1,
+      "directions_ablated": [
+        "proxy_neg_flip"
+      ],
+      "eq_val": 0.998559210846723,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.8200000000000001
+    },
+    {
+      "K": 2,
+      "directions_ablated": [
+        "proxy_neg_flip",
+        "proxy_len_ratio"
+      ],
+      "eq_val": 0.9985652066248124,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.8200000000000001
+    },
+    {
+      "K": 3,
+      "directions_ablated": [
+        "proxy_neg_flip",
+        "proxy_len_ratio",
+        "proxy_b_starts_the_post"
+      ],
+      "eq_val": 0.9985567463244409,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.81
+    },
+    {
+      "K": 4,
+      "directions_ablated": [
+        "proxy_neg_flip",
+        "proxy_len_ratio",
+        "proxy_b_starts_the_post",
+        "proxy_b_has_first_person"
+      ],
+      "eq_val": 0.9985588430075765,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.81
+    },
+    {
+      "K": 5,
+      "directions_ablated": [
+        "proxy_neg_flip",
+        "proxy_len_ratio",
+        "proxy_b_starts_the_post",
+        "proxy_b_has_first_person",
+        "proxy_b_much_shorter"
+      ],
+      "eq_val": 0.9985616753690052,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.8200000000000001
+    },
+    {
+      "K": 6,
+      "directions_ablated": [
+        "proxy_neg_flip",
+        "proxy_len_ratio",
+        "proxy_b_starts_the_post",
+        "proxy_b_has_first_person",
+        "proxy_b_much_shorter",
+        "proxy_b_has_verdict_word"
+      ],
+      "eq_val": 0.9985639191877995,
+      "eq_manual": 0.9780219780219781,
+      "eq_claude": 0.81
+    }
+  ]
+}
