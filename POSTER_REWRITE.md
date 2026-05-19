@@ -211,81 +211,126 @@ HateXplain (71.5% acc)."
 ### Problem definition (keep most of it)
 
 Keep the context and objective. Replace the "core challenge" bullet with:
-"Models trained on a single-generator synthetic corpus do not collapse into
-classifiers of the rationale meaning. They collapse into detectors of the
-training-generator's writing style. The 55% accuracy headline on humans
-hides a 31% / 100% per-class split."
+"Models trained on a single-generator synthetic corpus do not learn to
+classify rationale meaning. They learn to detect the training-generator's
+writing style. The 55% accuracy headline on humans hides a 31% / 100%
+per-class split: the model predicts unequivalent on virtually anything
+that doesn't look like Qwen-prose."
 
 ### Related works (keep as is)
 
 LLM-as-a-Judge framework, TARGE, RoBERTa references. Add a citation to the
 sentence-transformers paper (Reimers and Gurevych, 2019) if there is space.
 
-### Datasets (small change)
+### Datasets (update)
 
-Keep the existing list of hate-speech datasets. Add a sentence:
+Keep the existing list of hate-speech datasets. Add:
 "For the cross-generator experiment we additionally generated 200 paraphrase
-pairs from each of 5 LLMs (Anthropic Claude Haiku 4.5, OpenAI GPT-4o-mini,
-Qwen 2.5 72B, Meta Llama 3.1 8B, DeepSeek V3) via OpenRouter, paraphrasing
-the same 100 held-out source posts."
+pairs from each of 5 LLMs via OpenRouter (Anthropic Claude Haiku 4.5,
+OpenAI GPT-4o-mini, Qwen 2.5 72B, Meta Llama 3.1 8B, DeepSeek V3),
+paraphrasing the same 100 held-out OOD source posts. Each generator was
+asked once for a meaning-preserving paraphrase and once for a
+meaning-flipping paraphrase, giving 100 equivalent + 100 unequivalent
+pairs per generator. The final 4-generator recipe excludes DeepSeek
+(see Results D)."
 
-### Method (add four blocks)
+### Method (add five blocks)
 
 Existing blocks (synthetic data generation, RoBERTa fine-tuning, result
 analysis) stay. Add:
 
-1. **Cross-generator training.** 5 LLMs each generate 200 paraphrase pairs
-   on the same 100 OOD source posts. Train roberta-base on the union.
-2. **Leave-one-out ablation.** Train 5 additional models each missing one
-   generator. Identify the critical generator.
-3. **Blind eval.** Three held-out sets: 40-pair manual+Claude (already in
-   poster), 50-pair GPT-generated (Stage 7), 100-pair Claude-generated
-   (Stage 10).
-4. **Mechanistic probes.** Linear probes on the [CLS] residual at every
-   layer for equivalence and for a negation-regex feature. Multi-direction
-   ablation.
+1. **Cross-generator training.** Each of 5 LLMs generates 200 paraphrase
+   pairs on the same 100 OOD source posts (1,000 pairs total). Split
+   80/20 by source post to prevent leakage. Train roberta-base from
+   scratch on the 800-pair training union.
 
-### Results (replace four bullets with these six)
+2. **Leave-one-out ablation.** Train 5 additional models, each missing
+   one generator (640 train pairs each). Identifies the critical
+   generator.
 
-A. **Shortcut quantified.** Single-generator baseline: 31% equivalent / 100%
-   unequivalent accuracy on humans. Same pattern on Claude-generated set
-   (30 / 100). The 55% headline is a collapsed classifier.
+3. **Cross-train x cross-eval matrix.** Every trained checkpoint scored
+   on four distinct human-style eval sets that differ in their writing
+   source: Veronika's handwriting (n=20), Claude 4.6 (n=20),
+   GPT-4o-mini reactions (n=50), Claude Haiku 4.5 reactions (n=100).
+   This separates "the model learned semantics" from "the model
+   style-matches its training set."
 
-B. **Cross-generator training fixes it.** 1,000 pairs across 5 LLMs gives
-   81% on a blind 100-pair human eval, AUROC 0.896, eq/uneq split 84 / 77.
-   30x less data than the baseline, 22 points more accuracy.
+4. **Label verification.** Each LLM-generated eval label is verified by
+   a separate LLM call and cross-checked by 4 independent frontier LLMs
+   scoring 98 to 100% zero-shot.
 
-C. **Anthropic Haiku is irreplaceable.** Leave-one-out: dropping Haiku
-   alone collapses the model back to 60% / 0.773 AUROC. Other generators
-   cost 1 to 7 points each.
+5. **Mechanistic probes.** Linear probes on the [CLS] residual at every
+   transformer layer for the equivalence label and for stylistic
+   shortcut features. Multi-direction ablation at layer 12.
 
-D. **Frontier LLM ceiling is 98 to 100%.** GPT-4o, Claude Haiku, Qwen-72B
-   all hit perfect 100/100 zero-shot. Multi_gen captures 80% of that
-   signal in a 125M-parameter student.
+### Results (replace four bullets with these eight)
 
-E. **The shortcut is high-rank.** Projecting out 6 hand-picked stylistic
-   directions at layer 12 moves manual AUC from 0.769 to 0.758. The
-   shortcut cannot be patched at inference; it must be prevented at
-   training time.
+A. **Shortcut quantified.** Single-generator baseline gets 55% on humans,
+   but the per-class breakdown is **31% equivalent / 100% unequivalent**.
+   Same pattern on Claude-generated set (30 / 100). The "55%" headline
+   is a collapsed classifier that always predicts unequivalent on
+   anything stylistically distinct from Qwen-prose.
 
-F. **Layer 12 destroys layer 10.** Linear probe AUC on manual: 0.978 at
-   layer 10, 0.769 at layer 12 (baseline). Cross-generator training keeps
-   layer 12 at 0.978.
+B. **Cross-generator training fixes it.** Multi-generator training on
+   800 pairs hits **95% on Veronika's handwriting (n=20)**, 90% on
+   manual+Claude (n=40), 81% on Claude Haiku reactions (n=100, AUROC
+   0.896), 72% on GPT-4o-mini reactions (n=50). With 30x less data than
+   the baseline, accuracy gains of 22 to 40 percentage points depending
+   on the eval set. The per-class split becomes balanced (92/100, 87/94,
+   84/77, 81/61) instead of collapsed.
+
+C. **Anthropic Haiku is the critical generator.** Leave-one-out dropping
+   Haiku falls to 60% on handwritten, 57% on manual+Claude, **42% on
+   GPT-4o-mini reactions**, 60% on Claude Haiku reactions. The collapse
+   on GPT-written eval (where Haiku style is absent) rules out the
+   "style-match" interpretation: Haiku data carries genuine semantic
+   diversity, not just stylistic match to the test set.
+
+D. **DeepSeek V3 is redundant.** Leave-one-out dropping DeepSeek matches
+   or beats the full 5-generator mix on every eval (95 / 85 / 76 / 80
+   across handwritten / Claude 4.6 / GPT / Haiku). The recommended
+   recipe is the 4-gen mix: Anthropic Haiku + OpenAI GPT-4o-mini +
+   Qwen 2.5 72B + Llama 3.1 8B.
+
+E. **Single-generator 160-pair training fails on humans.** 4 of 5
+   single-generator-only models collapse to "always predict equivalent"
+   on human inputs. Their numbers on paraphrase test sets look decent
+   only because the 50/50 label balance keeps an always-equivalent
+   model at 50% by definition.
+
+F. **Frontier LLM zero-shot ceiling is 98 to 100%.** GPT-4o-2024-11-20,
+   Claude Haiku 4.5, and Qwen 2.5 72B all hit perfect 100/100 on the
+   100-pair human eval. Claude Sonnet 4.5: 99/100. DeepSeek V3: 98/100.
+   Multi_gen captures 80% of this signal in a 125M-parameter student
+   at <1% of the inference cost.
+
+G. **The shortcut is high-rank.** Projecting out 6 hand-picked
+   stylistic directions (negation flip, length ratio, "the post" prefix,
+   first-person, much-shorter, verdict word) at the baseline's layer 12
+   moves manual AUC from 0.769 to 0.758. The shortcut cannot be
+   surgically removed at inference; it must be prevented at training.
+
+H. **Layer 12 destroys layer 10.** Linear probe AUC on hand-written
+   humans: 0.978 at layer 10 (the baseline already "knows" the answer
+   two layers before its output) drops to 0.769 at layer 12. Multi-
+   generator training prevents this final-layer degradation (layer 12
+   manual AUC stays at 0.978).
 
 ### Conclusion (replace existing bullets)
 
 - The "future work" the original poster recommended is the actual paper.
   Generator diversity beats data scale by 30x.
-- Recipe: train on 200 to 500 paraphrases from each of 5 LLMs. Always
-  include Anthropic Haiku style.
-- The shortcut is a representational collapse, not a labelling problem
-  and not a localized feature. The training data is 95% clean. The
-  fine-tuned model still collapses.
-- Off-the-shelf semantic similarity does not solve this task. Fine-tuning
-  is required.
-- A 125M-parameter roberta-base trained on 1,000 cross-generator pairs
-  captures 80% of a frontier LLM's signal at less than 1% of the
-  inference cost.
+- Recipe: train on 200 paraphrases from each of 4 LLMs (Anthropic
+  Haiku + OpenAI GPT-4o-mini + Qwen 2.5 72B + Llama 3.1 8B). Anthropic
+  Haiku is irreplaceable; DeepSeek V3 is redundant.
+- The shortcut is a representational collapse in the last two
+  transformer layers, not a labelling problem and not a localized
+  feature. The training data is 95% clean. The fine-tuned model still
+  collapses.
+- Off-the-shelf semantic similarity (Sentence-BERT cosine) does not
+  solve this task (AUROC < 0.5). Fine-tuning is required.
+- A 125M-parameter roberta-base trained on 800 cross-generator pairs
+  captures 80% of a frontier LLM's signal at <1% of the inference cost.
 
 ## 9. What to remove from the poster
 
@@ -300,16 +345,32 @@ F. **Layer 12 destroys layer 10.** Linear probe AUC on manual: 0.978 at
   style." The problem is single-generator training generally, not Qwen
   specifically. v04 (Qwen-3B + Qwen-7B) also fails on bigger evals (68%).
 
-## 10. Two new figures to add
+## 10. Three new figures to add
 
-**Figure A: cross-generator transfer matrix.** 5x5 + multi_gen row + human
-column. Cells are accuracy. Diagonals greyed, multi_gen row in bold.
-Sourced from `overnight/results/stage9/matrix.json`.
+**Figure A: cross-train x cross-human-eval matrix.** Rows are training
+recipes (poster baseline, 5 single-generator models, 5 LOO models,
+multi_gen). Columns are the 4 human-style eval sets (Veronika handwritten
+n=20, Claude 4.6 n=20, GPT n=50, Haiku n=100). Cells are accuracy.
+The `loo_drop_anthropic` row crashes on every column, the `loo_drop_deepseek`
+row matches multi_gen on every column. This single figure carries findings
+B, C, D, E all at once. Sourced from `overnight/results/stage14b/matrix.json`
+combined with `overnight/results/stage14/matrix.json`.
 
-**Figure B: per-class accuracy on n=100 human eval.** Three model groups
-(poster baseline / v04 / multi_gen). Two stacked bars per group (equivalent
-vs unequivalent accuracy). Visually drives home the collapsed-classifier
-finding. Sourced from `overnight/results/stage10/scores.json`.
+**Figure B: per-class accuracy bar chart.** X-axis: 3 model groups
+(poster baseline, v04, multi_gen). Two stacked or grouped bars per group:
+equivalent accuracy (blue) and unequivalent accuracy (red). On any human
+eval set the baseline shows the collapsed pattern (red bar near 100%,
+blue bar near 0-40%) while multi_gen shows both bars in the 75-95% range.
+Drives home findings A and B. Sourced from
+`overnight/results/stage14b/matrix.json`.
+
+**Figure C: layer-wise probe AUC.** X-axis: layer index 1 to 12. Y-axis:
+manual-AUC of a linear probe trained at that layer. Two lines: baseline
+(starts at ~0.5, climbs to ~0.978 by layer 10, drops to 0.769 by layer 12)
+and multi_gen (climbs to ~1.0 by layer 10, stays at 0.978 through layer
+12). Drives home finding H about the late-layer collapse. Sourced from
+`overnight/results/stage2/baseline.json` and
+`overnight/results/stage2/best_mitigation.json`.
 
 ## 11. New files added to the repo
 
