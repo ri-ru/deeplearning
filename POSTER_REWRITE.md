@@ -20,17 +20,24 @@ Everything the poster claims is real. The original numbers stand.
 
 ## 2. New headline number to put on the poster
 
-Train roberta-base from scratch on 1,000 paraphrase pairs (200 each from
+Generated 1,000 paraphrase pairs total via OpenRouter (200 from each of
 Anthropic Claude Haiku 4.5, OpenAI GPT-4o-mini, Qwen 2.5 72B, Meta Llama 3.1 8B,
-DeepSeek V3, all paraphrasing the same 100 OOD source posts via OpenRouter).
+DeepSeek V3, all paraphrasing the same 100 OOD source posts). Split 80/20
+by source post: 800 pairs train, 200 pairs held out for the cross-generator
+test matrix. Train roberta-base from scratch on the 800-pair training union.
 Evaluate on a 100-pair human held-out set written by Claude Haiku in a
 different voice (Stage 10), labels verified by a second Haiku call.
+
+Synthetic data lives at `overnight/cross_gen/`:
+- `_source_posts.csv` (100 OOD source posts; seed = 42)
+- `anthropic_haiku.csv`, `openai_gpt4omini.csv`, `qwen25_72b.csv`,
+  `meta_llama3_8b.csv`, `deepseek_v3.csv` (200 pairs each)
 
 | Model | Training data | Human acc (n=100) | AUROC | eq / uneq |
 |---|---|---|---|---|
 | Poster baseline (Qwen-3B only) | 30,000 pairs | 59% | 0.745 | 40 / 84 |
 | v04 style-mix (poster + 200 Qwen-7B) | 30,200 pairs | 66% | 0.808 | 51 / 86 |
-| **multi_gen (5 LLMs, from scratch)** | **1,000 pairs** | **81%** | **0.896** | **84 / 77** |
+| **multi_gen (5 LLMs, from scratch)** | **800 pairs (1,000 generated, 800 train / 200 test)** | **81%** | **0.896** | **84 / 77** |
 | Frontier LLM zero-shot (ceiling) | 0 pairs | 98 to 100% | 1.0 | 100 / 100 |
 
 Three points to make on the poster:
