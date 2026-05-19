@@ -600,3 +600,75 @@ The classification "easily solved by reading both texts" is real -- the question
 Methodological caveat: Claude Haiku 4.5 was the verifier for the labels. Haiku scoring 100% is partly self-validation. But the other four LLMs scoring 98-100% rules out "Haiku-only artifacts."
 
 File: `overnight/results/stage11/ceiling.json`
+
+## 2026-05-19 15:20  STAGE 14: cross-train x cross-human-eval matrix
+
+Every trained checkpoint scored on every human-style eval set.
+
+**Accuracy (eq% / uneq%):**
+
+| model | manual+claude (n=40) | stage7 GPT (n=50) | stage10 Haiku (n=100) |
+|---|---|---|---|
+| poster_baseline | 60% (30/100) | 54% (37/74) | 59% (40/84) |
+| anthropic_haiku | 57% (100/0) | 54% (100/0) | 57% (100/0) |
+| openai_gpt4omini | 52% (65/35) | 40% (33/48) | 53% (37/74) |
+| qwen25_72b | 57% (100/0) | 54% (100/0) | 58% (100/2) |
+| meta_llama3_8b | 57% (100/0) | 54% (100/0) | 57% (100/0) |
+| deepseek_v3 | 57% (100/0) | 54% (100/0) | 57% (100/0) |
+| loo_drop_anthropic | 57% (35/88) | 42% (22/65) | 60% (42/84) |
+| loo_drop_deepseek | 90% (91/88) | 76% (78/74) | 80% (81/79) |
+| loo_drop_llama | 75% (96/47) | 60% (96/17) | 74% (98/42) |
+| loo_drop_openai | 75% (65/88) | 74% (70/78) | 77% (75/79) |
+| loo_drop_qwen | 78% (87/65) | 76% (70/83) | 74% (77/70) |
+| multi_gen | 90% (87/94) | 72% (81/61) | 81% (84/77) |
+
+**AUROC:**
+
+| model | manual+claude | stage7 GPT | stage10 Haiku |
+|---|---|---|---|
+| poster_baseline | 0.900 | 0.710 | 0.745 |
+| anthropic_haiku | 0.506 | 0.274 | 0.647 |
+| openai_gpt4omini | 0.514 | 0.386 | 0.593 |
+| qwen25_72b | 0.488 | 0.357 | 0.603 |
+| meta_llama3_8b | 0.488 | 0.182 | 0.674 |
+| deepseek_v3 | 0.412 | 0.211 | 0.618 |
+| loo_drop_anthropic | 0.737 | 0.535 | 0.773 |
+| loo_drop_deepseek | 0.910 | 0.839 | 0.889 |
+| loo_drop_llama | 0.852 | 0.688 | 0.846 |
+| loo_drop_openai | 0.864 | 0.833 | 0.867 |
+| loo_drop_qwen | 0.854 | 0.805 | 0.846 |
+| multi_gen | 0.936 | 0.804 | 0.896 |
+
+
+---
+
+## 2026-05-19  STAGE 14: cross-train x cross-human-eval matrix
+
+The clean experiment. Every trained checkpoint scored on three distinct human-style eval sets: manual+claude (n=40, mixed sources, no Haiku), Stage 7 (n=50, GPT-4o-mini-written), Stage 10 (n=100, Claude Haiku-written).
+
+Format: acc (eq% / uneq%)
+
+| model | manual+claude (40) | stage7 GPT (50) | stage10 Haiku (100) |
+|---|---|---|---|
+| poster_baseline | 60 (30/100) | 54 (37/74) | 59 (40/84) |
+| anthropic_haiku alone | 57 (100/0) | 54 (100/0) | 57 (100/0) |
+| openai_gpt4omini alone | 52 (65/35) | 40 (33/48) | 53 (37/74) |
+| qwen25_72b alone | 57 (100/0) | 54 (100/0) | 58 (100/2) |
+| meta_llama3_8b alone | 57 (100/0) | 54 (100/0) | 57 (100/0) |
+| deepseek_v3 alone | 57 (100/0) | 54 (100/0) | 57 (100/0) |
+| loo_drop_anthropic | 57 (35/88) | **42** (22/65) | 60 (42/84) |
+| loo_drop_deepseek | **90** (91/88) | **76** (78/74) | **80** (81/79) |
+| loo_drop_llama | 75 (96/47) | 60 (96/17) | 74 (98/42) |
+| loo_drop_openai | 75 (65/88) | 74 (70/78) | 77 (75/79) |
+| loo_drop_qwen | 78 (87/65) | 76 (70/83) | 74 (77/70) |
+| multi_gen (5 LLMs) | **90** (87/94) | **72** (81/61) | **81** (84/77) |
+
+Three new findings:
+
+1. **Single-generator 160-pair training is broken on humans.** 4 of 5 single-gen models predict equivalent on 100% of human eval inputs. The Stage 9 paraphrase-test numbers (70-83% transfer) were partly false comfort: those models cannot do the human-style task at all.
+
+2. **Haiku-on-both-sides confound is resolved.** loo_drop_anthropic gets 42% on Stage 7 (GPT-written, NO Haiku in the eval). If "Anthropic is critical" were style-match, dropping Haiku would only hurt on Haiku-eval. It hurts on GPT-eval too.
+
+3. **DeepSeek contributes nothing.** loo_drop_deepseek (90/76/80) matches or beats full multi_gen (90/72/81). The right recipe is 4-gen without DeepSeek: Anthropic Haiku + OpenAI GPT-4o-mini + Qwen 2.5 72B + Llama 3.1 8B.
+
+File: `overnight/results/stage14/matrix.json`

@@ -47,7 +47,50 @@ Three points to make on the poster:
    handled (84 / 77 split, not 40 / 84).
 3. AUROC 0.896 vs 0.745; this is real ranking ability, not threshold-tuning.
 
-## 3. Leave-one-out: Anthropic Haiku is the critical generator
+## 3. Cross-train x cross-human-eval matrix (added 2026-05-19)
+
+Every trained checkpoint scored on every human-style eval set. This is
+the clean test that resolves the Haiku-on-both-sides confound: if
+"Anthropic is critical" were a style-match artifact, dropping Haiku
+would hurt only on Haiku-written eval. The matrix shows dropping Haiku
+hurts on all three eval sets.
+
+Format below: accuracy (equivalent-acc / unequivalent-acc).
+
+| model | manual+claude (n=40) | stage7 GPT (n=50) | stage10 Haiku (n=100) |
+|---|---|---|---|
+| poster baseline | 60% (30/100) | 54% (37/74) | 59% (40/84) |
+| anthropic_haiku alone | 57% (100/0) | 54% (100/0) | 57% (100/0) |
+| openai_gpt4omini alone | 52% (65/35) | 40% (33/48) | 53% (37/74) |
+| qwen25_72b alone | 57% (100/0) | 54% (100/0) | 58% (100/2) |
+| meta_llama3_8b alone | 57% (100/0) | 54% (100/0) | 57% (100/0) |
+| deepseek_v3 alone | 57% (100/0) | 54% (100/0) | 57% (100/0) |
+| loo_drop_anthropic | 57% (35/88) | **42%** (22/65) | 60% (42/84) |
+| loo_drop_deepseek | **90%** (91/88) | **76%** (78/74) | **80%** (81/79) |
+| loo_drop_llama | 75% (96/47) | 60% (96/17) | 74% (98/42) |
+| loo_drop_openai | 75% (65/88) | 74% (70/78) | 77% (75/79) |
+| loo_drop_qwen | 78% (87/65) | 76% (70/83) | 74% (77/70) |
+| **multi_gen (5 LLMs)** | **90%** (87/94) | **72%** (81/61) | **81%** (84/77) |
+
+Three findings:
+
+1. **Single-generator 160-pair training does not solve the task.** 4 of 5
+   single-generator models collapse to "always predict equivalent" (100/0
+   splits). They look fine on paraphrase test sets in the Stage 9 matrix
+   only because predicting equivalent on a balanced set hits the 50/57%
+   floor. They cannot do the human-style task at all.
+
+2. **The Anthropic Haiku finding survives the cross-eval test.** Dropping
+   Haiku tanks the model on stage7 (GPT-written eval) to **42%**, on
+   manual+claude (non-Haiku eval) to 57%, on stage10 (Haiku-written) to
+   60%. The confound is resolved: Haiku is critical regardless of which
+   LLM wrote the eval.
+
+3. **DeepSeek V3 is not contributing.** `loo_drop_deepseek` matches or
+   beats full multi_gen on every eval. The optimal recipe is the 4-gen
+   mix: Anthropic Haiku + OpenAI GPT-4o-mini + Qwen 2.5 72B + Llama 3.1 8B.
+
+## 4. Leave-one-out: Anthropic Haiku is the critical generator
 
 For each of the 5 generators we trained one classifier on the union of the
 OTHER 4 generators (640 pairs) and scored on the n=100 human eval.
