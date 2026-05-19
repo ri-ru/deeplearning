@@ -90,6 +90,34 @@ Three findings:
    beats full multi_gen on every eval. The optimal recipe is the 4-gen
    mix: Anthropic Haiku + OpenAI GPT-4o-mini + Qwen 2.5 72B + Llama 3.1 8B.
 
+## 3b. Same matrix on actual handwritten text (the cleanest eval)
+
+The 40-pair human eval splits naturally into 20 actually-handwritten pairs
+(by the project member) and 20 written by Claude 4.6 (different model
+from any in our training). Format: acc (eq% / uneq%).
+
+| model | handwritten (n=20) | Claude 4.6 (n=20) |
+|---|---|---|
+| poster baseline | 55% (31/100) | 65% (30/100) |
+| **multi_gen (5 LLMs)** | **95%** (92/100) | **85%** (80/90) |
+| loo_drop_deepseek | **95%** (92/100) | **85%** (90/80) |
+| loo_drop_qwen | 85% (85/86) | 70% (90/50) |
+| loo_drop_llama | 90% (100/71) | 60% (90/30) |
+| loo_drop_openai | 70% (54/100) | 80% (80/80) |
+| loo_drop_anthropic | **60%** (38/100) | 55% (30/80) |
+| single-generator (any) | ~65% (collapsed to predict equivalent) | ~50% (collapsed) |
+
+This is the cleanest eval we have: no LLM involved in writing the text
+or labelling it. multi_gen reaches **95%** with a balanced 92/100 split.
+The Haiku-on-both-sides confound is fully resolved here, since the text
+has no Haiku style for the model to match.
+
+The DeepSeek-is-redundant finding holds: loo_drop_deepseek matches
+multi_gen exactly (95% / 85%). The Anthropic-is-critical finding holds:
+loo_drop_anthropic collapses to 60% / 55%.
+
+Caveat: n=20 per side, plus/minus 10pp. The 95% could be 85-100%.
+
 ## 4. Leave-one-out: Anthropic Haiku is the critical generator
 
 For each of the 5 generators we trained one classifier on the union of the

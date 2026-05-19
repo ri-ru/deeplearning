@@ -672,3 +672,25 @@ Three new findings:
 3. **DeepSeek contributes nothing.** loo_drop_deepseek (90/76/80) matches or beats full multi_gen (90/72/81). The right recipe is 4-gen without DeepSeek: Anthropic Haiku + OpenAI GPT-4o-mini + Qwen 2.5 72B + Llama 3.1 8B.
 
 File: `overnight/results/stage14/matrix.json`
+
+## 2026-05-19 15:27  STAGE 14b: handwritten vs Claude-4.6 split eval
+
+Split the manual+claude n=40 set into its two halves. manual_handwritten_n20 = Veronika's handwriting (no LLM at all). claude46_n20 = Claude 4.6 (NOT in any of our training sets, but same family as Haiku-4.5).
+
+Format: acc (eq% / uneq%)
+
+| model | manual handwritten (n=20) | Claude 4.6 (n=20) |
+|---|---|---|
+| poster_baseline | 55% (31/100) | 65% (30/100) |
+| anthropic_haiku | 65% (100/0) | 50% (100/0) |
+| openai_gpt4omini | 45% (54/29) | 60% (80/40) |
+| qwen25_72b | 65% (100/0) | 50% (100/0) |
+| meta_llama3_8b | 65% (100/0) | 50% (100/0) |
+| deepseek_v3 | 65% (100/0) | 50% (100/0) |
+| loo_drop_anthropic | 60% (38/100) | 55% (30/80) |
+| loo_drop_deepseek | 95% (92/100) | 85% (90/80) |
+| loo_drop_llama | 90% (100/71) | 60% (90/30) |
+| loo_drop_openai | 70% (54/100) | 80% (80/80) |
+| loo_drop_qwen | 85% (85/86) | 70% (90/50) |
+| multi_gen | 95% (92/100) | 85% (80/90) |
+
