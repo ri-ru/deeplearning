@@ -775,7 +775,85 @@ def fig_multigen_scorecard():
     plt.close(fig)
 
 
+# ============================================================================
+# poster headline replacement
+# ============================================================================
+
+def fig_headline_indist_vs_human():
+    """Replacement for the poster's muddled 4-bar 'F1 / Accuracy' chart.
+
+    Same scope (in-dist vs OOD drop) but one metric, per-class breakdown,
+    and the collapse is visible at a glance.
+    """
+    syn_eq   = STAGE1["v00_baseline"]["ood_overall"]["acc_equivalent"]   * 100
+    syn_uneq = STAGE1["v00_baseline"]["ood_overall"]["acc_unequivalent"] * 100
+    syn_f1   = STAGE1["v00_baseline"]["ood_overall"]["f1_macro"]
+    syn_acc  = STAGE1["v00_baseline"]["ood_overall"]["accuracy"]
+
+    hum_eq   = STAGE14B["poster_baseline"]["manual_handwritten_n20"]["acc_eq"]   * 100
+    hum_uneq = STAGE14B["poster_baseline"]["manual_handwritten_n20"]["acc_uneq"] * 100
+    hum_f1   = STAGE14B["poster_baseline"]["manual_handwritten_n20"]["f1"]
+    hum_acc  = STAGE14B["poster_baseline"]["manual_handwritten_n20"]["acc"]
+
+    fig, ax = plt.subplots(figsize=(8.5, 5.2))
+    x = np.array([0, 1.4])
+    w = 0.42
+
+    b_eq   = ax.bar(x - w/2, [syn_eq, hum_eq],   w, color=NAVY,  label="equivalent class")
+    b_uneq = ax.bar(x + w/2, [syn_uneq, hum_uneq], w, color=CORAL, label="unequivalent class")
+
+    for b, v in list(zip(b_eq, [syn_eq, hum_eq])) + list(zip(b_uneq, [syn_uneq, hum_uneq])):
+        ax.text(b.get_x() + b.get_width()/2, b.get_height() + 1.5,
+                f"{v:.0f}", ha="center", va="bottom",
+                fontsize=12, color=INK, fontweight="bold")
+
+    # group headers with F1 + acc
+    ax.text(x[0], 122,
+            f"Synthetic validation\nn~{STAGE1['v00_baseline']['ood_overall']['n']:,}",
+            ha="center", va="bottom", fontsize=11, color=INK, fontweight="bold")
+    ax.text(x[0], 115,
+            f"F1 = {syn_f1:.2f}  ·  acc = {syn_acc:.2f}",
+            ha="center", va="bottom", fontsize=10, color="#444")
+
+    ax.text(x[1], 122,
+            "Handwritten humans\nn=20",
+            ha="center", va="bottom", fontsize=11, color=INK, fontweight="bold")
+    ax.text(x[1], 115,
+            f"F1 = {hum_f1:.2f}  ·  acc = {hum_acc:.2f}",
+            ha="center", va="bottom", fontsize=10, color=CORAL)
+
+    # collapse annotation
+    ax.annotate("", xy=(x[1] - w/2, hum_eq + 3), xytext=(x[1] - w/2, 60),
+                arrowprops=dict(arrowstyle="->", color=CORAL, lw=1.5))
+    ax.text(x[1] - w/2 - 0.05, 62,
+            "model never\npredicts\n'equivalent'",
+            ha="right", va="center", fontsize=10, color=CORAL, style="italic")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels([])
+    ax.set_ylabel("per-class accuracy (%)")
+    ax.set_ylim(0, 135)
+    ax.set_yticks([0, 25, 50, 75, 100])
+    ax.set_title("In-distribution success, out-of-distribution collapse",
+                 fontsize=14, pad=18)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.04),
+              ncol=2, frameon=False, fontsize=11)
+    ax.spines["bottom"].set_visible(False)
+    ax.tick_params(bottom=False)
+
+    fig.text(0.02, -0.08,
+             "Same baseline RoBERTa, two evals. Synthetic: 97/98 balanced. "
+             "Human: 31/100 collapsed - the model always predicts 'unequivalent'. "
+             "Accuracy alone (55%) hides that a coin flip would do almost as well.",
+             fontsize=9.5, color="#444", wrap=True)
+
+    fig.tight_layout(rect=(0, 0.04, 1, 0.95))
+    fig.savefig(OUT / "0_headline_indist_vs_human.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
+    fig_headline_indist_vs_human()
     fig_eval_matrix()
     fig_per_class_balance()
     fig_loo_ablation()
