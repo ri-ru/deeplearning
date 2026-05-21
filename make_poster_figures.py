@@ -852,8 +852,72 @@ def fig_headline_indist_vs_human():
     plt.close(fig)
 
 
+def fig_headline_reformat():
+    """Same 4-bar chart as on the poster, reformatted."""
+    bars = [
+        ("TF-IDF\nbaseline",        0.789, SLATE,  "lexical baseline"),
+        ("GPT-4o-mini\nas judge",   0.964, "#9aa8b7", "LLM as judge"),
+        ("RoBERTa\nin-distribution",0.968, NAVY,   "synthetic test set"),
+        ("RoBERTa\nOOD - humans",   0.550, CORAL,  "handwritten n=20"),
+    ]
+
+    fig, ax = plt.subplots(figsize=(9.5, 5.4))
+    x = np.arange(len(bars))
+    heights = [b[1] for b in bars]
+    colors  = [b[2] for b in bars]
+    rects = ax.bar(x, heights, color=colors, width=0.62,
+                   edgecolor="white", linewidth=1.5)
+    ax.set_xlim(-0.6, 4.2)
+
+    for r, v in zip(rects, heights):
+        ax.text(r.get_x() + r.get_width()/2, r.get_height() + 0.015,
+                f"{v:.2f}", ha="center", va="bottom",
+                fontsize=13, color=INK, fontweight="bold")
+
+    # subtle caption under each bar
+    for i, b in enumerate(bars):
+        ax.text(i, -0.10, b[3], ha="center", va="top",
+                fontsize=9, color="#666", style="italic")
+
+    # the drop annotation: vertical bracket between in-dist top and OOD top
+    y_top  = heights[2]
+    y_bot  = heights[3]
+    drop   = (y_top - y_bot) * 100
+    bx     = 3.40  # x of the bracket, off to the right
+    ax.annotate("",
+                xy=(bx, y_bot), xytext=(bx, y_top),
+                arrowprops=dict(arrowstyle="<->", color=CORAL, lw=2.0))
+    ax.plot([2.31, bx], [y_top, y_top], color=CORAL, lw=1.0, alpha=0.6)
+    ax.plot([3.31, bx], [y_bot, y_bot], color=CORAL, lw=1.0, alpha=0.6)
+    ax.text(bx + 0.08, (y_top + y_bot)/2 + 0.02,
+            f"-{drop:.0f} pp",
+            ha="left", va="center", fontsize=14, color=CORAL,
+            fontweight="bold")
+    ax.text(bx + 0.08, (y_top + y_bot)/2 - 0.04,
+            "on human\nwriting",
+            ha="left", va="center", fontsize=10, color=CORAL,
+            style="italic")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels([b[0] for b in bars], fontsize=11)
+    ax.set_ylabel("accuracy")
+    ax.set_ylim(0, 1.10)
+    ax.set_yticks([0, 0.25, 0.50, 0.75, 1.00])
+    ax.set_title("Model generalization: the OOD performance drop",
+                 fontsize=14, pad=14)
+    ax.spines["bottom"].set_visible(True)
+    ax.tick_params(bottom=False)
+    # remove gridline at 1.0 collision
+    ax.set_axisbelow(True)
+
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
+    fig.savefig(OUT / "0_headline_reformat.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_headline_indist_vs_human()
+    fig_headline_reformat()
     fig_eval_matrix()
     fig_per_class_balance()
     fig_loo_ablation()
