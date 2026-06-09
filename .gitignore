@@ -53,3 +53,7 @@ overnight/run.log
 
 # local docs (not for the public repo)
 docs/
+
+# course handout / submission binaries (kept locally, not for the repo)
+Marked_S2_W8.zip
+EE559_A0_poster_template_v1_17-05.pdf
