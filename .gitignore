@@ -62,3 +62,4 @@ EE559_A0_poster_template_v1_17-05.pdf
 seeds/runs/
 seeds/extracts/
 seeds/configs/
+seeds/*.log
