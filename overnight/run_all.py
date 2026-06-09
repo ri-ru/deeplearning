@@ -40,7 +40,7 @@ def log(msg: str) -> None:
 
 
 def run_stage(name: str, script: Path, extra: list[str] | None = None) -> int:
-    cmd = [PYBIN, str(script)] + (extra or [])
+    cmd = [PYBIN, "-u", str(script)] + (extra or [])
     log(f"START {name}: {' '.join(cmd)}")
     try:
         rc = subprocess.call(cmd)
