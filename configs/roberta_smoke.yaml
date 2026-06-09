@@ -1,0 +1,18 @@
+# Fast smoke test: tiny sample, 1 epoch, just to confirm the pipeline runs
+# end to end on the GPU. NOT a real result.
+run_name: roberta_smoke
+csv_path: C:/Users/jan/Downloads/deep learning/data/reformulated_full.csv
+model_name: roberta-base
+
+max_length: 256
+epochs: 1
+batch_size: 32
+eval_batch_size: 64
+learning_rate: 2.0e-5
+weight_decay: 0.01
+warmup_ratio: 0.06
+val_frac: 0.1
+seed: 42
+bf16: true
+num_workers: 0
+max_samples: 400

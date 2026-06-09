@@ -1,10 +1,5 @@
 """Probe-split seed sweep (final-submission-2 layout).
-
-Re-fits the equivalence + negation probes on the SAME cached residuals under
-N seeds. Residuals are extracted once (from the seed-42 checkpoint) into
-seeds/extracts/, so this isolates probe-training (split) variance per layer.
-
-    python seeds/probe_seed_sweep.py --seeds 0 1 2 3 4 5 6 7 8 9
+python seeds/probe_seed_sweep.py --seeds 0 1 2 3 4 5 6 7 8 9
 """
 from __future__ import annotations
 

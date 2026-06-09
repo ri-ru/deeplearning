@@ -1,13 +1,4 @@
 """End-to-end interpretability variance across independently-trained models
-(final-submission-2 layout).
-
-For each RoBERTa seed checkpoint: extract per-layer [CLS] residuals to a temp
-dir, fit the equivalence + negation probes with a FIXED split, record per-layer
-val AUC + Pearson, then delete the residuals. Unlike probe_seed_sweep.py (which
-re-splits ONE model's residuals) this varies the upstream model -> tests whether
-"negation is decodable from deep layers" holds across independent checkpoints.
-
-    python seeds/end2end_interp_sweep.py
 """
 from __future__ import annotations
 

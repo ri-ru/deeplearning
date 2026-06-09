@@ -1,10 +1,4 @@
 """TF-IDF + LogReg baseline — seed-variance sweep (final-submission-2 layout).
-
-Fixed OOD test set; the seed only moves the stratified val carve in
-load_and_split (hence which ~90% of the in-domain pool trains). LogReg(lbfgs)
-is otherwise deterministic -> a low-variance baseline error bar.
-
-    python seeds/tfidf_seed_sweep.py
 """
 from __future__ import annotations
 

@@ -1,17 +1,7 @@
-"""RoBERTa judge — multi-seed variance experiment (final-submission-2 layout).
+"""RoBERTa judge — multi-seed variance experiment  
+The OOD test set is the 3 held-out domains
+(toxigen, gab, anatomy) and does not depend on the seed
 
-Trains the SAME roberta-base config under several seeds and reports mean +/-
-std of the OOD-test metrics. The OOD test set is the 3 held-out domains
-(toxigen, gab, anatomy) and does NOT depend on the seed, so the spread is
-clean run-to-run training variance (weight init + data shuffle + train/val
-carve), not evaluation noise.
-
-Faithful re-implementation of the original judge_finetune/src/train.py loop,
-reusing code/judge_training/{data,metrics}.py and pointing at the reorganized
-paths (data/reformulated_full.csv, outputs under seeds/).
-
-Run from the repo root with the project venv:
-    & "C:\\Users\\jan\\downloads\\nml_project_proposal\\.venv\\Scripts\\python.exe" seeds/run_seed_variance.py
 """
 from __future__ import annotations
 
