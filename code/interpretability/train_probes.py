@@ -1,18 +1,4 @@
 """Per-layer linear probes on [CLS] residuals.
-
-For each layer:
-    probe_equiv: logistic regression -> equivalence label (0/1)
-    probe_neg:   logistic regression -> contains_negation_in_synthetic (0/1)
-
-Trained on an 80/20 stratified split of the synthetic pool.
-Per-layer reports val AUC for both probes, the pearson correlation between
-their predicted probabilities, and the manual-set AUC for both probes
-(transfer test: probes trained on synthetic, eval'd on the 20 manual pairs).
-
-Outputs:
-    mech_interp/results/probe_metrics.json
-    mech_interp/figures/probe_auc_layer_sweep.png
-    mech_interp/figures/probe_prediction_correlation.png
 """
 from __future__ import annotations
 
@@ -79,7 +65,7 @@ def main() -> None:
         raise FileNotFoundError(f"No layer_*.pt files under {args.extracts}")
     print(f"[probes] found {n_layers} layer files")
 
-    # Use sample_ids from layer 0 as the canonical order; verify identical across layers.
+ 
     canon_ids, _ = _load_layer(args.extracts, 0)
     aligned = _align_positional(manifest, canon_ids)
     is_synth = aligned["source"].to_numpy() == "synthetic"
@@ -87,14 +73,14 @@ def main() -> None:
     y_equiv = aligned["label"].to_numpy().astype(int)
     y_neg = aligned["contains_negation_in_synthetic"].to_numpy().astype(int)
 
-    # Synthetic prior: regex AUC vs label
+    #  regex AUC vs label
     prior_auc = roc_auc_score(y_equiv[is_synth], y_neg[is_synth])
     print(f"[probes] regex-only AUC vs label (synthetic): {prior_auc:.4f}")
 
-    # Stratified train/val split on synthetic indices, then mask onto each layer.
+    # Stratified train/val split on synth index
     synth_idx = np.where(is_synth)[0]
     rng = np.random.default_rng(args.seed)
-    # Stratify on (label, negation) to keep both probe targets balanced in val.
+    # Stratify on (label, negation)  
     strata = y_equiv[synth_idx] * 2 + y_neg[synth_idx]
     train_idx, val_idx = train_test_split(
         synth_idx, test_size=args.val_frac, random_state=args.seed, stratify=strata,

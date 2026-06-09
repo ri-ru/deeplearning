@@ -1,7 +1,4 @@
-"""Shared scoring helpers used by every overnight stage.
-
-Each scorer returns a dict that is JSON-serializable so the final report
-generator can just glob `overnight/results/*.json` and tabulate.
+"""Shared scoring helpers "
 """
 from __future__ import annotations
 
@@ -126,7 +123,7 @@ def score_all(checkpoint_dir: Path, ood_test_df: pd.DataFrame | None = None) -> 
         df = load_full_csv()
         ood_test_df = df[df["domain"].isin(TEST_DOMAINS)].reset_index(drop=True)
 
-    # Run all OOD pairs once, then slice per-domain from the cached predictions.
+    #run ood pairs once
     ood_pairs = list(zip(
         ood_test_df["explanation"].astype(str).tolist(),
         ood_test_df["synthetic"].astype(str).tolist(),

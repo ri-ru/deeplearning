@@ -1,8 +1,7 @@
-"""Verify the four poster claims against the on-disk artifacts:
-
+"""Verify the four poster (reproductibility) 
 1. TF-IDF baseline F1 ≈ 0.789 on the OOD test split
-2. GPT-4o-mini zero-shot F1 ≈ 0.964 (already on disk at runs/zero_shot_gpt4omini.json)
-3. RoBERTa OOD F1 ≈ 0.968 (recompute from saved test_predictions.csv)
+2. GPT-4o-mini zero-shot F1 ≈ 0.964  
+3. RoBERTa OOD F1 ≈ 0.968  
 4. Cosine-sim shortcut: 21.6% of equivalent pairs and 50.9% of unequivalent pairs have sim > 0.9
 """
 from __future__ import annotations

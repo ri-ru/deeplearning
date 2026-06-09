@@ -2,22 +2,7 @@
 
 Stage 2 ablated only the negation-direction (logreg coefficient against the
 negation regex). It barely moved manual-AUC because the shortcut is encoded
-in MANY parallel directions, not just one. This stage:
-
-  1. Trains K independent shortcut probes against K shortcut proxies:
-       - text_b contains negation tokens text_a does not (neg-flip)
-       - cosine-sim bucket on the [CLS] embedding (already in features)
-       - text_b length / text_a length ratio (Qwen rewrites tend to be a
-         different length than the original)
-       - text_b contains "the post" (a Qwen tic vs human's "I think"/"this")
-       - first-token identity (the very first word of text_b)
-  2. Stacks the K coefficient vectors into a (K x d) matrix; takes its
-     orthonormal basis (Gram-Schmidt or SVD).
-  3. Projects [CLS] onto the orthogonal complement and retrains the
-     equivalence probe. Reports val + manual + claude AUC.
-  4. Sweeps K from 1..K_max so we can see the diminishing return.
-
-Runs on baseline-extracted residuals (already on disk).
+in MANY parallel directions 
 """
 from __future__ import annotations
 
@@ -35,7 +20,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from overnight.eval_common import LABEL2ID, REPO, save_json, has_negation_flip  # noqa: E402
+from eval_common import LABEL2ID, REPO, save_json, has_negation_flip  # noqa: E402
 
 EXTRACTS_DIR = REPO / "overnight" / "extracts"
 RESULTS_DIR = REPO / "overnight" / "results" / "stage6"
@@ -91,13 +76,14 @@ def project_out(X: np.ndarray, basis: np.ndarray) -> np.ndarray:
     if basis.shape[0] == 0:
         return X
     # Orthonormalize via QR
-    Q, _ = np.linalg.qr(basis.T)   # Q: (d, k) orthonormal
+    Q, _ = np.linalg.qr(basis.T)  
     return X - X @ Q @ Q.T
 
 
 def auc(y, p) -> float | None:
     if len(np.unique(y)) < 2:
         return None
+    
     try:
         return float(roc_auc_score(y, p))
     except Exception:
@@ -114,7 +100,7 @@ def main() -> int:
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Load manifest from stage2 cache
+ 
     extracts_dir = EXTRACTS_DIR / args.target_name
     meta_path = extracts_dir / "meta.json"
     if not meta_path.exists():
@@ -129,7 +115,7 @@ def main() -> int:
     proxies = build_proxies(manifest)
     print(f"[stage6] proxies: {list(proxies.columns)}")
 
-    # Load layer residuals
+
     pt = torch.load(str(extracts_dir / f"layer_{args.layer:02d}.pt"), weights_only=False)
     assert pt["sample_ids"] == manifest["sample_id"].astype(str).tolist()
     X = pt["activations"].numpy()
@@ -159,7 +145,7 @@ def main() -> int:
         if d is None:
             print(f"  proxy {col}: skipped (degenerate)")
             continue
-        # Sanity: how well does this direction decode the proxy on val?
+        #sanity: how well does this direction decode the proxy on val?
         score = (X[va_idx] @ d)
         try:
             a = roc_auc_score(y_proxy[va_idx], score)
@@ -168,9 +154,8 @@ def main() -> int:
         print(f"  proxy {col}: AUC vs proxy on val = {a:.3f}")
         directions.append((col, d))
 
-    # Sweep K from 0..len(directions). For each K, project out the FIRST K
-    # directions (ordered as listed in `proxies` columns) and retrain the
-    # equivalence probe.
+    # Sweep K from 0..len(directions). 
+
     rows = []
     for K in range(0, len(directions) + 1):
         basis = np.vstack([d for (_, d) in directions[:K]]) if K else np.zeros((0, X.shape[1]))
@@ -192,7 +177,9 @@ def main() -> int:
         "target": args.target_name,
         "layer": args.layer,
         "n_syn_train": int(len(tr_idx)), "n_syn_val": int(len(va_idx)),
+        
         "n_manual": int(len(man_idx)), "n_claude": int(len(cla_idx)),
+
         "directions_used": [n for n, _ in directions],
         "sweep": rows,
     }

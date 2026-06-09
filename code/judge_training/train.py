@@ -1,7 +1,5 @@
 """Fine-tune a transformer encoder for rationale-equivalence classification.
 
-Usage:
-    python -m src.train --config configs/roberta_base.yaml
 """
 from __future__ import annotations
 
@@ -19,6 +17,7 @@ from transformers import (
     AutoTokenizer,
     DataCollatorWithPadding,
     Trainer,
+
     TrainingArguments,
     set_seed,
 )
@@ -62,7 +61,7 @@ def main():
     val_tok = tokenize_dataset(val_ds, tok, cfg["max_length"])
     test_tok = tokenize_dataset(test_ds, tok, cfg["max_length"])
 
-    # Stash domain & post_id for the test set (Trainer drops non-tensor columns).
+    # dont need for test set
     test_domains = list(test_ds["domain"])
     test_post_ids = list(test_ds["post_id"])
     test_text_a = list(test_ds["text_a"])
@@ -115,7 +114,7 @@ def main():
 
     trainer.train()
 
-    # ---- Final OOD evaluation with per-domain breakdown.
+    # ---- Final OOD evals  
     pred_out = trainer.predict(test_tok)
     logits = pred_out.predictions
     labels = pred_out.label_ids
@@ -124,7 +123,7 @@ def main():
     print("\n=== OOD test results ===")
     print(json.dumps(breakdown, indent=2))
 
-    # Persist everything for the report.
+    # persistencee for report
     with open(run_dir / "metrics.json", "w") as f:
         json.dump({"config": cfg, "test": breakdown}, f, indent=2)
 

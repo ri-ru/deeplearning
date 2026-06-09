@@ -1,16 +1,4 @@
-"""Stage 9a: generate 200 rationale-pair paraphrases per LLM.
-
-Same 100 source posts (sampled from the OOD test split) are sent to every
-generator. For each post we generate two versions: one EQUIVALENT (paraphrase
-preserving meaning) and one UNEQUIVALENT (paraphrase flipping the verdict).
-This gives 200 pairs per generator on the same content distribution -- the
-only thing that varies is writing style.
-
-Source posts are sampled once and cached so all generators see the same set,
-and any rerun is reproducible.
-
-Writes one CSV per generator: overnight/cross_gen/<slug>.csv with columns
-    post, explanation, synthetic, meaning, post_id
+"""Stage 9a: generate 200 rationale-pair paraphrases per LLM. 
 """
 from __future__ import annotations
 
@@ -27,14 +15,14 @@ from typing import Iterable
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from overnight.eval_common import LABEL2ID, REPO, TEST_DOMAINS  # noqa: E402
+from eval_common import LABEL2ID, REPO, TEST_DOMAINS  # noqa: E402
 
 OUT_DIR = REPO / "overnight" / "cross_gen"
 POSTS_CSV = OUT_DIR / "_source_posts.csv"
 META_PATH = OUT_DIR / "_meta.json"
 
 # Generators available via OpenRouter (openai-compatible API).
-# `slug` = file name; `model` = openrouter model id.
+
 GENERATORS = {
     "openai_gpt4omini":  {"model": "openai/gpt-4o-mini",                "provider": "openrouter"},
     "anthropic_haiku":   {"model": "anthropic/claude-haiku-4.5",        "provider": "openrouter"},

@@ -1,19 +1,4 @@
-"""Stage 14: cross-train x cross-human-eval matrix.
-
-Every single-generator-trained model (Stage 9) plus multi_gen plus the 5
-leave-one-out variants (Stage 12), evaluated on 3 distinct human-style
-eval sets:
-
-  - manual+claude (n=40):  actual human (Veronika) + Claude 4.6.
-  - stage7 (n=50):         GPT-4o-mini "Reddit reader" voice.
-  - stage10 (n=100):       Claude Haiku 4.5 "tired on phone" voice.
-
-This is the experiment that disambiguates the Haiku-on-both-sides confound.
-If anthropic_haiku-trained-alone wins on Haiku-eval but loses on GPT-eval,
-the LOO finding is style-match. If it wins everywhere, the LOO finding
-is real.
-
-Output: overnight/results/stage14/matrix.json + table in OVERNIGHTLOG.md.
+"""Stage 14: cross-train x cross-human-eval matrix 
 """
 from __future__ import annotations
 
@@ -66,6 +51,7 @@ def resolve_ckpt(name: str) -> Path | None:
 def load_eval_sets() -> dict[str, pd.DataFrame]:
     out: dict[str, pd.DataFrame] = {}
 
+
     # manual + claude_test (40 humans, never seen by any model)
     rows = []
     for src in [REPO / "manual labelling.csv",
@@ -75,7 +61,7 @@ def load_eval_sets() -> dict[str, pd.DataFrame]:
                          "label": LABEL2ID[r["label"]]})
     out["manual_plus_claude_n40"] = pd.DataFrame(rows)
 
-    # Stage 7: GPT-4o-mini reader voice
+    #40 mini reader voice
     p = REPO / "overnight" / "results" / "stage7" / "harder_eval.csv"
     if p.exists():
         df = pd.read_csv(p)
@@ -84,7 +70,7 @@ def load_eval_sets() -> dict[str, pd.DataFrame]:
         df = df.rename(columns={"explanation": "text_a", "comment": "text_b"})
         out["stage7_gpt_n50"] = df[["text_a", "text_b", "label"]].reset_index(drop=True)
 
-    # Stage 10: Claude Haiku "tired on phone" voice
+    # claude haiku
     p = REPO / "overnight" / "results" / "stage10" / "claude_human_eval.csv"
     if p.exists():
         df = pd.read_csv(p)

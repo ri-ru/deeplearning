@@ -1,13 +1,7 @@
-"""Verify the OOD failure claims:
-
+"""Verify the OOD failure 
 - 55% accuracy on the 19 manually-labelled human-written rationales
   (`manual labelling.csv`).
-- "Severe bias" on the 21 Claude-4.6-written rationales
-  (`roberta_training/claude_test_labels.csv`).
 
-Loads the checkpoint that produced the poster's headline 0.968 F1
-(judge_finetune/runs/roberta_base/checkpoints/checkpoint-1576) and runs both
-test sets through it.
 """
 from __future__ import annotations
 

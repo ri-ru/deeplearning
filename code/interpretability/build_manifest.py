@@ -1,14 +1,4 @@
 """Build the mech-interp manifest from synthetic + manual pair CSVs.
-
-Output: mech_interp/extracts/manifest.csv with columns
-    sample_id, source, label, contains_negation_in_synthetic,
-    in_synthetic_not_original, text_a, text_b
-
-- text_a = original/model rationale (=`explanation` in synthetic, col 1 in manual)
-- text_b = reformulated rationale (=`synthetic`     in synthetic, col 2 in manual)
-- label  = 0 equivalent, 1 unequivalent (matches judge_finetune/src/data.py)
-- contains_negation_in_synthetic = regex match on text_b
-- in_synthetic_not_original      = 1 if from reformulated_full.csv else 0
 """
 from __future__ import annotations
 
@@ -47,9 +37,8 @@ def load_synthetic(csv_path: Path) -> pd.DataFrame:
 
 
 def load_manual(csv_path: Path) -> pd.DataFrame:
-    # Numbers export with a 'Table 1' preamble row; skip it and use row 2 as the header.
     raw = pd.read_csv(csv_path, skiprows=1, header=0)
-    # Expected schema: post / explanation / meaning / equivalence / 3 empty trailing cols.
+    #post / explanation / meaning / equivalence / 3 empty trailing cols.
     cols = list(raw.columns)
     if len(cols) < 4:
         raise ValueError(f"manual labelling.csv has unexpected schema: {cols}")
@@ -99,7 +88,6 @@ def main() -> None:
         f"(n={len(manual)})"
     )
 
-    # Prior: how strongly does the regex flag alone correlate with the label, on synthetic?
     if len(synth) > 0:
         from sklearn.metrics import roc_auc_score
 

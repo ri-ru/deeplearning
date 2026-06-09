@@ -1,15 +1,6 @@
 """Forward-pass every pair through the fine-tuned judge, save [CLS] residual stream per layer.
 
-Output:
-    mech_interp/extracts/layer_XX.pt   for XX in 00..12
-        dict(layer=XX, sample_ids=list[str], activations=Tensor(N, hidden_dim))
-    mech_interp/extracts/extract_meta.json
-        dict(model_dir, n_samples, n_layers, hidden_dim, max_length, batch_size, device)
-
-Run after build_manifest.py.
-
-Memory note: RoBERTa-base has 13 hidden states (1 embeddings + 12 blocks), hidden_dim=768.
-For 52,157 samples in float32 that is ~2.0 GB total on disk and ~155 MB per layer.
+RoBERTa-base has 13 hidden states (1 embeddings + 12 blocks), hidden_dim=768.
 """
 from __future__ import annotations
 
@@ -82,7 +73,7 @@ def main() -> None:
     text_a = manifest["text_a"].astype(str).tolist()
     text_b = manifest["text_b"].astype(str).tolist()
 
-    # First forward pass on one batch to discover layer count + hidden_dim.
+    #ffp 
     with torch.no_grad():
         enc = tok(
             text_a[: min(args.batch_size, n)],
@@ -95,7 +86,7 @@ def main() -> None:
     hidden_dim = out.hidden_states[0].shape[-1]
     print(f"[extract] n_layers={n_layers}  hidden_dim={hidden_dim}")
 
-    # Preallocate per-layer cpu tensors so we don't blow MPS RAM.
+    # Preallocate per-layer cpu  tensors
     layer_buffers = [torch.empty(n, hidden_dim, dtype=torch.float32) for _ in range(n_layers)]
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
@@ -113,7 +104,7 @@ def main() -> None:
         enc = {k: v.to(device) for k, v in enc.items()}
         with torch.no_grad():
             out = model(**enc)
-        # hidden_states: tuple of (B, T, H) tensors of length n_layers
+        #(B, T, H) tensors  
         for li, h in enumerate(out.hidden_states):
             cls = h[:, 0, :].detach().to(torch.float32).cpu()
             layer_buffers[li][cursor:end] = cls

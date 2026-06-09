@@ -1,12 +1,8 @@
 """
 Fine-tune RoBERTa on reformulated_full.csv + few-shot synthetic data.
-
-Usage:
-    python run.py --synthetic synthetic_fewshot.csv
-
 Required files in the same folder:
-    - reformulated_full.csv       (original 52k training data)
-    - synthetic_fewshot.csv       (output of reformulate.py)
+    - reformulated_full.csv (original 52k training data)
+    - synthetic_fewshot.csv (output of reformulate.py)
 """
 from __future__ import annotations
 

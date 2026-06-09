@@ -1,13 +1,4 @@
-"""Stage 14b: split the manual+claude n=40 set into its two halves and rerun.
-
-manual labelling.csv          = 20 pairs hand-written by Veronika.
-claude_test_labels.csv        = 20 pairs written by Claude 4.6.
-
-Stage 14 evaluated on these COMBINED. This script evaluates on each
-separately, so we can see how each model does on actually-handwritten
-text vs Claude-4.6-written text.
-
-Same 12 checkpoints as Stage 14.
+"""Stage 14b: split the manual+claude n=40 set into its two halves and rerun. 
 """
 from __future__ import annotations
 
@@ -22,10 +13,10 @@ import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from overnight.eval_common import (  # noqa: E402
+from  eval_common import (  # noqa: E402
     LABEL2ID, REPO, _batched_forward, _metrics_from_arrays, load_human_csv, save_json,
 )
-from overnight.stage14_human_eval_matrix import resolve_ckpt, MODELS  # noqa: E402
+from  stage14_human_eval_matrix import resolve_ckpt, MODELS  # noqa: E402
 
 RESULTS_DIR = REPO / "overnight" / "results" / "stage14b"
 
@@ -33,7 +24,7 @@ RESULTS_DIR = REPO / "overnight" / "results" / "stage14b"
 def load_split_sets() -> dict[str, pd.DataFrame]:
     out: dict[str, pd.DataFrame] = {}
 
-    # Veronika handwritten (the cleanest eval we have)
+    # handwritten 
     rows = []
     for r in load_human_csv(REPO / "manual labelling.csv"):
         rows.append({"text_a": r["explanation"], "text_b": r["comment"],

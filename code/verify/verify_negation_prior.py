@@ -1,13 +1,4 @@
-"""Complementary shortcut-evidence check that does NOT need residuals.
-
-Cross-tabulate the fine-tuned model's predictions on the OOD test set
-against a simple regex: "does the synthetic (text_b) contain a negation
-that's NOT in the original (text_a)?"
-
-If the model is learning meaning, accuracy should be uniform across the
-four cells (label x negation-flip). If the model is learning the shortcut,
-accuracy should collapse when the simple regex feature disagrees with the
-true label.
+"""Complementary shortcut-evidence check that does NOT need residuals. 
 """
 from __future__ import annotations
 
