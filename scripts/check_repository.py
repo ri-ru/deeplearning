@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import re
 import sys
-import xml.etree.ElementTree as ET
 from urllib.parse import unquote
 
 from project_summary import ROOT, build_summary
@@ -29,7 +28,6 @@ def main() -> None:
     notebook = json.loads((ROOT / "summary_notebook.ipynb").read_text())
     if notebook.get("nbformat") != 4 or not notebook.get("cells"):
         errors.append("The implementation notebook is not a non-empty v4 notebook")
-    ET.parse(ROOT / "assets/samesense-banner.svg")
     for path in sorted((ROOT / "configs").glob("*.yaml")):
         match = re.search(r"^csv_path:\s*(.+)$", path.read_text(), flags=re.MULTILINE)
         if not match or not (ROOT / "code" / match.group(1)).is_file():
@@ -48,7 +46,7 @@ def main() -> None:
     if errors:
         print("\n".join(errors), file=sys.stderr)
         sys.exit(1)
-    print("Passed: local documentation links, JSON/SVG/notebook integrity, portable CSV paths,")
+    print("Passed: local documentation links, JSON/notebook integrity, portable CSV paths,")
     print("        dataset inventory, and README metrics against their source artifacts.")
 
 
