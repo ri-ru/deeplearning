@@ -1,6 +1,6 @@
 # SameSense
 
-A RoBERTa-based classifier that checks whether two hate-speech moderation explanations have the same meaning.
+A 125M-parameter RoBERTa judge for semantic equivalence between moderation explanations, with cross-generator evaluation, linear probes, and directional ablations.
 
 [![Repository checks](https://github.com/ri-ru/samesense/actions/workflows/checks.yml/badge.svg)](https://github.com/ri-ru/samesense/actions/workflows/checks.yml)
 
@@ -8,11 +8,13 @@ A RoBERTa-based classifier that checks whether two hate-speech moderation explan
 
 ## Summary
 
-We built the data generation, training, and evaluation pipeline for a 125M-parameter sentence-pair classifier. It predicts whether two explanations are **equivalent** or **non-equivalent**; it does not classify the original post as hate speech.
+We built the data generation, training, and evaluation pipeline for a compact sentence-pair classifier that can replace an LLM call for this specific judging task. It predicts whether two explanations are **equivalent** or **non-equivalent**; it does not classify the original post as hate speech.
 
 - Generated 52,137 labelled pairs and fine-tuned RoBERTa with held-out-domain evaluation.
 - Compared against TF-IDF and LLM baselines, then used layer probes and ablations to investigate failures on unfamiliar writing styles.
 - Trained a second version on 998 pairs from five generators, improving accuracy on the evaluation sets below.
+
+The central finding was a generalization failure: **0.968 macro-F1 on 17,691 held-out-domain synthetic pairs** (TF-IDF: 0.789) concealed sensitivity to writing style. Probes and directional ablations investigated the shortcuts; training on more varied generators improved the recorded style-shift results.
 
 ## Run the summary
 
@@ -53,4 +55,4 @@ Model weights are not included. Some historical analysis scripts require the ori
 
 ---
 
-Veronika Wannack, Flavia Wallenhorst, and Dimitri Pelgrin · EPFL EE-559, Group 26.
+Built by Veronika Wannack with teammates Flavia Wallenhorst and Dimitri Pelgrin.
