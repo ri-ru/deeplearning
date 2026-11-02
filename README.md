@@ -1,54 +1,74 @@
-# Can RoBERTa Judge If Two Hate-Speech Rationales Mean the Same Thing?
+<p align="center">
+  <img src="assets/samesense-banner.svg" alt="SameSense. Different words. Same meaning. Two rationales are compared by an equivalence judge." width="100%">
+</p>
 
-**EE-559 Deep Learning — Group 26**
-Veronika Wannack, Flavia Wallenhorst, Dimitri Pelgrin (EPFL)
+# SameSense
 
-The deliverable is the notebook **`synthetic_data_generation.ipynb`**. Run it top
-to bottom. Part I (data generation) was run on the GPU cluster (vLLM + Qwen2.5-3B
-+ an OpenAI key for the flip-rate audit); Part II reads results back from the
-cached artifacts in `results/`, so the analysis and figures rebuild on a plain
-CPU clone in seconds.
+**A lightweight NLP pipeline for checking whether two moderation rationales say the same thing.**
 
-## Folder layout
+[![Repository checks](https://github.com/ri-ru/samesense/actions/workflows/checks.yml/badge.svg)](https://github.com/ri-ru/samesense/actions/workflows/checks.yml)
+[![Model: RoBERTa-base](https://img.shields.io/badge/model-RoBERTa--base-164E45?style=flat)](code/judge_training/)
+[![Stack: PyTorch + Transformers](https://img.shields.io/badge/stack-PyTorch%20%2B%20Transformers-164E45?style=flat)](requirements.txt)
 
+[Build summary](#what-we-built) · [Quick start](#quick-start) · [Validation](guides/validation.md) · [Implementation walkthrough](summary_notebook.ipynb)
+
+## The idea
+
+Two explanations can use different words and still make the same claim. They can also look almost identical while disagreeing on the one detail that matters. SameSense turns that distinction into a sentence-pair classification task: **equivalent** or **non-equivalent**.
+
+The implementation uses a fine-tuned, 125M-parameter RoBERTa encoder rather than calling a large language model for every comparison. It is built around hate-speech moderation rationales: comparing explanations, not deciding whether a post is hateful.
+
+## What we built
+
+- **Data pipeline.** Generated 52,137 labelled rationale pairs from HateCoT source data, with few-shot demonstrations and quality checks.
+- **Trainable judge.** Implemented configurable RoBERTa fine-tuning, domain-based evaluation splits, per-domain metrics, and prediction exports.
+- **Failure analysis.** Checked performance against lexical and LLM baselines, inspected negation shortcuts, and probed representations layer by layer.
+- **Better training data.** Built a five-generator dataset of 998 usable pairs and evaluated the resulting judge on human-written and cross-model explanations.
+- **Inspectable delivery.** Included the source datasets, training configurations, evaluation artifacts, seed-sweep results, and a notebook explaining the implementation.
+
+The practical lesson from the build: a strong score on familiar synthetic text did not guarantee reliable behaviour on unfamiliar writing styles. A more varied training set improved the recorded checks.
+
+## Quick start
+
+**Inspect the completed work without a GPU, API key, or dependency install.**
+
+```bash
+git clone https://github.com/ri-ru/samesense.git
+cd samesense
+python3 scripts/project_summary.py
 ```
-synthetic_data_generation.ipynb   the notebook (the whole story, end to end)
-README.md
-data/        inputs the notebook reads
-results/     cached outputs the notebook displays (numbers/figures come from here)
-code/        the scripts that produced everything in results/  (run on the cluster)
-```
 
-### `data/`
-| File | Used in | What it is |
-|---|---|---|
-| `hatecot_final_D3.csv` | Part I | raw HateCoT posts + human rationales (generation source) |
-| `manual_labelling.csv` | Part I | hand-labelled examples used as few-shot demonstrations |
-| `reformulated_full.csv` | Part II | the ~52k generated `(explanation, synthetic, meaning)` pairs |
+This reads the committed artifacts and prints the dataset inventory and model comparison. It does **not** run inference or retrain a model. For machine-readable output, add `--json`.
 
-### `results/`
-| File | Produced by (`code/…`) |
+To follow the code and figures, open [the implementation notebook](summary_notebook.ipynb) directly on GitHub. To train a new judge or rebuild the notebook's cached-result tables, use the [running guide](guides/usage.md).
+
+## Recorded performance
+
+Accuracy of the original single-generator judge and the later multi-generator version:
+
+| Evaluation set | Examples | Single-generator | Multi-generator |
+|---|---:|---:|---:|
+| Human-written rationales | 20 | 55% | **95%** |
+| Claude-written rationales | 20 | 65% | **85%** |
+| GPT-4o-mini rationales | 50 | 54% | **72%** |
+| Claude Haiku rationales | 100 | 59% | **81%** |
+
+These are recorded runs, and the small human/Claude sets do not establish broad reliability. The [validation notes](guides/validation.md) identify the source artifacts, evaluation boundaries, and known limitations.
+
+## Inside the repository
+
+| Location | What you will find |
 |---|---|
-| `verify_poster_results.json` | `verify/verify_poster.py` |
-| `verify_ood_results.json` | `verify/verify_ood.py` |
-| `verify_negation_prior_results.json` | `verify/verify_negation_prior.py` |
-| `probe_metrics.json` | `interpretability/` (build_manifest → extract_residuals → train_probes) |
-| `roberta_fewshot_trainer_state.json` | `roberta_baseline/run.py` |
-| `cross_gen/*.csv` | `generator_diversity/stage9_generate.py` |
-| `overnight/stage6_baseline_layer12.json` | `generator_diversity/stage6_multi_ablation.py` |
-| `overnight/stage14_matrix.json` | `generator_diversity/stage14_human_eval_matrix.py` |
-| `overnight/stage14b_matrix.json` | `generator_diversity/stage14b_human_split.py` |
+| [summary_notebook.ipynb](summary_notebook.ipynb) | Implementation narrative, code excerpts, tables, and figures |
+| [code/judge_training/](code/judge_training/) | Data loading, domain splits, tokenization, metrics, and fine-tuning |
+| [code/generator_diversity/](code/generator_diversity/) | Multi-model pair generation and comparison scripts |
+| [code/interpretability/](code/interpretability/) | Activation extraction, layer-wise probes, and shortcut analysis |
+| [code/verify/](code/verify/) | Baseline, domain-shift, and negation checks |
+| [configs/](configs/) | Full and smoke-test training configurations |
+| [data/](data/) · [results/](results/) · [seeds/](seeds/) | Source data, cached outputs, and repeated-seed checks |
 
-### `code/` — provenance for every reported number
-These ran on the cluster; the notebook's Part II cells are short excerpts of them.
+The repository includes code, data, and saved evaluation results. **Trained model weights are not bundled**, and some historical analysis scripts still expect the original cluster layout; the running guide distinguishes supported local entry points from those scripts.
 
-| Folder | What it does |
-|---|---|
-| `verify/` | re-evaluates the trained judge on held-out / human / Claude rationales → the `verify_*` results |
-| `judge_training/` | the RoBERTa-base sentence-pair judge: domain split (`data.py`), metrics (`metrics.py`), training loop (`train.py`) |
-| `interpretability/` | per-layer [CLS] probes for the equivalence label and the negation shortcut |
-| `generator_diversity/` | the multi-generator fix: regenerate pairs from 5 LLMs and re-evaluate (stages 6/9/14/14b) |
-| `roberta_baseline/` | the few-shot RoBERTa baseline run that produced `roberta_fewshot_trainer_state.json` |
+---
 
-> Note: Part I's full generation code lives **inside the notebook** (Sections 0–5), not
-> in `code/`. `code/` holds the Part II training/analysis scripts.
+Built by **Veronika Wannack, Flavia Wallenhorst, and Dimitri Pelgrin** at EPFL. Originally completed for EE-559 Deep Learning, Group 26. The original project and authorship are preserved in the notebook.

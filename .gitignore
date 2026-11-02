@@ -63,3 +63,11 @@ seeds/runs/
 seeds/extracts/
 seeds/configs/
 seeds/*.log
+
+# Local training, secrets, and documentation-preview artifacts
+code/runs/
+.env
+.env.*
+.playwright-cli/
+output/playwright/
+.impeccable/

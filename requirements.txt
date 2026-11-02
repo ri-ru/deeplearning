@@ -1,0 +1,10 @@
+# Core single-generator training pipeline. Python 3.11 or 3.12 recommended.
+# Generation dependencies (vLLM / API clients) are intentionally separate.
+torch>=2.4,<3
+transformers>=4.46,<5
+datasets>=2.20,<5
+accelerate>=1.0,<2
+numpy>=1.26,<3
+pandas>=2.2,<3
+scikit-learn>=1.4,<2
+PyYAML>=6.0,<7
